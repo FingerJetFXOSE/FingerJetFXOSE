@@ -33,7 +33,7 @@ documentation and/or other materials provided with the distribution.
 acknowledgment:
 
    "This product includes the DigitalPersona FingerJetFX OSE fingerprint 
-   feature extractor. (http://digitalpersona.com/fingerjetfx)” 
+   feature extractor. (http://digitalpersona.com/fingerjetfx)" 
  
    This acknowledgement must be included in the end-user documentation 
    included with the redistribution.  Alternately, this acknowledgement 
@@ -43,8 +43,8 @@ acknowledgment:
 4. All advertising materials mentioning features or use of this software 
 must display the following acknowledgment:
 
-   “This product includes the DigitalPersona FingerJetFX OSE fingerprint 
-   feature extractor. (http://digitalpersona.com/fingerjetfx)”  
+   "This product includes the DigitalPersona FingerJetFX OSE fingerprint 
+   feature extractor. (http://digitalpersona.com/fingerjetfx)"  
 
 5. Advertising or marketing materials must include acknowledgment of 
 FingerJetFX as required herein but may not imply endorsement by 
@@ -52,7 +52,7 @@ DigitalPersona without prior written permission.  For written permission,
 please contact FingerJetFX-OSE@digitalpersona.com.
 
 6. Products derived from this software may not be called "FingerJet" 
-or “FingerJetFX” nor may "FingerJet" or “FingerJetFX” appear in their names
+or "FingerJetFX" nor may "FingerJet" or "FingerJetFX" appear in their names
 without prior written permission from DigitalPersona, Inc.
  
 7. Disclaimers: The software is not designed, made, or intended for use 
@@ -80,9 +80,9 @@ damages, costs and expenses (including attorney fees) arising out of or
 relating to any breach of such export restrictions. 
 
 9. Notice to U.S. Government End users:  The software and documentations 
-are “Commercial Items” as that term is defined in 48 C.F.R §2.101, 
-consisting of “Commercial Computer Software” and “Commercial Computer 
-Software Documentation,” as such terms are used in 48 C.F.R. §12.212 or 48
+are "Commercial Items" as that term is defined in 48 C.F.R §2.101, 
+consisting of "Commercial Computer Software" and "Commercial Computer 
+Software Documentation," as such terms are used in 48 C.F.R. §12.212 or 48
 C.F.R. §227.7202, as applicable.  Consistent with 48 C.F.R. §12.212 or 48
 C.F.R. §§227.7202-1 through 227.7202-4, as applicable, the Commercial 
 Computer Software and Commercial Computer Software Documentation are being
