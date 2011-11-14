@@ -1,0 +1,1 @@
+This folder contains the simple feature extraction API wrapper around libFRFXLL.
