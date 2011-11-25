@@ -34,6 +34,10 @@ include $(CLEAR_VARS)
 include $(call all-subdir-makefiles)
 
 LOCAL_MODULE    := FRFXLL
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../include/ \
+                    $(LOCAL_PATH)/../include/ \
+                    $(LOCAL_PATH)/../algorithm
+
 LOCAL_SRC_FILES := FRFXLLCreateContext.cpp \
                    FRFXLLCreateFeatureSet.cpp \
                    FRFXLLCreateFeatureSetFromRaw.cpp \

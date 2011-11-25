@@ -35,5 +35,9 @@ include $(call all-subdir-makefiles)
 
 LOCAL_MODULE    := fjfx
 LOCAL_SRC_FILES := fjfx.cpp
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../include/ \
+                    $(LOCAL_PATH)/../libFRFXLL/include/ \
+                    $(LOCAL_PATH)/../libFRFXLL/src/include/
+LOCAL_STATIC_LIBRARIES := FRFXLL
 
 include $(BUILD_SHARED_LIBRARY)

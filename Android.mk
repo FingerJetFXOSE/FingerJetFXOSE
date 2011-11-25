@@ -29,18 +29,4 @@
 #      ANDROID BUILD SYSTEM FILES: Heiko Witte
 
 LOCAL_PATH := $(call my-dir)
-
-include $(CLEAR_VARS)
 include $(call all-subdir-makefiles)
-
-LOCAL_MODULE    := FRFXLL
-
-include $(BUILD_STATIC_LIBRARY)
-
-include $(CLEAR_VARS)
-include $(call all-subdir-makefiles)
-
-LOCAL_MODULE    := fjfx
-LOCAL_STATIC_LIBRARIES := FRFXLL
-
-include $(BUILD_SHARED_LIBRARY)
