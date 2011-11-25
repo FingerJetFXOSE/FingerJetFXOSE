@@ -34,7 +34,6 @@ include $(CLEAR_VARS)
 include $(call all-subdir-makefiles)
 
 LOCAL_MODULE    := FRFXLL
-LOCAL_SRC_FILES := $(LOCAL_PATH)/src/libFRFXLL
 
 include $(BUILD_STATIC_LIBRARY)
 
@@ -42,7 +41,6 @@ include $(CLEAR_VARS)
 include $(call all-subdir-makefiles)
 
 LOCAL_MODULE    := fjfx
-LOCAL_SRC_FILES := $(LOCAL_PATH)/src/libfjfx
 LOCAL_STATIC_LIBRARIES := FRFXLL
 
 include $(BUILD_SHARED_LIBRARY)
