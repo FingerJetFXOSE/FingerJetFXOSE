@@ -34,7 +34,6 @@
 
 int main(int argc, char ** argv) {
   FILE *fp = 0;
-  char pnmMagic[2] = {0};
   int height, width, gray;
   unsigned int size;
   void * image = 0;
@@ -55,8 +54,8 @@ int main(int argc, char ** argv) {
     printf("Cannot open image file: %s\n", argv[1]);
     return 9;
   }
-  n = fscanf(fp, "%2s%d%d%d", pnmMagic, &width, &height, &gray);
-  if (n != 4 || pnmMagic[0] != 'P' || pnmMagic[1] != '5' || 
+  n = fscanf(fp, "P5%d%d%d", &width, &height, &gray); 
+  if (n != 3 || 
       gray > 256 || width > 0xffff || height > 0xffff || 
       gray <= 1 || width < 32 || height < 32) {
     printf("Image file %s is in unsupported format\n", argv[1]);

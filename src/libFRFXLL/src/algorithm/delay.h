@@ -88,7 +88,7 @@ namespace FingerJetFxOSE {
         delay(size_t dt, bool init_val = false) 
           : ptr(buffer)
           , end(buffer + (dt + 7) / 8)
-          , initmask(1 << (-int8(dt) & 7))
+          , initmask(1 << (-dt & 7)) 
         {
           mask = initmask;
           while(ptr < end) {

@@ -46,7 +46,6 @@
 #include "intmath.h"
 #include "complex.h"
 #include "delay.h"
-//#include <algorithm>
 
 namespace FingerJetFxOSE {
 namespace FpRecEngineImpl {
@@ -183,15 +182,16 @@ namespace FeatureExtractionImpl {
       for (size_t x = 0; x < width + n2; ++x) {
         T t(0);
         if (x < width) {
-          s1[x] += (y < size) ? p[x] : 0;
-          t = s1[x] - d1(s1[x]);
+          T v = (y < size) ? p[x] : 0;
+          s1[x] += v;
+          t = s1[x] -= d1(v);
         }
         if (y >= n2*width) {
-          s2 += t;
+          s2 += t; // SmallerTypeCheck
           if (x < n2) {
-            d2(s2);
+            d2(t);
           } else {
-            t = s2 - d2(s2);
+            t = s2 -= d2(t);
             t = f(t);
             inout[y - (width+1)*n2 + x] = t;
           }

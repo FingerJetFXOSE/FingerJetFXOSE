@@ -47,7 +47,7 @@ namespace FeatureExtractionImpl {
       static const uint8 filler = 0;
 
       uint8 & operator ()(int32 x, int32 yw) {
-        return (0 <= x && x < width && 0 <= yw && yw < size) ? start[x + yw] : dummy;
+        return (0 <= x && x < width && 0 <= yw && yw < size) ? start[x + yw] : (dummy=0, dummy); // SmallerTypeCheck : dummy can overflow 
       }
       uint8 operator ()(int32 x, int32 yw) const {
         return (0 <= x && x < width && 0 <= yw && yw < size) ? ~start[x + yw] : filler;

@@ -229,7 +229,7 @@ namespace FingerJetFxOSE {
                            const size_t & dataInSize_)
           : dataIn(dataIn_)
           , dataInSize(dataInSize_)
-          , CBEFF(CBEFF_DEFAULT)
+          , CBEFF(0) 
           , specifiedFinger(FRFXLL_FINGER_POSITION_NOT_SPECIFIED)
           , specifiedView(FRFXLL_VIEW_NUMBER_NOT_SPECIFIED)
           , rotation(0)

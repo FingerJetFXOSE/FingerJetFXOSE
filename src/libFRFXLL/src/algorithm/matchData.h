@@ -104,7 +104,7 @@ namespace Embedded {
       return ((a & 0x80) ? -1 : 1) * sinTable[a & 0x7f];
     }
     static int16 cos(uint8 a) {
-      return sin((a + 64));
+      return sin((a + 64 & 0xff)); 
     }
     void Assign(uint8 a) {
       *this = Angle(a);

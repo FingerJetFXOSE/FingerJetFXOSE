@@ -452,7 +452,7 @@ namespace FingerJetFxOSE {
           // Hack to convert DP devCode in CBEFF Product ID where high word of CBEFFProductID is
           // DP's ID (0x0033) from Biometric Industry Association http://www.ibia.org/cbeff_new/cbeff_organizations.asp
           if ((nCBEFFProductID & 0xffffff00) == 0x0033fe00) {
-            devCode = nCBEFFProductID;
+            devCode = nCBEFFProductID & 0xff; 
             return FRFXLL_OK;
           }
           switch (CBEFF_OWNER(nCBEFFProductID)) {

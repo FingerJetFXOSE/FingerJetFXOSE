@@ -51,7 +51,7 @@ namespace FingerJetFxOSE {
           } else if (eof()) {
             data = NULL;
           } else {
-            data[cur] = uint8(c); 
+            data[cur] = uint8(c & 0xff);  
           }
           cur++;
           return GetResult();

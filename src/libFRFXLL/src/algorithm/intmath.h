@@ -66,7 +66,7 @@ namespace FingerJetFxOSE {
   }
 
   inline int8 cos(uint8 a) {
-    return sin((a + 64));
+    return sin((a + 64 & 0xff)); 
   }
 
   //template <class T> inline void swap(T & c, T & s) {

@@ -228,7 +228,7 @@ namespace FeatureExtractionImpl {
       const static int8 offs[8] = {0, 1, 1, 1, 0, -1, -1, -1};
       a_point out = mn ? 255 : 0;
       for (int8 i = -1; i <= 1; ++i) {
-        a_point cur(x + offs[(a + i) & 7], y + offs[(a + i - 2) & 7], relative ? a + i : a, p, width);
+        a_point cur(x + offs[(a + i) & 7], y + offs[(a + i - 2) & 7], relative ? a + i & 0xff: a, p, width); 
         if (mn ? cur.v <= out.v : cur.v >= out.v) {
           out = cur;
         }
@@ -342,7 +342,7 @@ namespace FeatureExtractionImpl {
             m.position.x = int16(xp); // + FingerJetFxOSE::reduce<int16>(bf.xoffs, 7);
             m.position.y = int16(yp); // + FingerJetFxOSE::reduce<int16>(bf.yoffs, 7);
             if (bf.rotate180) {
-              a = a + 128;
+              a = a + 128 & 0xff;
             }
             if (!adjust_angle(a, xp, yp, phasemap, width, size, false)) {
               adjust_angle(a, xp, yp, phasemap, width, size, true);
