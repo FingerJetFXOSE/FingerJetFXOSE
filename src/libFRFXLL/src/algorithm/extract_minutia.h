@@ -219,7 +219,7 @@ namespace FeatureExtractionImpl {
 
   struct a_point : public Point {
     uint8 a, v;
-    a_point(uint8 v_ = 0) : v(v_) {}
+    a_point(uint8 v_ = 0) : a(0), v(v_) {}
     a_point(int16 x, int16 y, uint8 a_, const uint8 * p, size_t width) 
       : Point(x, y), a(a_), v(p[x + y * width]) {
     }
@@ -228,7 +228,7 @@ namespace FeatureExtractionImpl {
       const static int8 offs[8] = {0, 1, 1, 1, 0, -1, -1, -1};
       a_point out = mn ? 255 : 0;
       for (int8 i = -1; i <= 1; ++i) {
-        a_point cur(x + offs[(a + i) & 7], y + offs[(a + i - 2) & 7], relative ? a + i & 0xff: a, p, width); 
+        a_point cur(x + offs[(a + i) & 7], y + offs[(a + i - 2) & 7], relative ? (a + i) & 0xff: a, p, width); 
         if (mn ? cur.v <= out.v : cur.v >= out.v) {
           out = cur;
         }
@@ -323,7 +323,7 @@ namespace FeatureExtractionImpl {
           int confidence = 0;
           bool confirmed = false;
           bool type = false;
-          uint8 a;
+          uint8 a = 0;
           for (int i = -2; i <= 2; i += 4) {
             uint8 a0 = direction[x/2] + i;
             int8 c = cos(a0), s = sin(a0);
@@ -342,7 +342,7 @@ namespace FeatureExtractionImpl {
             m.position.x = int16(xp); // + FingerJetFxOSE::reduce<int16>(bf.xoffs, 7);
             m.position.y = int16(yp); // + FingerJetFxOSE::reduce<int16>(bf.yoffs, 7);
             if (bf.rotate180) {
-              a = a + 128 & 0xff;
+              a = (a + 128) & 0xff;
             }
             if (!adjust_angle(a, xp, yp, phasemap, width, size, false)) {
               adjust_angle(a, xp, yp, phasemap, width, size, true);
