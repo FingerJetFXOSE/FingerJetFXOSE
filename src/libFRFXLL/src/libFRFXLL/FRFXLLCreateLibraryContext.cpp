@@ -66,12 +66,9 @@ static void m_free(void * p, void * _) {
 //static unsigned int get_current_tick_in_ms() {
 //  return (unsigned int)(clock() * 1000ULL / CLOCKS_PER_SEC);
 //}
-#if CLOCKS_PER_SEC == 1000
-#define FRFXLL_USE_CLOCK
 static unsigned int get_current_tick_in_ms() {
   return (unsigned int)(clock());
 }
-#endif
 
 static long m_interlocked_increment(volatile long * pv) {
 #ifdef WIN32
@@ -123,9 +120,8 @@ FRFXLL_RESULT FRFXLLCreateLibraryContext(
   FRFXLL_CONTEXT_INIT ci = {sizeof(ci)};
   ci.malloc = &m_malloc;
   ci.free = &m_free;
-#ifdef FRFXLL_USE_CLOCK
-  ci.get_current_tick_in_ms = &get_current_tick_in_ms;
-#endif
+  if (CLOCKS_PER_SEC == (clock_t)1000)
+      ci.get_current_tick_in_ms = &get_current_tick_in_ms;
   ci.interlocked_increment = m_interlocked_increment;
   ci.interlocked_decrement = m_interlocked_decrement;
   ci.interlocked_exchange  = m_interlocked_exchange;
