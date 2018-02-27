@@ -98,28 +98,40 @@ namespace Embedded {
     static const uint8 enh_block_bits = 5;
     static const int32 enh_spacing = 17;
 
-    const uint8 * imgIn = nullptr;
-    uint8 * img = nullptr;
-    size_t height = 0;
-    size_t width = 0;
-    size_t size = 0;
+    const uint8 * imgIn;
+    uint8 * img;
+    size_t height;
+    size_t width;
+    size_t size;
 
-    int32 xOffs = 0; // Phasemap offset
-    int32 yOffs = 0; // Phasemap offset
+    int32 xOffs; // Phasemap offset
+    int32 yOffs; // Phasemap offset
 
-    uint8 * footprint = nullptr;
-    ori_t * ori = nullptr;
-    size_t ori_width = 0;
-    size_t ori_size = 0;
-    uint16 imageResolution = 0; // In DPI
-    uint8 readerCode = 0;
+    uint8 * footprint;
+    ori_t * ori;
+    size_t ori_width;
+    size_t ori_size;
+    uint16 imageResolution; // In DPI
+    uint8 readerCode;
     const FeatureExtractionImpl::Parameters & param;
 
     FeatureExtractionBase(const FeatureExtractionImpl::Parameters & param_)
-      : xOffs(1)
+      : imgIn(NULL)
+      , img(NULL)
+      , height(0)
+      , width(0)
+      , size(0)
+      , xOffs(1)
       , yOffs(6)
+      , footprint(NULL)
+      , ori(NULL)
+      , ori_width(0)
+      , ori_size(0)
+      , imageResolution(0)
+      , readerCode(0)
       , param(param_)
     {}
+    
     void SetOriSize() {
       ori_width = int((width - 1) / ori_scale + 1);
       size_t ori_height = int((size/width - 1) / ori_scale + 1);
