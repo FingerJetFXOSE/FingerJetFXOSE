@@ -57,6 +57,10 @@ FRFXLL_RESULT FRFXLLCreateContext(
   if (ctx == NULL) return CheckResult(FRFXLL_ERR_NO_MEMORY);
   Ptr<const Context> pctx = ctx;
   // TODO: update settings here as needed
+  /* Overriding default FRFXLL settings for NFIQ2 */
+  Context * rwCtx = const_cast<Context *>(ctx); 
+  rwCtx->settings.fex.user_feedback.minimum_footprint_area = 0;
+  rwCtx->settings.fex.user_feedback.minimum_number_of_minutia = 0;
   return ctx->GetHandle(phContext);
 }
 

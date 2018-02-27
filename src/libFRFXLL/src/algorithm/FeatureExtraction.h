@@ -98,21 +98,21 @@ namespace Embedded {
     static const uint8 enh_block_bits = 5;
     static const int32 enh_spacing = 17;
 
-    const uint8 * imgIn;
-    uint8 * img;
-    size_t height;
-    size_t width;
-    size_t size;
+    const uint8 * imgIn = nullptr;
+    uint8 * img = nullptr;
+    size_t height = 0;
+    size_t width = 0;
+    size_t size = 0;
 
-    int32 xOffs; // Phasemap offset
-    int32 yOffs; // Phasemap offset
+    int32 xOffs = 0; // Phasemap offset
+    int32 yOffs = 0; // Phasemap offset
 
-    uint8 * footprint;
-    ori_t * ori;
-    size_t ori_width;
-    size_t ori_size;
-    uint16 imageResolution; // In DPI
-    uint8 readerCode;
+    uint8 * footprint = nullptr;
+    ori_t * ori = nullptr;
+    size_t ori_width = 0;
+    size_t ori_size = 0;
+    uint16 imageResolution = 0; // In DPI
+    uint8 readerCode = 0;
     const FeatureExtractionImpl::Parameters & param;
 
     FeatureExtractionBase(const FeatureExtractionImpl::Parameters & param_)
@@ -171,7 +171,9 @@ namespace Embedded {
         orientation_map_and_footprint<maxwidth, ori_scale>(width, size, img, true, ori, footprint);
       }
       freeman_phasemap<ori_scale>(width, size, img, ori, img);
-      top_n<Minutia> top_minutia(md.minutia, md.minutia + std::min(md.capacity(), size_t(68)));
+      /* Patched limits of FRFXLL for NFIQ2 */
+      /* original line: top_n<Minutia> top_minutia(md.minutia, md.minutia + std::min(md.capacity(), size_t(68))); */
+      top_n<Minutia> top_minutia(md.minutia, md.minutia + md.capacity());
       extract_minutia<maxwidth, ori_scale>(img, width, size, footprint, top_minutia, param);
       md.numMinutia = top_minutia.size();
       top_minutia.sort();
