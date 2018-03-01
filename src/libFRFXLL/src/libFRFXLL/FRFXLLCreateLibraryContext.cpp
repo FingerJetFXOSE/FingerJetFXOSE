@@ -33,6 +33,7 @@
 #include <FRFXLL.h>
 
 #ifdef WIN32
+#include <windows.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -62,10 +63,6 @@ static void m_free(void * p, void * _) {
   free(p);
 }
 
-// Don't use it here: causes dependency on 64-bit division
-//static unsigned int get_current_tick_in_ms() {
-//  return (unsigned int)(clock() * 1000ULL / CLOCKS_PER_SEC);
-//}
 static unsigned int get_current_tick_in_ms() {
   return (unsigned int)(clock());
 }
@@ -121,7 +118,9 @@ FRFXLL_RESULT FRFXLLCreateLibraryContext(
   ci.malloc = &m_malloc;
   ci.free = &m_free;
   if (CLOCKS_PER_SEC == (clock_t)1000)
-      ci.get_current_tick_in_ms = &get_current_tick_in_ms;
+  {
+    ci.get_current_tick_in_ms = &get_current_tick_in_ms;
+  }
   ci.interlocked_increment = m_interlocked_increment;
   ci.interlocked_decrement = m_interlocked_decrement;
   ci.interlocked_exchange  = m_interlocked_exchange;

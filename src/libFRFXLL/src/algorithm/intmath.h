@@ -66,7 +66,7 @@ namespace FingerJetFxOSE {
   }
 
   inline int8 cos(uint8 a) {
-    return sin((a + 64 & 0xff)); 
+    return sin(((a + 64) & 0xff)); 
   }
 
   //template <class T> inline void swap(T & c, T & s) {
@@ -415,7 +415,7 @@ adj:
       135, 108, 85, 68, 54, 43, 34, 27, 21, 17, 14, 11, 9, 7, 5, 4, 3, 3, 2, 2, 1, \
       1, 1, 1, 1
     };
-    return x < 0 ? table[0] : x < countof(table) ? table[x] : 0;
+    return x < 0 ? table[0] : x < (int16)countof(table) ? table[x] : 0;
   }
   //-10*log10(x * INT_MAX)
   inline int32 minus10_log10(int32 x) {

@@ -116,10 +116,22 @@ namespace Embedded {
     const FeatureExtractionImpl::Parameters & param;
 
     FeatureExtractionBase(const FeatureExtractionImpl::Parameters & param_)
-      : xOffs(1)
+      : imgIn(NULL)
+      , img(NULL)
+      , height(0)
+      , width(0)
+      , size(0)
+      , xOffs(1)
       , yOffs(6)
+      , footprint(NULL)
+      , ori(NULL)
+      , ori_width(0)
+      , ori_size(0)
+      , imageResolution(0)
+      , readerCode(0)
       , param(param_)
     {}
+    
     void SetOriSize() {
       ori_width = int((width - 1) / ori_scale + 1);
       size_t ori_height = int((size/width - 1) / ori_scale + 1);
@@ -171,7 +183,9 @@ namespace Embedded {
         orientation_map_and_footprint<maxwidth, ori_scale>(width, size, img, true, ori, footprint);
       }
       freeman_phasemap<ori_scale>(width, size, img, ori, img);
-      top_n<Minutia> top_minutia(md.minutia, md.minutia + std::min(md.capacity(), size_t(68)));
+      /* Patched limits of FRFXLL for NFIQ2 */
+      /* original line: top_n<Minutia> top_minutia(md.minutia, md.minutia + std::min(md.capacity(), size_t(68))); */
+      top_n<Minutia> top_minutia(md.minutia, md.minutia + md.capacity());
       extract_minutia<maxwidth, ori_scale>(img, width, size, footprint, top_minutia, param);
       md.numMinutia = top_minutia.size();
       top_minutia.sort();

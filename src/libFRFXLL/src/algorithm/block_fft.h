@@ -107,7 +107,7 @@ namespace FFT {
   inline void shuffle(int32 * data) {
     static const uint32 size   = 1 << size_bits;
     static const uint32 stride = 1 << stride_bits;
-    for (int i = stride; i < size - stride; i += stride) {
+    for (int i = stride; i < (int)(size - stride); i += stride) {
       const int32 j = bitreverser<size_bits - stride_bits, stride_bits>::reverse(i);
       if (i > j) {
         std::swap(data[i], data[j]);
