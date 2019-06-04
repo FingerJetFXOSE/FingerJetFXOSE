@@ -18,11 +18,17 @@ if(EXISTS "${CXXTEST_OUTPUT}")
     runner.cpp 
     dpfrUnitTest.cpp
   )
+  
   if( USE_SANITIZER )
     target_link_libraries( ${PROJECT_NAME} "FRFXLL_static" "TestVectors" "asan" ) 
   else()
     target_link_libraries( ${PROJECT_NAME} "FRFXLL_static" "TestVectors") 
   endif()
+
+  if( ANDROID )
+    set_property(TARGET ${PROJECT_NAME} PROPERTY POSITION_INDEPENDENT_CODE TRUE)
+  endif()
+
 endif()
 
 
