@@ -1,6 +1,13 @@
+option(USE_SANITIZER "Using the GCC sanitizer" OFF)
+
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   # used for Windows and Linux
-  add_definitions( "-O3 -fvisibility=hidden -Wno-unused-variable -Wno-unused-but-set-variable" )
+  if( USE_SANITIZER )
+    message( STATUS "${Pk}Configure diagnostic build with GCC sanitizer${Na}")
+    add_definitions( "-O0 -fvisibility=hidden -Wno-unused-variable -Wno-unused-but-set-variable  -fsanitize=address -fno-omit-frame-pointer -static-libasan" )
+  else()
+    add_definitions( "-O3 -fvisibility=hidden -Wno-unused-variable -Wno-unused-but-set-variable" )
+  endif()
   if("${TARGET_PLATFORM}" MATCHES "win*")
     add_definitions("-DWIN32 -D_WIN32")
   else()

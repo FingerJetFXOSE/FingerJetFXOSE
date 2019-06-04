@@ -44,6 +44,13 @@ echo "Detected ${machine}, using cmake generator ${generator} for target ${targe
 mkdir -p "./build/${machine}/${target}"
 cd "./build/${machine}/${target}"
 
+#linux sanitizer
+if [ ${machine:0:5} == "Linux" ]; then
+	if [ "$2" == "sanitizer" ]; then
+    xtraflags="-DUSE_SANITIZER=ON"
+  fi
+fi
+
 #android settings (experimental)
 if [ ${target:0:7} == "android" ]; then
   android_ndk=$2
@@ -58,16 +65,17 @@ if [ ${target:0:7} == "android" ]; then
   fi
 fi
 
+#ios
 if [ ${target:0:3} == "ios" ]; then
-	cfg="-DCMAKE_TOOLCHAIN_FILE='./nfiq2/ios.toolchain.cmake'"
-    xtraflags="-DENABLE_ARC=FALSE"
+	cfg="-DCMAKE_TOOLCHAIN_FILE='./ios.toolchain.cmake'"
+  xtraflags="-DENABLE_ARC=FALSE"
 fi
 
 # run cmake
 if [ "${target}" == "x64" ]; then
-  cmake -G "${generator}" -D32BITS=OFF -D64BITS=ON ../../../
+  cmake -G "${generator}" -D32BITS=OFF -D64BITS=ON "$xtraflags" ../../../
 elif [ "${target}" == "x32" ]; then
-  cmake -G "${generator}" -D32BITS=ON -D64BITS=OFF ../../../
+  cmake -G "${generator}" -D32BITS=ON -D64BITS=OFF "$xtraflags" ../../../
 elif [ "${target}" == "android-arm32" ]; then
   cmake -G "$generator" "$ndk" "$platform" -DANDROID_ABI=armeabi-v7a "$cfg" "$xtraflags" "../../../"
 elif [ "${target}" == "android-arm64" ]; then

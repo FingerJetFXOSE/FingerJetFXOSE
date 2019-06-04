@@ -13,4 +13,9 @@ add_library( "${PROJECT_NAME}_static" STATIC
 add_library( ${PROJECT_NAME} SHARED
   fjfx.cpp
 )
-target_link_libraries( "${PROJECT_NAME}" "FRFXLL_static" ) 
+
+if( USE_SANITIZER )
+  target_link_libraries( ${PROJECT_NAME} "FRFXLL_static" "asan" ) 
+else()
+  target_link_libraries( ${PROJECT_NAME} "FRFXLL_static" ) 
+endif()

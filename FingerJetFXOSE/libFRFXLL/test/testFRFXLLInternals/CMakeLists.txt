@@ -18,8 +18,11 @@ if(EXISTS "${CXXTEST_OUTPUT}")
   add_executable( ${PROJECT_NAME}
     runner.cpp 
   )
-  target_link_libraries( ${PROJECT_NAME} "FRFXLL_static" "TestVectors" ) 
-
+  if( USE_SANITIZER )
+    target_link_libraries( ${PROJECT_NAME} "FRFXLL_static" "TestVectors" "asan" ) 
+  else()
+    target_link_libraries( ${PROJECT_NAME} "FRFXLL_static" "TestVectors") 
+  endif()
 endif()
 
 

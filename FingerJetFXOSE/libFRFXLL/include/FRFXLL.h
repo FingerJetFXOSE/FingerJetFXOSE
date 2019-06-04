@@ -209,7 +209,7 @@ Feature extraction function using raw pixel array as an input
 \retval FRFXLL_ERR_FB_TOO_SMALL_AREA     Fingerprint area is too small
 \retval FRFXLL_ERR_INVALID_IMAGE         Invalid image data
 */
-FRFXLL_RESULT FRFXLLCreateFeatureSetFromRaw(
+FRFXLL_RESULT FRFXLL_EXPORT FRFXLLCreateFeatureSetFromRaw(
   FRFXLL_HANDLE hContext,          ///< [in] Handle to a fingerprint recognition context
   const unsigned char pixels[],    ///< [in] sample as 8bpp pixel array (no line padding for alignment)
   size_t size,                     ///< [in] size of the sample buffer
@@ -232,7 +232,7 @@ as the result function uses very small amount of memory, but the content of pixe
 \retval FRFXLL_ERR_FB_TOO_SMALL_AREA     Fingerprint area is too small
 \retval FRFXLL_ERR_INVALID_IMAGE         Invalid image data
 */
-FRFXLL_RESULT FRFXLLCreateFeatureSetInPlaceFromRaw(
+FRFXLL_RESULT FRFXLL_EXPORT FRFXLLCreateFeatureSetInPlaceFromRaw(
   FRFXLL_HANDLE hContext,          ///< [in] Handle to a fingerprint recognition context
   unsigned char pixels[],          ///< [in] sample as 8bpp pixel array (no line padding for alignment)
   size_t size,                     ///< [in] size of the sample buffer

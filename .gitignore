@@ -28,6 +28,7 @@ bin/
 lib/
 **/dist/
 **/build/
+**/.vs*/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*

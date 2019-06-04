@@ -120,7 +120,7 @@ void __ut_assert_same_data(const char * file, int line, const unsigned char * da
     _printf(("\n%s:%d: error : %s differs from %s", file, line, s1, s2));
     g_RC++;
     if (size != ref_size) {
-      _printf(("in size : %d != %d\n", size != ref_size));
+      _printf(("in size : %d != %d\n", size, ref_size));
     } else {
       size_t i, j = 0;
       _printf((" first 10 differences:\n"));

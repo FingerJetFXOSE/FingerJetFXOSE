@@ -31,6 +31,7 @@
 #ifndef __TESTINTMATH_H
 #define __TESTINTMATH_H
 
+#include <limits.h>
 #include <intmath.h>
 
 using namespace FingerJetFxOSE;

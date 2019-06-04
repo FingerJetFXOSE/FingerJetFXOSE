@@ -1,4 +1,8 @@
 message( STATUS "${Gn}Generating runner.cpp for the cxxtest framework...${Na}")
+if(EXISTS "${CXXTEST_OUTPUT}")
+  file(REMOVE "${CXXTEST_OUTPUT}")
+  message( STATUS "${Ye}Removed old runner.cpp${Na}")
+endif()
 execute_process(
   COMMAND python --version
 )

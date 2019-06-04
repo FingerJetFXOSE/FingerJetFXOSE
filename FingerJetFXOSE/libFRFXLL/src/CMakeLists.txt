@@ -16,3 +16,6 @@ add_library( "${PROJECT_NAME}_static" STATIC
 add_library( ${PROJECT_NAME} SHARED
   ${SOURCE_FILES}
 )
+if( USE_SANITIZER )
+  target_link_libraries( ${PROJECT_NAME} "asan" ) 
+endif()
