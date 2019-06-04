@@ -15,5 +15,5 @@ execute_process(
   WORKING_DIRECTORY "${CXXTEST_PATH}/bin"
 )
 if(NOT EXISTS "${CXXTEST_OUTPUT}")
-  message( WARNING "${Ye}Could not generate runner.cpp. Tests will not be available! Do you miss the required PYTHON installation?${Na}")
+  message( STATUS "${Ye}Could not generate runner.cpp. Tests will not be available! Do you miss the required PYTHON installation?${Na}")
 endif()

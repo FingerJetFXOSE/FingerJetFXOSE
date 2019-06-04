@@ -18,11 +18,11 @@ function findCmake()
 
 function removeDebugConfig()
 {
-  $lines = Get-Content "NFIQ2.sln"
-  Set-Content "NFIQ2.sln" -value ""
+  $lines = Get-Content "FingerJetFXOSE.sln"
+  Set-Content "FingerJetFXOSE.sln" -value ""
   foreach ($line in $lines) {
     if (-not($line -match "Debug")) {
-      Add-Content "NFIQ2.sln" -value $line
+      Add-Content "FingerJetFXOSE.sln" -value $line
     }
   }
 }
