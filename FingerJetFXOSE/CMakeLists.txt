@@ -14,6 +14,12 @@ set(Bl "${Esc}[34m")
 set(Pk "${Esc}[35m")
 set(Gy "${Esc}[37m")
 
+# set path vars
+set( ROOT_PATH ${PROJECT_SOURCE_DIR} )
+set( FRFXLL_PATH ${ROOT_PATH}/libFRFXLL )
+set( FJFX_PATH ${ROOT_PATH}/libFJFX )
+get_filename_component(CXXTEST_PATH "../cxxtest" ABSOLUTE BASE_DIR "${ROOT_PATH}")
+
 # detect target platform
 if( WIN32 ) 
   if( ( CMAKE_SIZEOF_VOID_P EQUAL 8 AND NOT 32BITS ) OR 64BITS )
@@ -64,6 +70,7 @@ else()
   message( "Detected ${CMAKE_CXX_COMPILER_ID}" )
 endif()
 
+# set up compiler definitions
 if( 32BITS)
   set( CMAKE_C_FLAGS "-m32")
   set( CMAKE_CXX_FLAGS "-m32") 
@@ -71,16 +78,10 @@ elseif( 64BITS)
   set( CMAKE_C_FLAGS "-m64")
   set( CMAKE_CXX_FLAGS "-m64") 
 endif()
-include( compiler.cmake )
+include( "${ROOT_PATH}/cmake/compiler.cmake" )
 
-set( ROOT_PATH ${PROJECT_SOURCE_DIR} )
+# create build and distribution path( 3 parts)
 set( BUILD_PATH  ${CMAKE_CURRENT_BINARY_DIR} )
-set( FRFXLL_PATH ${ROOT_PATH}/libFRFXLL )
-set( FJFX_PATH ${ROOT_PATH}/libFJFX )
-
-get_filename_component(CXXTEST_PATH "../cxxtest" ABSOLUTE BASE_DIR "${ROOT_PATH}")
-
-# create distribution path( 3 parts)
 # 1st
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
   set( DIST_PATH  ${ROOT_PATH}/dist )
