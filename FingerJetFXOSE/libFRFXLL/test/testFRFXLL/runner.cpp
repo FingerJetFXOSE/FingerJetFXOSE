@@ -1,0 +1,885 @@
+/* Generated file, do not edit */
+
+#ifndef CXXTEST_RUNNING
+#define CXXTEST_RUNNING
+#endif
+
+#include <cxxtest/TestListener.h>
+#include <cxxtest/TestTracker.h>
+#include <cxxtest/TestRunner.h>
+#include <cxxtest/RealDescriptions.h>
+#include <cxxtest/TestMain.h>
+#include <cxxtest/ParenPrinter.h>
+
+int main( int argc, char *argv[] ) {
+ int status;
+ CxxTest::initialize();
+    CxxTest::ParenPrinter tmp;
+    CxxTest::RealWorldDescription::_worldName = "testFRFXLL";
+    status = CxxTest::Main< CxxTest::ParenPrinter >( tmp, argc, argv );
+    return status;
+}
+bool suite_LibraryInformation_init = false;
+#include "/mnt/d/Devel/Git/FingerJetFXOSE/FingerJetFXOSE/libFRFXLL/test/testFRFXLL/dpfrCommonApiTests.h"
+
+class TestDescription_suite_LibraryInformation_testGetLibraryVersionWithValidParameters : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_LibraryInformation_testGetLibraryVersionWithValidParameters(LibraryInformation& _suite_LibraryInformation) : suite_LibraryInformation(_suite_LibraryInformation) { }
+ LibraryInformation& suite_LibraryInformation;
+ void runTest() { suite_LibraryInformation.testGetLibraryVersionWithValidParameters(); }
+};
+
+class TestDescription_suite_LibraryInformation_testGetLibraryVersionWithNullVersionPtr : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_LibraryInformation_testGetLibraryVersionWithNullVersionPtr(LibraryInformation& _suite_LibraryInformation) : suite_LibraryInformation(_suite_LibraryInformation) { }
+ LibraryInformation& suite_LibraryInformation;
+ void runTest() { suite_LibraryInformation.testGetLibraryVersionWithNullVersionPtr(); }
+};
+
+class TestDescription_suite_ContextCreation_testCreateContextWithNullContextInitPtr : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_ContextCreation_testCreateContextWithNullContextInitPtr(ContextCreation& _suite_ContextCreation) : suite_ContextCreation(_suite_ContextCreation) { }
+ ContextCreation& suite_ContextCreation;
+ void runTest() { suite_ContextCreation.testCreateContextWithNullContextInitPtr(); }
+};
+
+class TestDescription_suite_ContextCreation_testCreateContextWithNullContextHandlePtr : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_ContextCreation_testCreateContextWithNullContextHandlePtr(ContextCreation& _suite_ContextCreation) : suite_ContextCreation(_suite_ContextCreation) { }
+ ContextCreation& suite_ContextCreation;
+ void runTest() { suite_ContextCreation.testCreateContextWithNullContextHandlePtr(); }
+};
+
+class TestDescription_suite_ContextCreation_testCreateContextOutOfMemory : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_ContextCreation_testCreateContextOutOfMemory(ContextCreation& _suite_ContextCreation) : suite_ContextCreation(_suite_ContextCreation) { }
+ ContextCreation& suite_ContextCreation;
+ void runTest() { suite_ContextCreation.testCreateContextOutOfMemory(); }
+};
+
+class TestDescription_suite_ContextCreation_testCreateContextOutOfMemoryForHandle : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_ContextCreation_testCreateContextOutOfMemoryForHandle(ContextCreation& _suite_ContextCreation) : suite_ContextCreation(_suite_ContextCreation) { }
+ ContextCreation& suite_ContextCreation;
+ void runTest() { suite_ContextCreation.testCreateContextOutOfMemoryForHandle(); }
+};
+
+class TestDescription_suite_ContextCreation_testCreateContextMakesOnlyTwoAllocation : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_ContextCreation_testCreateContextMakesOnlyTwoAllocation(ContextCreation& _suite_ContextCreation) : suite_ContextCreation(_suite_ContextCreation) { }
+ ContextCreation& suite_ContextCreation;
+ void runTest() { suite_ContextCreation.testCreateContextMakesOnlyTwoAllocation(); }
+};
+
+class TestDescription_suite_ContextCreation_testCreateContextWithValidParameters : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_ContextCreation_testCreateContextWithValidParameters(ContextCreation& _suite_ContextCreation) : suite_ContextCreation(_suite_ContextCreation) { }
+ ContextCreation& suite_ContextCreation;
+ void runTest() { suite_ContextCreation.testCreateContextWithValidParameters(); }
+};
+
+class TestDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithNullInputContextHandle : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithNullInputContextHandle(OperationsWithCreatedContext& _suite_OperationsWithCreatedContext) : suite_OperationsWithCreatedContext(_suite_OperationsWithCreatedContext) { }
+ OperationsWithCreatedContext& suite_OperationsWithCreatedContext;
+ void runTest() { suite_OperationsWithCreatedContext.testDuplicateContextHandleWithNullInputContextHandle(); }
+};
+
+class TestDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithInvalidInputContextHandle : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithInvalidInputContextHandle(OperationsWithCreatedContext& _suite_OperationsWithCreatedContext) : suite_OperationsWithCreatedContext(_suite_OperationsWithCreatedContext) { }
+ OperationsWithCreatedContext& suite_OperationsWithCreatedContext;
+ void runTest() { suite_OperationsWithCreatedContext.testDuplicateContextHandleWithInvalidInputContextHandle(); }
+};
+
+class TestDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithNullOutputContextHandlePtr : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithNullOutputContextHandlePtr(OperationsWithCreatedContext& _suite_OperationsWithCreatedContext) : suite_OperationsWithCreatedContext(_suite_OperationsWithCreatedContext) { }
+ OperationsWithCreatedContext& suite_OperationsWithCreatedContext;
+ void runTest() { suite_OperationsWithCreatedContext.testDuplicateContextHandleWithNullOutputContextHandlePtr(); }
+};
+
+class TestDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleOutOfMemory : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleOutOfMemory(OperationsWithCreatedContext& _suite_OperationsWithCreatedContext) : suite_OperationsWithCreatedContext(_suite_OperationsWithCreatedContext) { }
+ OperationsWithCreatedContext& suite_OperationsWithCreatedContext;
+ void runTest() { suite_OperationsWithCreatedContext.testDuplicateContextHandleOutOfMemory(); }
+};
+
+class TestDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleMakesOnlyOneAllocation : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleMakesOnlyOneAllocation(OperationsWithCreatedContext& _suite_OperationsWithCreatedContext) : suite_OperationsWithCreatedContext(_suite_OperationsWithCreatedContext) { }
+ OperationsWithCreatedContext& suite_OperationsWithCreatedContext;
+ void runTest() { suite_OperationsWithCreatedContext.testDuplicateContextHandleMakesOnlyOneAllocation(); }
+};
+
+class TestDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithSameContextHandle : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithSameContextHandle(OperationsWithCreatedContext& _suite_OperationsWithCreatedContext) : suite_OperationsWithCreatedContext(_suite_OperationsWithCreatedContext) { }
+ OperationsWithCreatedContext& suite_OperationsWithCreatedContext;
+ void runTest() { suite_OperationsWithCreatedContext.testDuplicateContextHandleWithSameContextHandle(); }
+};
+
+class TestDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithValidParameters : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithValidParameters(OperationsWithCreatedContext& _suite_OperationsWithCreatedContext) : suite_OperationsWithCreatedContext(_suite_OperationsWithCreatedContext) { }
+ OperationsWithCreatedContext& suite_OperationsWithCreatedContext;
+ void runTest() { suite_OperationsWithCreatedContext.testDuplicateContextHandleWithValidParameters(); }
+};
+
+#include "/mnt/d/Devel/Git/FingerJetFXOSE/FingerJetFXOSE/libFRFXLL/test/testFRFXLL/dpfrFtrExInPlaceTests.h"
+
+class TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithNullContextHandle : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithNullContextHandle(CreatingFeatureSetInPlace& _suite_CreatingFeatureSetInPlace) : suite_CreatingFeatureSetInPlace(_suite_CreatingFeatureSetInPlace) { }
+ CreatingFeatureSetInPlace& suite_CreatingFeatureSetInPlace;
+ void runTest() { suite_CreatingFeatureSetInPlace.testCreateFeatureSetWithNullContextHandle(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithNullFeatureSetHandlePtr : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithNullFeatureSetHandlePtr(CreatingFeatureSetInPlace& _suite_CreatingFeatureSetInPlace) : suite_CreatingFeatureSetInPlace(_suite_CreatingFeatureSetInPlace) { }
+ CreatingFeatureSetInPlace& suite_CreatingFeatureSetInPlace;
+ void runTest() { suite_CreatingFeatureSetInPlace.testCreateFeatureSetWithNullFeatureSetHandlePtr(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithNullImageDataPtr : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithNullImageDataPtr(CreatingFeatureSetInPlace& _suite_CreatingFeatureSetInPlace) : suite_CreatingFeatureSetInPlace(_suite_CreatingFeatureSetInPlace) { }
+ CreatingFeatureSetInPlace& suite_CreatingFeatureSetInPlace;
+ void runTest() { suite_CreatingFeatureSetInPlace.testCreateFeatureSetWithNullImageDataPtr(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithShortImageDataSize : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithShortImageDataSize(CreatingFeatureSetInPlace& _suite_CreatingFeatureSetInPlace) : suite_CreatingFeatureSetInPlace(_suite_CreatingFeatureSetInPlace) { }
+ CreatingFeatureSetInPlace& suite_CreatingFeatureSetInPlace;
+ void runTest() { suite_CreatingFeatureSetInPlace.testCreateFeatureSetWithShortImageDataSize(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithOneByteShorterImageDataSize : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithOneByteShorterImageDataSize(CreatingFeatureSetInPlace& _suite_CreatingFeatureSetInPlace) : suite_CreatingFeatureSetInPlace(_suite_CreatingFeatureSetInPlace) { }
+ CreatingFeatureSetInPlace& suite_CreatingFeatureSetInPlace;
+ void runTest() { suite_CreatingFeatureSetInPlace.testCreateFeatureSetWithOneByteShorterImageDataSize(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithOneByteLongerImageDataSize : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithOneByteLongerImageDataSize(CreatingFeatureSetInPlace& _suite_CreatingFeatureSetInPlace) : suite_CreatingFeatureSetInPlace(_suite_CreatingFeatureSetInPlace) { }
+ CreatingFeatureSetInPlace& suite_CreatingFeatureSetInPlace;
+ void runTest() { suite_CreatingFeatureSetInPlace.testCreateFeatureSetWithOneByteLongerImageDataSize(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithLongImageDataSize : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithLongImageDataSize(CreatingFeatureSetInPlace& _suite_CreatingFeatureSetInPlace) : suite_CreatingFeatureSetInPlace(_suite_CreatingFeatureSetInPlace) { }
+ CreatingFeatureSetInPlace& suite_CreatingFeatureSetInPlace;
+ void runTest() { suite_CreatingFeatureSetInPlace.testCreateFeatureSetWithLongImageDataSize(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetOutOfMemory : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetOutOfMemory(CreatingFeatureSetInPlace& _suite_CreatingFeatureSetInPlace) : suite_CreatingFeatureSetInPlace(_suite_CreatingFeatureSetInPlace) { }
+ CreatingFeatureSetInPlace& suite_CreatingFeatureSetInPlace;
+ void runTest() { suite_CreatingFeatureSetInPlace.testCreateFeatureSetOutOfMemory(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetOutOfMemoryForFeatureSetObject : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetOutOfMemoryForFeatureSetObject(CreatingFeatureSetInPlace& _suite_CreatingFeatureSetInPlace) : suite_CreatingFeatureSetInPlace(_suite_CreatingFeatureSetInPlace) { }
+ CreatingFeatureSetInPlace& suite_CreatingFeatureSetInPlace;
+ void runTest() { suite_CreatingFeatureSetInPlace.testCreateFeatureSetOutOfMemoryForFeatureSetObject(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetOutOfMemoryForHandle : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetOutOfMemoryForHandle(CreatingFeatureSetInPlace& _suite_CreatingFeatureSetInPlace) : suite_CreatingFeatureSetInPlace(_suite_CreatingFeatureSetInPlace) { }
+ CreatingFeatureSetInPlace& suite_CreatingFeatureSetInPlace;
+ void runTest() { suite_CreatingFeatureSetInPlace.testCreateFeatureSetOutOfMemoryForHandle(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetMakesOnlyThreeAllocations : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetMakesOnlyThreeAllocations(CreatingFeatureSetInPlace& _suite_CreatingFeatureSetInPlace) : suite_CreatingFeatureSetInPlace(_suite_CreatingFeatureSetInPlace) { }
+ CreatingFeatureSetInPlace& suite_CreatingFeatureSetInPlace;
+ void runTest() { suite_CreatingFeatureSetInPlace.testCreateFeatureSetMakesOnlyThreeAllocations(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetAsInvalidDataType : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetAsInvalidDataType(CreatingFeatureSetInPlace& _suite_CreatingFeatureSetInPlace) : suite_CreatingFeatureSetInPlace(_suite_CreatingFeatureSetInPlace) { }
+ CreatingFeatureSetInPlace& suite_CreatingFeatureSetInPlace;
+ void runTest() { suite_CreatingFeatureSetInPlace.testCreateFeatureSetAsInvalidDataType(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetAsFeatureSetDataType : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetAsFeatureSetDataType(CreatingFeatureSetInPlace& _suite_CreatingFeatureSetInPlace) : suite_CreatingFeatureSetInPlace(_suite_CreatingFeatureSetInPlace) { }
+ CreatingFeatureSetInPlace& suite_CreatingFeatureSetInPlace;
+ void runTest() { suite_CreatingFeatureSetInPlace.testCreateFeatureSetAsFeatureSetDataType(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlace_testCreateAsFeatureSetAnsiSampleDataType : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlace_testCreateAsFeatureSetAnsiSampleDataType(CreatingFeatureSetInPlace& _suite_CreatingFeatureSetInPlace) : suite_CreatingFeatureSetInPlace(_suite_CreatingFeatureSetInPlace) { }
+ CreatingFeatureSetInPlace& suite_CreatingFeatureSetInPlace;
+ void runTest() { suite_CreatingFeatureSetInPlace.testCreateAsFeatureSetAnsiSampleDataType(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlace_testCreateWithEnhancementDisabled : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlace_testCreateWithEnhancementDisabled(CreatingFeatureSetInPlace& _suite_CreatingFeatureSetInPlace) : suite_CreatingFeatureSetInPlace(_suite_CreatingFeatureSetInPlace) { }
+ CreatingFeatureSetInPlace& suite_CreatingFeatureSetInPlace;
+ void runTest() { suite_CreatingFeatureSetInPlace.testCreateWithEnhancementDisabled(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlace_testCreateWithEnhancementEnabled : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlace_testCreateWithEnhancementEnabled(CreatingFeatureSetInPlace& _suite_CreatingFeatureSetInPlace) : suite_CreatingFeatureSetInPlace(_suite_CreatingFeatureSetInPlace) { }
+ CreatingFeatureSetInPlace& suite_CreatingFeatureSetInPlace;
+ void runTest() { suite_CreatingFeatureSetInPlace.testCreateWithEnhancementEnabled(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlace_testCreateWithEnhancementDisallowedCombination : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlace_testCreateWithEnhancementDisallowedCombination(CreatingFeatureSetInPlace& _suite_CreatingFeatureSetInPlace) : suite_CreatingFeatureSetInPlace(_suite_CreatingFeatureSetInPlace) { }
+ CreatingFeatureSetInPlace& suite_CreatingFeatureSetInPlace;
+ void runTest() { suite_CreatingFeatureSetInPlace.testCreateWithEnhancementDisallowedCombination(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureBadImage_ANY_BINARY : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureBadImage_ANY_BINARY(CreatingFeatureSetInPlaceWithTestImages& _suite_CreatingFeatureSetInPlaceWithTestImages) : suite_CreatingFeatureSetInPlaceWithTestImages(_suite_CreatingFeatureSetInPlaceWithTestImages) { }
+ CreatingFeatureSetInPlaceWithTestImages& suite_CreatingFeatureSetInPlaceWithTestImages;
+ void runTest() { suite_CreatingFeatureSetInPlaceWithTestImages.testCreateFeatureBadImage_ANY_BINARY(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureBadImage_OneLine : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureBadImage_OneLine(CreatingFeatureSetInPlaceWithTestImages& _suite_CreatingFeatureSetInPlaceWithTestImages) : suite_CreatingFeatureSetInPlaceWithTestImages(_suite_CreatingFeatureSetInPlaceWithTestImages) { }
+ CreatingFeatureSetInPlaceWithTestImages& suite_CreatingFeatureSetInPlaceWithTestImages;
+ void runTest() { suite_CreatingFeatureSetInPlaceWithTestImages.testCreateFeatureBadImage_OneLine(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureBadImage_CONSTANT_IMAGE : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureBadImage_CONSTANT_IMAGE(CreatingFeatureSetInPlaceWithTestImages& _suite_CreatingFeatureSetInPlaceWithTestImages) : suite_CreatingFeatureSetInPlaceWithTestImages(_suite_CreatingFeatureSetInPlaceWithTestImages) { }
+ CreatingFeatureSetInPlaceWithTestImages& suite_CreatingFeatureSetInPlaceWithTestImages;
+ void runTest() { suite_CreatingFeatureSetInPlaceWithTestImages.testCreateFeatureBadImage_CONSTANT_IMAGE(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureBrcmImage00 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureBrcmImage00(CreatingFeatureSetInPlaceWithTestImages& _suite_CreatingFeatureSetInPlaceWithTestImages) : suite_CreatingFeatureSetInPlaceWithTestImages(_suite_CreatingFeatureSetInPlaceWithTestImages) { }
+ CreatingFeatureSetInPlaceWithTestImages& suite_CreatingFeatureSetInPlaceWithTestImages;
+ void runTest() { suite_CreatingFeatureSetInPlaceWithTestImages.testCreateFeatureBrcmImage00(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureAuthentecImage01 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureAuthentecImage01(CreatingFeatureSetInPlaceWithTestImages& _suite_CreatingFeatureSetInPlaceWithTestImages) : suite_CreatingFeatureSetInPlaceWithTestImages(_suite_CreatingFeatureSetInPlaceWithTestImages) { }
+ CreatingFeatureSetInPlaceWithTestImages& suite_CreatingFeatureSetInPlaceWithTestImages;
+ void runTest() { suite_CreatingFeatureSetInPlaceWithTestImages.testCreateFeatureAuthentecImage01(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureAuthentecImage01WithOneByteShorter : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureAuthentecImage01WithOneByteShorter(CreatingFeatureSetInPlaceWithTestImages& _suite_CreatingFeatureSetInPlaceWithTestImages) : suite_CreatingFeatureSetInPlaceWithTestImages(_suite_CreatingFeatureSetInPlaceWithTestImages) { }
+ CreatingFeatureSetInPlaceWithTestImages& suite_CreatingFeatureSetInPlaceWithTestImages;
+ void runTest() { suite_CreatingFeatureSetInPlaceWithTestImages.testCreateFeatureAuthentecImage01WithOneByteShorter(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureAuthentecImage01WithOneByteLonger : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureAuthentecImage01WithOneByteLonger(CreatingFeatureSetInPlaceWithTestImages& _suite_CreatingFeatureSetInPlaceWithTestImages) : suite_CreatingFeatureSetInPlaceWithTestImages(_suite_CreatingFeatureSetInPlaceWithTestImages) { }
+ CreatingFeatureSetInPlaceWithTestImages& suite_CreatingFeatureSetInPlaceWithTestImages;
+ void runTest() { suite_CreatingFeatureSetInPlaceWithTestImages.testCreateFeatureAuthentecImage01WithOneByteLonger(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureWithTruncatedImage : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureWithTruncatedImage(CreatingFeatureSetInPlaceWithTestImages& _suite_CreatingFeatureSetInPlaceWithTestImages) : suite_CreatingFeatureSetInPlaceWithTestImages(_suite_CreatingFeatureSetInPlaceWithTestImages) { }
+ CreatingFeatureSetInPlaceWithTestImages& suite_CreatingFeatureSetInPlaceWithTestImages;
+ void runTest() { suite_CreatingFeatureSetInPlaceWithTestImages.testCreateFeatureWithTruncatedImage(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureAuthentecImage02WithOneRowLonger : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureAuthentecImage02WithOneRowLonger(CreatingFeatureSetInPlaceWithTestImages& _suite_CreatingFeatureSetInPlaceWithTestImages) : suite_CreatingFeatureSetInPlaceWithTestImages(_suite_CreatingFeatureSetInPlaceWithTestImages) { }
+ CreatingFeatureSetInPlaceWithTestImages& suite_CreatingFeatureSetInPlaceWithTestImages;
+ void runTest() { suite_CreatingFeatureSetInPlaceWithTestImages.testCreateFeatureAuthentecImage02WithOneRowLonger(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImageMartini : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImageMartini(CreatingFeatureSetInPlaceWithTestImages& _suite_CreatingFeatureSetInPlaceWithTestImages) : suite_CreatingFeatureSetInPlaceWithTestImages(_suite_CreatingFeatureSetInPlaceWithTestImages) { }
+ CreatingFeatureSetInPlaceWithTestImages& suite_CreatingFeatureSetInPlaceWithTestImages;
+ void runTest() { suite_CreatingFeatureSetInPlaceWithTestImages.testCreateFeatureTestImageMartini(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImageMartiniCE : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImageMartiniCE(CreatingFeatureSetInPlaceWithTestImages& _suite_CreatingFeatureSetInPlaceWithTestImages) : suite_CreatingFeatureSetInPlaceWithTestImages(_suite_CreatingFeatureSetInPlaceWithTestImages) { }
+ CreatingFeatureSetInPlaceWithTestImages& suite_CreatingFeatureSetInPlaceWithTestImages;
+ void runTest() { suite_CreatingFeatureSetInPlaceWithTestImages.testCreateFeatureTestImageMartiniCE(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImageValidityWrongRecordLength : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImageValidityWrongRecordLength(CreatingFeatureSetInPlaceWithTestImages& _suite_CreatingFeatureSetInPlaceWithTestImages) : suite_CreatingFeatureSetInPlaceWithTestImages(_suite_CreatingFeatureSetInPlaceWithTestImages) { }
+ CreatingFeatureSetInPlaceWithTestImages& suite_CreatingFeatureSetInPlaceWithTestImages;
+ void runTest() { suite_CreatingFeatureSetInPlaceWithTestImages.testCreateFeatureTestImageValidityWrongRecordLength(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImageValidity : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImageValidity(CreatingFeatureSetInPlaceWithTestImages& _suite_CreatingFeatureSetInPlaceWithTestImages) : suite_CreatingFeatureSetInPlaceWithTestImages(_suite_CreatingFeatureSetInPlaceWithTestImages) { }
+ CreatingFeatureSetInPlaceWithTestImages& suite_CreatingFeatureSetInPlaceWithTestImages;
+ void runTest() { suite_CreatingFeatureSetInPlaceWithTestImages.testCreateFeatureTestImageValidity(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage200 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage200(CreatingFeatureSetInPlaceWithTestImages& _suite_CreatingFeatureSetInPlaceWithTestImages) : suite_CreatingFeatureSetInPlaceWithTestImages(_suite_CreatingFeatureSetInPlaceWithTestImages) { }
+ CreatingFeatureSetInPlaceWithTestImages& suite_CreatingFeatureSetInPlaceWithTestImages;
+ void runTest() { suite_CreatingFeatureSetInPlaceWithTestImages.testCreateFeatureTestImage200(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage250 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage250(CreatingFeatureSetInPlaceWithTestImages& _suite_CreatingFeatureSetInPlaceWithTestImages) : suite_CreatingFeatureSetInPlaceWithTestImages(_suite_CreatingFeatureSetInPlaceWithTestImages) { }
+ CreatingFeatureSetInPlaceWithTestImages& suite_CreatingFeatureSetInPlaceWithTestImages;
+ void runTest() { suite_CreatingFeatureSetInPlaceWithTestImages.testCreateFeatureTestImage250(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage299 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage299(CreatingFeatureSetInPlaceWithTestImages& _suite_CreatingFeatureSetInPlaceWithTestImages) : suite_CreatingFeatureSetInPlaceWithTestImages(_suite_CreatingFeatureSetInPlaceWithTestImages) { }
+ CreatingFeatureSetInPlaceWithTestImages& suite_CreatingFeatureSetInPlaceWithTestImages;
+ void runTest() { suite_CreatingFeatureSetInPlaceWithTestImages.testCreateFeatureTestImage299(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage300 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage300(CreatingFeatureSetInPlaceWithTestImages& _suite_CreatingFeatureSetInPlaceWithTestImages) : suite_CreatingFeatureSetInPlaceWithTestImages(_suite_CreatingFeatureSetInPlaceWithTestImages) { }
+ CreatingFeatureSetInPlaceWithTestImages& suite_CreatingFeatureSetInPlaceWithTestImages;
+ void runTest() { suite_CreatingFeatureSetInPlaceWithTestImages.testCreateFeatureTestImage300(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage332 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage332(CreatingFeatureSetInPlaceWithTestImages& _suite_CreatingFeatureSetInPlaceWithTestImages) : suite_CreatingFeatureSetInPlaceWithTestImages(_suite_CreatingFeatureSetInPlaceWithTestImages) { }
+ CreatingFeatureSetInPlaceWithTestImages& suite_CreatingFeatureSetInPlaceWithTestImages;
+ void runTest() { suite_CreatingFeatureSetInPlaceWithTestImages.testCreateFeatureTestImage332(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage333 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage333(CreatingFeatureSetInPlaceWithTestImages& _suite_CreatingFeatureSetInPlaceWithTestImages) : suite_CreatingFeatureSetInPlaceWithTestImages(_suite_CreatingFeatureSetInPlaceWithTestImages) { }
+ CreatingFeatureSetInPlaceWithTestImages& suite_CreatingFeatureSetInPlaceWithTestImages;
+ void runTest() { suite_CreatingFeatureSetInPlaceWithTestImages.testCreateFeatureTestImage333(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage1000 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage1000(CreatingFeatureSetInPlaceWithTestImages& _suite_CreatingFeatureSetInPlaceWithTestImages) : suite_CreatingFeatureSetInPlaceWithTestImages(_suite_CreatingFeatureSetInPlaceWithTestImages) { }
+ CreatingFeatureSetInPlaceWithTestImages& suite_CreatingFeatureSetInPlaceWithTestImages;
+ void runTest() { suite_CreatingFeatureSetInPlaceWithTestImages.testCreateFeatureTestImage1000(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage1001 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage1001(CreatingFeatureSetInPlaceWithTestImages& _suite_CreatingFeatureSetInPlaceWithTestImages) : suite_CreatingFeatureSetInPlaceWithTestImages(_suite_CreatingFeatureSetInPlaceWithTestImages) { }
+ CreatingFeatureSetInPlaceWithTestImages& suite_CreatingFeatureSetInPlaceWithTestImages;
+ void runTest() { suite_CreatingFeatureSetInPlaceWithTestImages.testCreateFeatureTestImage1001(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage_100_100 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage_100_100(CreatingFeatureSetInPlaceWithTestImages& _suite_CreatingFeatureSetInPlaceWithTestImages) : suite_CreatingFeatureSetInPlaceWithTestImages(_suite_CreatingFeatureSetInPlaceWithTestImages) { }
+ CreatingFeatureSetInPlaceWithTestImages& suite_CreatingFeatureSetInPlaceWithTestImages;
+ void runTest() { suite_CreatingFeatureSetInPlaceWithTestImages.testCreateFeatureTestImage_100_100(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureIso : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureIso(CreatingFeatureSetInPlaceWithTestImages& _suite_CreatingFeatureSetInPlaceWithTestImages) : suite_CreatingFeatureSetInPlaceWithTestImages(_suite_CreatingFeatureSetInPlaceWithTestImages) { }
+ CreatingFeatureSetInPlaceWithTestImages& suite_CreatingFeatureSetInPlaceWithTestImages;
+ void runTest() { suite_CreatingFeatureSetInPlaceWithTestImages.testCreateFeatureIso(); }
+};
+
+#include "/mnt/d/Devel/Git/FingerJetFXOSE/FingerJetFXOSE/libFRFXLL/test/testFRFXLL/dpfrFtrExTests.h"
+
+class TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithNullContextHandle : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithNullContextHandle(CreatingFeatureSetAnsi& _suite_CreatingFeatureSetAnsi) : suite_CreatingFeatureSetAnsi(_suite_CreatingFeatureSetAnsi) { }
+ CreatingFeatureSetAnsi& suite_CreatingFeatureSetAnsi;
+ void runTest() { suite_CreatingFeatureSetAnsi.testCreateFeatureSetWithNullContextHandle(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithNullFeatureSetHandlePtr : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithNullFeatureSetHandlePtr(CreatingFeatureSetAnsi& _suite_CreatingFeatureSetAnsi) : suite_CreatingFeatureSetAnsi(_suite_CreatingFeatureSetAnsi) { }
+ CreatingFeatureSetAnsi& suite_CreatingFeatureSetAnsi;
+ void runTest() { suite_CreatingFeatureSetAnsi.testCreateFeatureSetWithNullFeatureSetHandlePtr(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithNullImageDataPtr : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithNullImageDataPtr(CreatingFeatureSetAnsi& _suite_CreatingFeatureSetAnsi) : suite_CreatingFeatureSetAnsi(_suite_CreatingFeatureSetAnsi) { }
+ CreatingFeatureSetAnsi& suite_CreatingFeatureSetAnsi;
+ void runTest() { suite_CreatingFeatureSetAnsi.testCreateFeatureSetWithNullImageDataPtr(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithShortImageDataSize : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithShortImageDataSize(CreatingFeatureSetAnsi& _suite_CreatingFeatureSetAnsi) : suite_CreatingFeatureSetAnsi(_suite_CreatingFeatureSetAnsi) { }
+ CreatingFeatureSetAnsi& suite_CreatingFeatureSetAnsi;
+ void runTest() { suite_CreatingFeatureSetAnsi.testCreateFeatureSetWithShortImageDataSize(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithOneByteShorterImageDataSize : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithOneByteShorterImageDataSize(CreatingFeatureSetAnsi& _suite_CreatingFeatureSetAnsi) : suite_CreatingFeatureSetAnsi(_suite_CreatingFeatureSetAnsi) { }
+ CreatingFeatureSetAnsi& suite_CreatingFeatureSetAnsi;
+ void runTest() { suite_CreatingFeatureSetAnsi.testCreateFeatureSetWithOneByteShorterImageDataSize(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithOneByteLongerImageDataSize : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithOneByteLongerImageDataSize(CreatingFeatureSetAnsi& _suite_CreatingFeatureSetAnsi) : suite_CreatingFeatureSetAnsi(_suite_CreatingFeatureSetAnsi) { }
+ CreatingFeatureSetAnsi& suite_CreatingFeatureSetAnsi;
+ void runTest() { suite_CreatingFeatureSetAnsi.testCreateFeatureSetWithOneByteLongerImageDataSize(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithLongImageDataSize : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithLongImageDataSize(CreatingFeatureSetAnsi& _suite_CreatingFeatureSetAnsi) : suite_CreatingFeatureSetAnsi(_suite_CreatingFeatureSetAnsi) { }
+ CreatingFeatureSetAnsi& suite_CreatingFeatureSetAnsi;
+ void runTest() { suite_CreatingFeatureSetAnsi.testCreateFeatureSetWithLongImageDataSize(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetOutOfMemory : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetOutOfMemory(CreatingFeatureSetAnsi& _suite_CreatingFeatureSetAnsi) : suite_CreatingFeatureSetAnsi(_suite_CreatingFeatureSetAnsi) { }
+ CreatingFeatureSetAnsi& suite_CreatingFeatureSetAnsi;
+ void runTest() { suite_CreatingFeatureSetAnsi.testCreateFeatureSetOutOfMemory(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetOutOfMemoryForFeatureSetObject : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetOutOfMemoryForFeatureSetObject(CreatingFeatureSetAnsi& _suite_CreatingFeatureSetAnsi) : suite_CreatingFeatureSetAnsi(_suite_CreatingFeatureSetAnsi) { }
+ CreatingFeatureSetAnsi& suite_CreatingFeatureSetAnsi;
+ void runTest() { suite_CreatingFeatureSetAnsi.testCreateFeatureSetOutOfMemoryForFeatureSetObject(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetOutOfMemoryForHandle : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetOutOfMemoryForHandle(CreatingFeatureSetAnsi& _suite_CreatingFeatureSetAnsi) : suite_CreatingFeatureSetAnsi(_suite_CreatingFeatureSetAnsi) { }
+ CreatingFeatureSetAnsi& suite_CreatingFeatureSetAnsi;
+ void runTest() { suite_CreatingFeatureSetAnsi.testCreateFeatureSetOutOfMemoryForHandle(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetMakesOnlyThreeAllocations : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetMakesOnlyThreeAllocations(CreatingFeatureSetAnsi& _suite_CreatingFeatureSetAnsi) : suite_CreatingFeatureSetAnsi(_suite_CreatingFeatureSetAnsi) { }
+ CreatingFeatureSetAnsi& suite_CreatingFeatureSetAnsi;
+ void runTest() { suite_CreatingFeatureSetAnsi.testCreateFeatureSetMakesOnlyThreeAllocations(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetAsInvalidDataType : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetAsInvalidDataType(CreatingFeatureSetAnsi& _suite_CreatingFeatureSetAnsi) : suite_CreatingFeatureSetAnsi(_suite_CreatingFeatureSetAnsi) { }
+ CreatingFeatureSetAnsi& suite_CreatingFeatureSetAnsi;
+ void runTest() { suite_CreatingFeatureSetAnsi.testCreateFeatureSetAsInvalidDataType(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetAsFeatureSetDataType : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetAsFeatureSetDataType(CreatingFeatureSetAnsi& _suite_CreatingFeatureSetAnsi) : suite_CreatingFeatureSetAnsi(_suite_CreatingFeatureSetAnsi) { }
+ CreatingFeatureSetAnsi& suite_CreatingFeatureSetAnsi;
+ void runTest() { suite_CreatingFeatureSetAnsi.testCreateFeatureSetAsFeatureSetDataType(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetAnsi_testCreateAsFeatureSetAnsiSampleDataType : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetAnsi_testCreateAsFeatureSetAnsiSampleDataType(CreatingFeatureSetAnsi& _suite_CreatingFeatureSetAnsi) : suite_CreatingFeatureSetAnsi(_suite_CreatingFeatureSetAnsi) { }
+ CreatingFeatureSetAnsi& suite_CreatingFeatureSetAnsi;
+ void runTest() { suite_CreatingFeatureSetAnsi.testCreateAsFeatureSetAnsiSampleDataType(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureBadImage_ANY_BINARY : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureBadImage_ANY_BINARY(CreatingFeatureSetWithTestImages& _suite_CreatingFeatureSetWithTestImages) : suite_CreatingFeatureSetWithTestImages(_suite_CreatingFeatureSetWithTestImages) { }
+ CreatingFeatureSetWithTestImages& suite_CreatingFeatureSetWithTestImages;
+ void runTest() { suite_CreatingFeatureSetWithTestImages.testCreateFeatureBadImage_ANY_BINARY(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureBadImage_OneLine : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureBadImage_OneLine(CreatingFeatureSetWithTestImages& _suite_CreatingFeatureSetWithTestImages) : suite_CreatingFeatureSetWithTestImages(_suite_CreatingFeatureSetWithTestImages) { }
+ CreatingFeatureSetWithTestImages& suite_CreatingFeatureSetWithTestImages;
+ void runTest() { suite_CreatingFeatureSetWithTestImages.testCreateFeatureBadImage_OneLine(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureBadImage_CONSTANT_IMAGE : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureBadImage_CONSTANT_IMAGE(CreatingFeatureSetWithTestImages& _suite_CreatingFeatureSetWithTestImages) : suite_CreatingFeatureSetWithTestImages(_suite_CreatingFeatureSetWithTestImages) { }
+ CreatingFeatureSetWithTestImages& suite_CreatingFeatureSetWithTestImages;
+ void runTest() { suite_CreatingFeatureSetWithTestImages.testCreateFeatureBadImage_CONSTANT_IMAGE(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureBrcmImage00 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureBrcmImage00(CreatingFeatureSetWithTestImages& _suite_CreatingFeatureSetWithTestImages) : suite_CreatingFeatureSetWithTestImages(_suite_CreatingFeatureSetWithTestImages) { }
+ CreatingFeatureSetWithTestImages& suite_CreatingFeatureSetWithTestImages;
+ void runTest() { suite_CreatingFeatureSetWithTestImages.testCreateFeatureBrcmImage00(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage01 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage01(CreatingFeatureSetWithTestImages& _suite_CreatingFeatureSetWithTestImages) : suite_CreatingFeatureSetWithTestImages(_suite_CreatingFeatureSetWithTestImages) { }
+ CreatingFeatureSetWithTestImages& suite_CreatingFeatureSetWithTestImages;
+ void runTest() { suite_CreatingFeatureSetWithTestImages.testCreateFeatureAuthentecImage01(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage01WithOneByteShorter : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage01WithOneByteShorter(CreatingFeatureSetWithTestImages& _suite_CreatingFeatureSetWithTestImages) : suite_CreatingFeatureSetWithTestImages(_suite_CreatingFeatureSetWithTestImages) { }
+ CreatingFeatureSetWithTestImages& suite_CreatingFeatureSetWithTestImages;
+ void runTest() { suite_CreatingFeatureSetWithTestImages.testCreateFeatureAuthentecImage01WithOneByteShorter(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage01WithOneByteLonger : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage01WithOneByteLonger(CreatingFeatureSetWithTestImages& _suite_CreatingFeatureSetWithTestImages) : suite_CreatingFeatureSetWithTestImages(_suite_CreatingFeatureSetWithTestImages) { }
+ CreatingFeatureSetWithTestImages& suite_CreatingFeatureSetWithTestImages;
+ void runTest() { suite_CreatingFeatureSetWithTestImages.testCreateFeatureAuthentecImage01WithOneByteLonger(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureWithTruncatedImage : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureWithTruncatedImage(CreatingFeatureSetWithTestImages& _suite_CreatingFeatureSetWithTestImages) : suite_CreatingFeatureSetWithTestImages(_suite_CreatingFeatureSetWithTestImages) { }
+ CreatingFeatureSetWithTestImages& suite_CreatingFeatureSetWithTestImages;
+ void runTest() { suite_CreatingFeatureSetWithTestImages.testCreateFeatureWithTruncatedImage(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage02 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage02(CreatingFeatureSetWithTestImages& _suite_CreatingFeatureSetWithTestImages) : suite_CreatingFeatureSetWithTestImages(_suite_CreatingFeatureSetWithTestImages) { }
+ CreatingFeatureSetWithTestImages& suite_CreatingFeatureSetWithTestImages;
+ void runTest() { suite_CreatingFeatureSetWithTestImages.testCreateFeatureAuthentecImage02(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage02WithOneRowLonger : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage02WithOneRowLonger(CreatingFeatureSetWithTestImages& _suite_CreatingFeatureSetWithTestImages) : suite_CreatingFeatureSetWithTestImages(_suite_CreatingFeatureSetWithTestImages) { }
+ CreatingFeatureSetWithTestImages& suite_CreatingFeatureSetWithTestImages;
+ void runTest() { suite_CreatingFeatureSetWithTestImages.testCreateFeatureAuthentecImage02WithOneRowLonger(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImageMartini : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImageMartini(CreatingFeatureSetWithTestImages& _suite_CreatingFeatureSetWithTestImages) : suite_CreatingFeatureSetWithTestImages(_suite_CreatingFeatureSetWithTestImages) { }
+ CreatingFeatureSetWithTestImages& suite_CreatingFeatureSetWithTestImages;
+ void runTest() { suite_CreatingFeatureSetWithTestImages.testCreateFeatureTestAnsiImageMartini(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImageMartiniCE : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImageMartiniCE(CreatingFeatureSetWithTestImages& _suite_CreatingFeatureSetWithTestImages) : suite_CreatingFeatureSetWithTestImages(_suite_CreatingFeatureSetWithTestImages) { }
+ CreatingFeatureSetWithTestImages& suite_CreatingFeatureSetWithTestImages;
+ void runTest() { suite_CreatingFeatureSetWithTestImages.testCreateFeatureTestAnsiImageMartiniCE(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage200 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage200(CreatingFeatureSetWithTestImages& _suite_CreatingFeatureSetWithTestImages) : suite_CreatingFeatureSetWithTestImages(_suite_CreatingFeatureSetWithTestImages) { }
+ CreatingFeatureSetWithTestImages& suite_CreatingFeatureSetWithTestImages;
+ void runTest() { suite_CreatingFeatureSetWithTestImages.testCreateFeatureTestAnsiImage200(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage250 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage250(CreatingFeatureSetWithTestImages& _suite_CreatingFeatureSetWithTestImages) : suite_CreatingFeatureSetWithTestImages(_suite_CreatingFeatureSetWithTestImages) { }
+ CreatingFeatureSetWithTestImages& suite_CreatingFeatureSetWithTestImages;
+ void runTest() { suite_CreatingFeatureSetWithTestImages.testCreateFeatureTestAnsiImage250(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage299 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage299(CreatingFeatureSetWithTestImages& _suite_CreatingFeatureSetWithTestImages) : suite_CreatingFeatureSetWithTestImages(_suite_CreatingFeatureSetWithTestImages) { }
+ CreatingFeatureSetWithTestImages& suite_CreatingFeatureSetWithTestImages;
+ void runTest() { suite_CreatingFeatureSetWithTestImages.testCreateFeatureTestAnsiImage299(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage300 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage300(CreatingFeatureSetWithTestImages& _suite_CreatingFeatureSetWithTestImages) : suite_CreatingFeatureSetWithTestImages(_suite_CreatingFeatureSetWithTestImages) { }
+ CreatingFeatureSetWithTestImages& suite_CreatingFeatureSetWithTestImages;
+ void runTest() { suite_CreatingFeatureSetWithTestImages.testCreateFeatureTestAnsiImage300(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage1000 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage1000(CreatingFeatureSetWithTestImages& _suite_CreatingFeatureSetWithTestImages) : suite_CreatingFeatureSetWithTestImages(_suite_CreatingFeatureSetWithTestImages) { }
+ CreatingFeatureSetWithTestImages& suite_CreatingFeatureSetWithTestImages;
+ void runTest() { suite_CreatingFeatureSetWithTestImages.testCreateFeatureTestAnsiImage1000(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage1001 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage1001(CreatingFeatureSetWithTestImages& _suite_CreatingFeatureSetWithTestImages) : suite_CreatingFeatureSetWithTestImages(_suite_CreatingFeatureSetWithTestImages) { }
+ CreatingFeatureSetWithTestImages& suite_CreatingFeatureSetWithTestImages;
+ void runTest() { suite_CreatingFeatureSetWithTestImages.testCreateFeatureTestAnsiImage1001(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage_100_100 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage_100_100(CreatingFeatureSetWithTestImages& _suite_CreatingFeatureSetWithTestImages) : suite_CreatingFeatureSetWithTestImages(_suite_CreatingFeatureSetWithTestImages) { }
+ CreatingFeatureSetWithTestImages& suite_CreatingFeatureSetWithTestImages;
+ void runTest() { suite_CreatingFeatureSetWithTestImages.testCreateFeatureTestAnsiImage_100_100(); }
+};
+
+class TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureIso : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureIso(CreatingFeatureSetWithTestImages& _suite_CreatingFeatureSetWithTestImages) : suite_CreatingFeatureSetWithTestImages(_suite_CreatingFeatureSetWithTestImages) { }
+ CreatingFeatureSetWithTestImages& suite_CreatingFeatureSetWithTestImages;
+ void runTest() { suite_CreatingFeatureSetWithTestImages.testCreateFeatureIso(); }
+};
+
+#include <cxxtest/Root.cpp>
+const char* CxxTest::RealWorldDescription::_worldName;
+namespace CxxTest {
+ void initialize()
+ {
+static CxxTest::List Tests_LibraryInformation;
+  Tests_LibraryInformation.initialize();
+static LibraryInformation suite_LibraryInformation;
+
+ static CxxTest::StaticSuiteDescription suiteDescription_LibraryInformation;
+
+  suiteDescription_LibraryInformation.initialize( "/mnt/d/Devel/Git/FingerJetFXOSE/FingerJetFXOSE/libFRFXLL/test/testFRFXLL/dpfrCommonApiTests.h", 45, "LibraryInformation", suite_LibraryInformation, Tests_LibraryInformation );
+  static TestDescription_suite_LibraryInformation_testGetLibraryVersionWithValidParameters testDescription_suite_LibraryInformation_testGetLibraryVersionWithValidParameters(suite_LibraryInformation);
+  testDescription_suite_LibraryInformation_testGetLibraryVersionWithValidParameters.initialize( Tests_LibraryInformation, suiteDescription_LibraryInformation, 57, "testGetLibraryVersionWithValidParameters" );
+  static TestDescription_suite_LibraryInformation_testGetLibraryVersionWithNullVersionPtr testDescription_suite_LibraryInformation_testGetLibraryVersionWithNullVersionPtr(suite_LibraryInformation);
+  testDescription_suite_LibraryInformation_testGetLibraryVersionWithNullVersionPtr.initialize( Tests_LibraryInformation, suiteDescription_LibraryInformation, 60, "testGetLibraryVersionWithNullVersionPtr" );
+static CxxTest::List Tests_ContextCreation;
+  Tests_ContextCreation.initialize();
+static ContextCreation suite_ContextCreation;
+
+ static CxxTest::StaticSuiteDescription suiteDescription_ContextCreation;
+
+  suiteDescription_ContextCreation.initialize( "/mnt/d/Devel/Git/FingerJetFXOSE/FingerJetFXOSE/libFRFXLL/test/testFRFXLL/dpfrCommonApiTests.h", 65, "ContextCreation", suite_ContextCreation, Tests_ContextCreation );
+  static TestDescription_suite_ContextCreation_testCreateContextWithNullContextInitPtr testDescription_suite_ContextCreation_testCreateContextWithNullContextInitPtr(suite_ContextCreation);
+  testDescription_suite_ContextCreation_testCreateContextWithNullContextInitPtr.initialize( Tests_ContextCreation, suiteDescription_ContextCreation, 87, "testCreateContextWithNullContextInitPtr" );
+  static TestDescription_suite_ContextCreation_testCreateContextWithNullContextHandlePtr testDescription_suite_ContextCreation_testCreateContextWithNullContextHandlePtr(suite_ContextCreation);
+  testDescription_suite_ContextCreation_testCreateContextWithNullContextHandlePtr.initialize( Tests_ContextCreation, suiteDescription_ContextCreation, 91, "testCreateContextWithNullContextHandlePtr" );
+  static TestDescription_suite_ContextCreation_testCreateContextOutOfMemory testDescription_suite_ContextCreation_testCreateContextOutOfMemory(suite_ContextCreation);
+  testDescription_suite_ContextCreation_testCreateContextOutOfMemory.initialize( Tests_ContextCreation, suiteDescription_ContextCreation, 94, "testCreateContextOutOfMemory" );
+  static TestDescription_suite_ContextCreation_testCreateContextOutOfMemoryForHandle testDescription_suite_ContextCreation_testCreateContextOutOfMemoryForHandle(suite_ContextCreation);
+  testDescription_suite_ContextCreation_testCreateContextOutOfMemoryForHandle.initialize( Tests_ContextCreation, suiteDescription_ContextCreation, 99, "testCreateContextOutOfMemoryForHandle" );
+  static TestDescription_suite_ContextCreation_testCreateContextMakesOnlyTwoAllocation testDescription_suite_ContextCreation_testCreateContextMakesOnlyTwoAllocation(suite_ContextCreation);
+  testDescription_suite_ContextCreation_testCreateContextMakesOnlyTwoAllocation.initialize( Tests_ContextCreation, suiteDescription_ContextCreation, 104, "testCreateContextMakesOnlyTwoAllocation" );
+  static TestDescription_suite_ContextCreation_testCreateContextWithValidParameters testDescription_suite_ContextCreation_testCreateContextWithValidParameters(suite_ContextCreation);
+  testDescription_suite_ContextCreation_testCreateContextWithValidParameters.initialize( Tests_ContextCreation, suiteDescription_ContextCreation, 110, "testCreateContextWithValidParameters" );
+static CxxTest::List Tests_OperationsWithCreatedContext;
+  Tests_OperationsWithCreatedContext.initialize();
+static OperationsWithCreatedContext suite_OperationsWithCreatedContext;
+
+ static CxxTest::StaticSuiteDescription suiteDescription_OperationsWithCreatedContext;
+
+  suiteDescription_OperationsWithCreatedContext.initialize( "/mnt/d/Devel/Git/FingerJetFXOSE/FingerJetFXOSE/libFRFXLL/test/testFRFXLL/dpfrCommonApiTests.h", 118, "OperationsWithCreatedContext", suite_OperationsWithCreatedContext, Tests_OperationsWithCreatedContext );
+  static TestDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithNullInputContextHandle testDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithNullInputContextHandle(suite_OperationsWithCreatedContext);
+  testDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithNullInputContextHandle.initialize( Tests_OperationsWithCreatedContext, suiteDescription_OperationsWithCreatedContext, 134, "testDuplicateContextHandleWithNullInputContextHandle" );
+  static TestDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithInvalidInputContextHandle testDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithInvalidInputContextHandle(suite_OperationsWithCreatedContext);
+  testDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithInvalidInputContextHandle.initialize( Tests_OperationsWithCreatedContext, suiteDescription_OperationsWithCreatedContext, 138, "testDuplicateContextHandleWithInvalidInputContextHandle" );
+  static TestDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithNullOutputContextHandlePtr testDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithNullOutputContextHandlePtr(suite_OperationsWithCreatedContext);
+  testDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithNullOutputContextHandlePtr.initialize( Tests_OperationsWithCreatedContext, suiteDescription_OperationsWithCreatedContext, 147, "testDuplicateContextHandleWithNullOutputContextHandlePtr" );
+  static TestDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleOutOfMemory testDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleOutOfMemory(suite_OperationsWithCreatedContext);
+  testDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleOutOfMemory.initialize( Tests_OperationsWithCreatedContext, suiteDescription_OperationsWithCreatedContext, 150, "testDuplicateContextHandleOutOfMemory" );
+  static TestDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleMakesOnlyOneAllocation testDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleMakesOnlyOneAllocation(suite_OperationsWithCreatedContext);
+  testDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleMakesOnlyOneAllocation.initialize( Tests_OperationsWithCreatedContext, suiteDescription_OperationsWithCreatedContext, 155, "testDuplicateContextHandleMakesOnlyOneAllocation" );
+  static TestDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithSameContextHandle testDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithSameContextHandle(suite_OperationsWithCreatedContext);
+  testDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithSameContextHandle.initialize( Tests_OperationsWithCreatedContext, suiteDescription_OperationsWithCreatedContext, 161, "testDuplicateContextHandleWithSameContextHandle" );
+  static TestDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithValidParameters testDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithValidParameters(suite_OperationsWithCreatedContext);
+  testDescription_suite_OperationsWithCreatedContext_testDuplicateContextHandleWithValidParameters.initialize( Tests_OperationsWithCreatedContext, suiteDescription_OperationsWithCreatedContext, 167, "testDuplicateContextHandleWithValidParameters" );
+static CxxTest::List Tests_CreatingFeatureSetInPlace;
+  Tests_CreatingFeatureSetInPlace.initialize();
+static CreatingFeatureSetInPlace suite_CreatingFeatureSetInPlace;
+
+ static CxxTest::StaticSuiteDescription suiteDescription_CreatingFeatureSetInPlace;
+
+  suiteDescription_CreatingFeatureSetInPlace.initialize( "/mnt/d/Devel/Git/FingerJetFXOSE/FingerJetFXOSE/libFRFXLL/test/testFRFXLL/dpfrFtrExInPlaceTests.h", 38, "CreatingFeatureSetInPlace", suite_CreatingFeatureSetInPlace, Tests_CreatingFeatureSetInPlace );
+  static TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithNullContextHandle testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithNullContextHandle(suite_CreatingFeatureSetInPlace);
+  testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithNullContextHandle.initialize( Tests_CreatingFeatureSetInPlace, suiteDescription_CreatingFeatureSetInPlace, 56, "testCreateFeatureSetWithNullContextHandle" );
+  static TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithNullFeatureSetHandlePtr testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithNullFeatureSetHandlePtr(suite_CreatingFeatureSetInPlace);
+  testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithNullFeatureSetHandlePtr.initialize( Tests_CreatingFeatureSetInPlace, suiteDescription_CreatingFeatureSetInPlace, 61, "testCreateFeatureSetWithNullFeatureSetHandlePtr" );
+  static TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithNullImageDataPtr testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithNullImageDataPtr(suite_CreatingFeatureSetInPlace);
+  testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithNullImageDataPtr.initialize( Tests_CreatingFeatureSetInPlace, suiteDescription_CreatingFeatureSetInPlace, 66, "testCreateFeatureSetWithNullImageDataPtr" );
+  static TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithShortImageDataSize testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithShortImageDataSize(suite_CreatingFeatureSetInPlace);
+  testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithShortImageDataSize.initialize( Tests_CreatingFeatureSetInPlace, suiteDescription_CreatingFeatureSetInPlace, 71, "testCreateFeatureSetWithShortImageDataSize" );
+  static TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithOneByteShorterImageDataSize testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithOneByteShorterImageDataSize(suite_CreatingFeatureSetInPlace);
+  testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithOneByteShorterImageDataSize.initialize( Tests_CreatingFeatureSetInPlace, suiteDescription_CreatingFeatureSetInPlace, 76, "testCreateFeatureSetWithOneByteShorterImageDataSize" );
+  static TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithOneByteLongerImageDataSize testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithOneByteLongerImageDataSize(suite_CreatingFeatureSetInPlace);
+  testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithOneByteLongerImageDataSize.initialize( Tests_CreatingFeatureSetInPlace, suiteDescription_CreatingFeatureSetInPlace, 81, "testCreateFeatureSetWithOneByteLongerImageDataSize" );
+  static TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithLongImageDataSize testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithLongImageDataSize(suite_CreatingFeatureSetInPlace);
+  testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetWithLongImageDataSize.initialize( Tests_CreatingFeatureSetInPlace, suiteDescription_CreatingFeatureSetInPlace, 86, "testCreateFeatureSetWithLongImageDataSize" );
+  static TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetOutOfMemory testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetOutOfMemory(suite_CreatingFeatureSetInPlace);
+  testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetOutOfMemory.initialize( Tests_CreatingFeatureSetInPlace, suiteDescription_CreatingFeatureSetInPlace, 91, "testCreateFeatureSetOutOfMemory" );
+  static TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetOutOfMemoryForFeatureSetObject testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetOutOfMemoryForFeatureSetObject(suite_CreatingFeatureSetInPlace);
+  testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetOutOfMemoryForFeatureSetObject.initialize( Tests_CreatingFeatureSetInPlace, suiteDescription_CreatingFeatureSetInPlace, 97, "testCreateFeatureSetOutOfMemoryForFeatureSetObject" );
+  static TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetOutOfMemoryForHandle testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetOutOfMemoryForHandle(suite_CreatingFeatureSetInPlace);
+  testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetOutOfMemoryForHandle.initialize( Tests_CreatingFeatureSetInPlace, suiteDescription_CreatingFeatureSetInPlace, 103, "testCreateFeatureSetOutOfMemoryForHandle" );
+  static TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetMakesOnlyThreeAllocations testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetMakesOnlyThreeAllocations(suite_CreatingFeatureSetInPlace);
+  testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetMakesOnlyThreeAllocations.initialize( Tests_CreatingFeatureSetInPlace, suiteDescription_CreatingFeatureSetInPlace, 109, "testCreateFeatureSetMakesOnlyThreeAllocations" );
+  static TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetAsInvalidDataType testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetAsInvalidDataType(suite_CreatingFeatureSetInPlace);
+  testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetAsInvalidDataType.initialize( Tests_CreatingFeatureSetInPlace, suiteDescription_CreatingFeatureSetInPlace, 115, "testCreateFeatureSetAsInvalidDataType" );
+  static TestDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetAsFeatureSetDataType testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetAsFeatureSetDataType(suite_CreatingFeatureSetInPlace);
+  testDescription_suite_CreatingFeatureSetInPlace_testCreateFeatureSetAsFeatureSetDataType.initialize( Tests_CreatingFeatureSetInPlace, suiteDescription_CreatingFeatureSetInPlace, 120, "testCreateFeatureSetAsFeatureSetDataType" );
+  static TestDescription_suite_CreatingFeatureSetInPlace_testCreateAsFeatureSetAnsiSampleDataType testDescription_suite_CreatingFeatureSetInPlace_testCreateAsFeatureSetAnsiSampleDataType(suite_CreatingFeatureSetInPlace);
+  testDescription_suite_CreatingFeatureSetInPlace_testCreateAsFeatureSetAnsiSampleDataType.initialize( Tests_CreatingFeatureSetInPlace, suiteDescription_CreatingFeatureSetInPlace, 125, "testCreateAsFeatureSetAnsiSampleDataType" );
+  static TestDescription_suite_CreatingFeatureSetInPlace_testCreateWithEnhancementDisabled testDescription_suite_CreatingFeatureSetInPlace_testCreateWithEnhancementDisabled(suite_CreatingFeatureSetInPlace);
+  testDescription_suite_CreatingFeatureSetInPlace_testCreateWithEnhancementDisabled.initialize( Tests_CreatingFeatureSetInPlace, suiteDescription_CreatingFeatureSetInPlace, 130, "testCreateWithEnhancementDisabled" );
+  static TestDescription_suite_CreatingFeatureSetInPlace_testCreateWithEnhancementEnabled testDescription_suite_CreatingFeatureSetInPlace_testCreateWithEnhancementEnabled(suite_CreatingFeatureSetInPlace);
+  testDescription_suite_CreatingFeatureSetInPlace_testCreateWithEnhancementEnabled.initialize( Tests_CreatingFeatureSetInPlace, suiteDescription_CreatingFeatureSetInPlace, 135, "testCreateWithEnhancementEnabled" );
+  static TestDescription_suite_CreatingFeatureSetInPlace_testCreateWithEnhancementDisallowedCombination testDescription_suite_CreatingFeatureSetInPlace_testCreateWithEnhancementDisallowedCombination(suite_CreatingFeatureSetInPlace);
+  testDescription_suite_CreatingFeatureSetInPlace_testCreateWithEnhancementDisallowedCombination.initialize( Tests_CreatingFeatureSetInPlace, suiteDescription_CreatingFeatureSetInPlace, 140, "testCreateWithEnhancementDisallowedCombination" );
+static CxxTest::List Tests_CreatingFeatureSetInPlaceWithTestImages;
+  Tests_CreatingFeatureSetInPlaceWithTestImages.initialize();
+static CreatingFeatureSetInPlaceWithTestImages suite_CreatingFeatureSetInPlaceWithTestImages;
+
+ static CxxTest::StaticSuiteDescription suiteDescription_CreatingFeatureSetInPlaceWithTestImages;
+
+  suiteDescription_CreatingFeatureSetInPlaceWithTestImages.initialize( "/mnt/d/Devel/Git/FingerJetFXOSE/FingerJetFXOSE/libFRFXLL/test/testFRFXLL/dpfrFtrExInPlaceTests.h", 149, "CreatingFeatureSetInPlaceWithTestImages", suite_CreatingFeatureSetInPlaceWithTestImages, Tests_CreatingFeatureSetInPlaceWithTestImages );
+  static TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureBadImage_ANY_BINARY testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureBadImage_ANY_BINARY(suite_CreatingFeatureSetInPlaceWithTestImages);
+  testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureBadImage_ANY_BINARY.initialize( Tests_CreatingFeatureSetInPlaceWithTestImages, suiteDescription_CreatingFeatureSetInPlaceWithTestImages, 166, "testCreateFeatureBadImage_ANY_BINARY" );
+  static TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureBadImage_OneLine testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureBadImage_OneLine(suite_CreatingFeatureSetInPlaceWithTestImages);
+  testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureBadImage_OneLine.initialize( Tests_CreatingFeatureSetInPlaceWithTestImages, suiteDescription_CreatingFeatureSetInPlaceWithTestImages, 172, "testCreateFeatureBadImage_OneLine" );
+  static TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureBadImage_CONSTANT_IMAGE testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureBadImage_CONSTANT_IMAGE(suite_CreatingFeatureSetInPlaceWithTestImages);
+  testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureBadImage_CONSTANT_IMAGE.initialize( Tests_CreatingFeatureSetInPlaceWithTestImages, suiteDescription_CreatingFeatureSetInPlaceWithTestImages, 179, "testCreateFeatureBadImage_CONSTANT_IMAGE" );
+  static TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureBrcmImage00 testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureBrcmImage00(suite_CreatingFeatureSetInPlaceWithTestImages);
+  testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureBrcmImage00.initialize( Tests_CreatingFeatureSetInPlaceWithTestImages, suiteDescription_CreatingFeatureSetInPlaceWithTestImages, 186, "testCreateFeatureBrcmImage00" );
+  static TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureAuthentecImage01 testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureAuthentecImage01(suite_CreatingFeatureSetInPlaceWithTestImages);
+  testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureAuthentecImage01.initialize( Tests_CreatingFeatureSetInPlaceWithTestImages, suiteDescription_CreatingFeatureSetInPlaceWithTestImages, 192, "testCreateFeatureAuthentecImage01" );
+  static TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureAuthentecImage01WithOneByteShorter testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureAuthentecImage01WithOneByteShorter(suite_CreatingFeatureSetInPlaceWithTestImages);
+  testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureAuthentecImage01WithOneByteShorter.initialize( Tests_CreatingFeatureSetInPlaceWithTestImages, suiteDescription_CreatingFeatureSetInPlaceWithTestImages, 198, "testCreateFeatureAuthentecImage01WithOneByteShorter" );
+  static TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureAuthentecImage01WithOneByteLonger testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureAuthentecImage01WithOneByteLonger(suite_CreatingFeatureSetInPlaceWithTestImages);
+  testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureAuthentecImage01WithOneByteLonger.initialize( Tests_CreatingFeatureSetInPlaceWithTestImages, suiteDescription_CreatingFeatureSetInPlaceWithTestImages, 204, "testCreateFeatureAuthentecImage01WithOneByteLonger" );
+  static TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureWithTruncatedImage testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureWithTruncatedImage(suite_CreatingFeatureSetInPlaceWithTestImages);
+  testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureWithTruncatedImage.initialize( Tests_CreatingFeatureSetInPlaceWithTestImages, suiteDescription_CreatingFeatureSetInPlaceWithTestImages, 210, "testCreateFeatureWithTruncatedImage" );
+  static TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureAuthentecImage02WithOneRowLonger testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureAuthentecImage02WithOneRowLonger(suite_CreatingFeatureSetInPlaceWithTestImages);
+  testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureAuthentecImage02WithOneRowLonger.initialize( Tests_CreatingFeatureSetInPlaceWithTestImages, suiteDescription_CreatingFeatureSetInPlaceWithTestImages, 222, "testCreateFeatureAuthentecImage02WithOneRowLonger" );
+  static TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImageMartini testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImageMartini(suite_CreatingFeatureSetInPlaceWithTestImages);
+  testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImageMartini.initialize( Tests_CreatingFeatureSetInPlaceWithTestImages, suiteDescription_CreatingFeatureSetInPlaceWithTestImages, 230, "testCreateFeatureTestImageMartini" );
+  static TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImageMartiniCE testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImageMartiniCE(suite_CreatingFeatureSetInPlaceWithTestImages);
+  testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImageMartiniCE.initialize( Tests_CreatingFeatureSetInPlaceWithTestImages, suiteDescription_CreatingFeatureSetInPlaceWithTestImages, 236, "testCreateFeatureTestImageMartiniCE" );
+  static TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImageValidityWrongRecordLength testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImageValidityWrongRecordLength(suite_CreatingFeatureSetInPlaceWithTestImages);
+  testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImageValidityWrongRecordLength.initialize( Tests_CreatingFeatureSetInPlaceWithTestImages, suiteDescription_CreatingFeatureSetInPlaceWithTestImages, 243, "testCreateFeatureTestImageValidityWrongRecordLength" );
+  static TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImageValidity testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImageValidity(suite_CreatingFeatureSetInPlaceWithTestImages);
+  testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImageValidity.initialize( Tests_CreatingFeatureSetInPlaceWithTestImages, suiteDescription_CreatingFeatureSetInPlaceWithTestImages, 250, "testCreateFeatureTestImageValidity" );
+  static TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage200 testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage200(suite_CreatingFeatureSetInPlaceWithTestImages);
+  testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage200.initialize( Tests_CreatingFeatureSetInPlaceWithTestImages, suiteDescription_CreatingFeatureSetInPlaceWithTestImages, 257, "testCreateFeatureTestImage200" );
+  static TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage250 testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage250(suite_CreatingFeatureSetInPlaceWithTestImages);
+  testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage250.initialize( Tests_CreatingFeatureSetInPlaceWithTestImages, suiteDescription_CreatingFeatureSetInPlaceWithTestImages, 263, "testCreateFeatureTestImage250" );
+  static TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage299 testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage299(suite_CreatingFeatureSetInPlaceWithTestImages);
+  testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage299.initialize( Tests_CreatingFeatureSetInPlaceWithTestImages, suiteDescription_CreatingFeatureSetInPlaceWithTestImages, 269, "testCreateFeatureTestImage299" );
+  static TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage300 testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage300(suite_CreatingFeatureSetInPlaceWithTestImages);
+  testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage300.initialize( Tests_CreatingFeatureSetInPlaceWithTestImages, suiteDescription_CreatingFeatureSetInPlaceWithTestImages, 276, "testCreateFeatureTestImage300" );
+  static TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage332 testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage332(suite_CreatingFeatureSetInPlaceWithTestImages);
+  testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage332.initialize( Tests_CreatingFeatureSetInPlaceWithTestImages, suiteDescription_CreatingFeatureSetInPlaceWithTestImages, 282, "testCreateFeatureTestImage332" );
+  static TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage333 testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage333(suite_CreatingFeatureSetInPlaceWithTestImages);
+  testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage333.initialize( Tests_CreatingFeatureSetInPlaceWithTestImages, suiteDescription_CreatingFeatureSetInPlaceWithTestImages, 289, "testCreateFeatureTestImage333" );
+  static TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage1000 testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage1000(suite_CreatingFeatureSetInPlaceWithTestImages);
+  testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage1000.initialize( Tests_CreatingFeatureSetInPlaceWithTestImages, suiteDescription_CreatingFeatureSetInPlaceWithTestImages, 296, "testCreateFeatureTestImage1000" );
+  static TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage1001 testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage1001(suite_CreatingFeatureSetInPlaceWithTestImages);
+  testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage1001.initialize( Tests_CreatingFeatureSetInPlaceWithTestImages, suiteDescription_CreatingFeatureSetInPlaceWithTestImages, 302, "testCreateFeatureTestImage1001" );
+  static TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage_100_100 testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage_100_100(suite_CreatingFeatureSetInPlaceWithTestImages);
+  testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureTestImage_100_100.initialize( Tests_CreatingFeatureSetInPlaceWithTestImages, suiteDescription_CreatingFeatureSetInPlaceWithTestImages, 309, "testCreateFeatureTestImage_100_100" );
+  static TestDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureIso testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureIso(suite_CreatingFeatureSetInPlaceWithTestImages);
+  testDescription_suite_CreatingFeatureSetInPlaceWithTestImages_testCreateFeatureIso.initialize( Tests_CreatingFeatureSetInPlaceWithTestImages, suiteDescription_CreatingFeatureSetInPlaceWithTestImages, 315, "testCreateFeatureIso" );
+static CxxTest::List Tests_CreatingFeatureSetAnsi;
+  Tests_CreatingFeatureSetAnsi.initialize();
+static CreatingFeatureSetAnsi suite_CreatingFeatureSetAnsi;
+
+ static CxxTest::StaticSuiteDescription suiteDescription_CreatingFeatureSetAnsi;
+
+  suiteDescription_CreatingFeatureSetAnsi.initialize( "/mnt/d/Devel/Git/FingerJetFXOSE/FingerJetFXOSE/libFRFXLL/test/testFRFXLL/dpfrFtrExTests.h", 41, "CreatingFeatureSetAnsi", suite_CreatingFeatureSetAnsi, Tests_CreatingFeatureSetAnsi );
+  static TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithNullContextHandle testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithNullContextHandle(suite_CreatingFeatureSetAnsi);
+  testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithNullContextHandle.initialize( Tests_CreatingFeatureSetAnsi, suiteDescription_CreatingFeatureSetAnsi, 63, "testCreateFeatureSetWithNullContextHandle" );
+  static TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithNullFeatureSetHandlePtr testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithNullFeatureSetHandlePtr(suite_CreatingFeatureSetAnsi);
+  testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithNullFeatureSetHandlePtr.initialize( Tests_CreatingFeatureSetAnsi, suiteDescription_CreatingFeatureSetAnsi, 68, "testCreateFeatureSetWithNullFeatureSetHandlePtr" );
+  static TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithNullImageDataPtr testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithNullImageDataPtr(suite_CreatingFeatureSetAnsi);
+  testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithNullImageDataPtr.initialize( Tests_CreatingFeatureSetAnsi, suiteDescription_CreatingFeatureSetAnsi, 73, "testCreateFeatureSetWithNullImageDataPtr" );
+  static TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithShortImageDataSize testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithShortImageDataSize(suite_CreatingFeatureSetAnsi);
+  testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithShortImageDataSize.initialize( Tests_CreatingFeatureSetAnsi, suiteDescription_CreatingFeatureSetAnsi, 78, "testCreateFeatureSetWithShortImageDataSize" );
+  static TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithOneByteShorterImageDataSize testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithOneByteShorterImageDataSize(suite_CreatingFeatureSetAnsi);
+  testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithOneByteShorterImageDataSize.initialize( Tests_CreatingFeatureSetAnsi, suiteDescription_CreatingFeatureSetAnsi, 83, "testCreateFeatureSetWithOneByteShorterImageDataSize" );
+  static TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithOneByteLongerImageDataSize testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithOneByteLongerImageDataSize(suite_CreatingFeatureSetAnsi);
+  testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithOneByteLongerImageDataSize.initialize( Tests_CreatingFeatureSetAnsi, suiteDescription_CreatingFeatureSetAnsi, 88, "testCreateFeatureSetWithOneByteLongerImageDataSize" );
+  static TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithLongImageDataSize testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithLongImageDataSize(suite_CreatingFeatureSetAnsi);
+  testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetWithLongImageDataSize.initialize( Tests_CreatingFeatureSetAnsi, suiteDescription_CreatingFeatureSetAnsi, 93, "testCreateFeatureSetWithLongImageDataSize" );
+  static TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetOutOfMemory testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetOutOfMemory(suite_CreatingFeatureSetAnsi);
+  testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetOutOfMemory.initialize( Tests_CreatingFeatureSetAnsi, suiteDescription_CreatingFeatureSetAnsi, 98, "testCreateFeatureSetOutOfMemory" );
+  static TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetOutOfMemoryForFeatureSetObject testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetOutOfMemoryForFeatureSetObject(suite_CreatingFeatureSetAnsi);
+  testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetOutOfMemoryForFeatureSetObject.initialize( Tests_CreatingFeatureSetAnsi, suiteDescription_CreatingFeatureSetAnsi, 104, "testCreateFeatureSetOutOfMemoryForFeatureSetObject" );
+  static TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetOutOfMemoryForHandle testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetOutOfMemoryForHandle(suite_CreatingFeatureSetAnsi);
+  testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetOutOfMemoryForHandle.initialize( Tests_CreatingFeatureSetAnsi, suiteDescription_CreatingFeatureSetAnsi, 110, "testCreateFeatureSetOutOfMemoryForHandle" );
+  static TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetMakesOnlyThreeAllocations testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetMakesOnlyThreeAllocations(suite_CreatingFeatureSetAnsi);
+  testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetMakesOnlyThreeAllocations.initialize( Tests_CreatingFeatureSetAnsi, suiteDescription_CreatingFeatureSetAnsi, 116, "testCreateFeatureSetMakesOnlyThreeAllocations" );
+  static TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetAsInvalidDataType testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetAsInvalidDataType(suite_CreatingFeatureSetAnsi);
+  testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetAsInvalidDataType.initialize( Tests_CreatingFeatureSetAnsi, suiteDescription_CreatingFeatureSetAnsi, 122, "testCreateFeatureSetAsInvalidDataType" );
+  static TestDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetAsFeatureSetDataType testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetAsFeatureSetDataType(suite_CreatingFeatureSetAnsi);
+  testDescription_suite_CreatingFeatureSetAnsi_testCreateFeatureSetAsFeatureSetDataType.initialize( Tests_CreatingFeatureSetAnsi, suiteDescription_CreatingFeatureSetAnsi, 127, "testCreateFeatureSetAsFeatureSetDataType" );
+  static TestDescription_suite_CreatingFeatureSetAnsi_testCreateAsFeatureSetAnsiSampleDataType testDescription_suite_CreatingFeatureSetAnsi_testCreateAsFeatureSetAnsiSampleDataType(suite_CreatingFeatureSetAnsi);
+  testDescription_suite_CreatingFeatureSetAnsi_testCreateAsFeatureSetAnsiSampleDataType.initialize( Tests_CreatingFeatureSetAnsi, suiteDescription_CreatingFeatureSetAnsi, 132, "testCreateAsFeatureSetAnsiSampleDataType" );
+static CxxTest::List Tests_CreatingFeatureSetWithTestImages;
+  Tests_CreatingFeatureSetWithTestImages.initialize();
+static CreatingFeatureSetWithTestImages suite_CreatingFeatureSetWithTestImages;
+
+ static CxxTest::StaticSuiteDescription suiteDescription_CreatingFeatureSetWithTestImages;
+
+  suiteDescription_CreatingFeatureSetWithTestImages.initialize( "/mnt/d/Devel/Git/FingerJetFXOSE/FingerJetFXOSE/libFRFXLL/test/testFRFXLL/dpfrFtrExTests.h", 141, "CreatingFeatureSetWithTestImages", suite_CreatingFeatureSetWithTestImages, Tests_CreatingFeatureSetWithTestImages );
+  static TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureBadImage_ANY_BINARY testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureBadImage_ANY_BINARY(suite_CreatingFeatureSetWithTestImages);
+  testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureBadImage_ANY_BINARY.initialize( Tests_CreatingFeatureSetWithTestImages, suiteDescription_CreatingFeatureSetWithTestImages, 157, "testCreateFeatureBadImage_ANY_BINARY" );
+  static TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureBadImage_OneLine testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureBadImage_OneLine(suite_CreatingFeatureSetWithTestImages);
+  testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureBadImage_OneLine.initialize( Tests_CreatingFeatureSetWithTestImages, suiteDescription_CreatingFeatureSetWithTestImages, 165, "testCreateFeatureBadImage_OneLine" );
+  static TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureBadImage_CONSTANT_IMAGE testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureBadImage_CONSTANT_IMAGE(suite_CreatingFeatureSetWithTestImages);
+  testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureBadImage_CONSTANT_IMAGE.initialize( Tests_CreatingFeatureSetWithTestImages, suiteDescription_CreatingFeatureSetWithTestImages, 174, "testCreateFeatureBadImage_CONSTANT_IMAGE" );
+  static TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureBrcmImage00 testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureBrcmImage00(suite_CreatingFeatureSetWithTestImages);
+  testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureBrcmImage00.initialize( Tests_CreatingFeatureSetWithTestImages, suiteDescription_CreatingFeatureSetWithTestImages, 183, "testCreateFeatureBrcmImage00" );
+  static TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage01 testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage01(suite_CreatingFeatureSetWithTestImages);
+  testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage01.initialize( Tests_CreatingFeatureSetWithTestImages, suiteDescription_CreatingFeatureSetWithTestImages, 191, "testCreateFeatureAuthentecImage01" );
+  static TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage01WithOneByteShorter testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage01WithOneByteShorter(suite_CreatingFeatureSetWithTestImages);
+  testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage01WithOneByteShorter.initialize( Tests_CreatingFeatureSetWithTestImages, suiteDescription_CreatingFeatureSetWithTestImages, 199, "testCreateFeatureAuthentecImage01WithOneByteShorter" );
+  static TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage01WithOneByteLonger testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage01WithOneByteLonger(suite_CreatingFeatureSetWithTestImages);
+  testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage01WithOneByteLonger.initialize( Tests_CreatingFeatureSetWithTestImages, suiteDescription_CreatingFeatureSetWithTestImages, 207, "testCreateFeatureAuthentecImage01WithOneByteLonger" );
+  static TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureWithTruncatedImage testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureWithTruncatedImage(suite_CreatingFeatureSetWithTestImages);
+  testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureWithTruncatedImage.initialize( Tests_CreatingFeatureSetWithTestImages, suiteDescription_CreatingFeatureSetWithTestImages, 215, "testCreateFeatureWithTruncatedImage" );
+  static TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage02 testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage02(suite_CreatingFeatureSetWithTestImages);
+  testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage02.initialize( Tests_CreatingFeatureSetWithTestImages, suiteDescription_CreatingFeatureSetWithTestImages, 223, "testCreateFeatureAuthentecImage02" );
+  static TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage02WithOneRowLonger testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage02WithOneRowLonger(suite_CreatingFeatureSetWithTestImages);
+  testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureAuthentecImage02WithOneRowLonger.initialize( Tests_CreatingFeatureSetWithTestImages, suiteDescription_CreatingFeatureSetWithTestImages, 231, "testCreateFeatureAuthentecImage02WithOneRowLonger" );
+  static TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImageMartini testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImageMartini(suite_CreatingFeatureSetWithTestImages);
+  testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImageMartini.initialize( Tests_CreatingFeatureSetWithTestImages, suiteDescription_CreatingFeatureSetWithTestImages, 240, "testCreateFeatureTestAnsiImageMartini" );
+  static TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImageMartiniCE testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImageMartiniCE(suite_CreatingFeatureSetWithTestImages);
+  testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImageMartiniCE.initialize( Tests_CreatingFeatureSetWithTestImages, suiteDescription_CreatingFeatureSetWithTestImages, 248, "testCreateFeatureTestAnsiImageMartiniCE" );
+  static TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage200 testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage200(suite_CreatingFeatureSetWithTestImages);
+  testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage200.initialize( Tests_CreatingFeatureSetWithTestImages, suiteDescription_CreatingFeatureSetWithTestImages, 256, "testCreateFeatureTestAnsiImage200" );
+  static TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage250 testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage250(suite_CreatingFeatureSetWithTestImages);
+  testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage250.initialize( Tests_CreatingFeatureSetWithTestImages, suiteDescription_CreatingFeatureSetWithTestImages, 264, "testCreateFeatureTestAnsiImage250" );
+  static TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage299 testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage299(suite_CreatingFeatureSetWithTestImages);
+  testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage299.initialize( Tests_CreatingFeatureSetWithTestImages, suiteDescription_CreatingFeatureSetWithTestImages, 272, "testCreateFeatureTestAnsiImage299" );
+  static TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage300 testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage300(suite_CreatingFeatureSetWithTestImages);
+  testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage300.initialize( Tests_CreatingFeatureSetWithTestImages, suiteDescription_CreatingFeatureSetWithTestImages, 281, "testCreateFeatureTestAnsiImage300" );
+  static TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage1000 testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage1000(suite_CreatingFeatureSetWithTestImages);
+  testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage1000.initialize( Tests_CreatingFeatureSetWithTestImages, suiteDescription_CreatingFeatureSetWithTestImages, 289, "testCreateFeatureTestAnsiImage1000" );
+  static TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage1001 testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage1001(suite_CreatingFeatureSetWithTestImages);
+  testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage1001.initialize( Tests_CreatingFeatureSetWithTestImages, suiteDescription_CreatingFeatureSetWithTestImages, 297, "testCreateFeatureTestAnsiImage1001" );
+  static TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage_100_100 testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage_100_100(suite_CreatingFeatureSetWithTestImages);
+  testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureTestAnsiImage_100_100.initialize( Tests_CreatingFeatureSetWithTestImages, suiteDescription_CreatingFeatureSetWithTestImages, 306, "testCreateFeatureTestAnsiImage_100_100" );
+  static TestDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureIso testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureIso(suite_CreatingFeatureSetWithTestImages);
+  testDescription_suite_CreatingFeatureSetWithTestImages_testCreateFeatureIso.initialize( Tests_CreatingFeatureSetWithTestImages, suiteDescription_CreatingFeatureSetWithTestImages, 314, "testCreateFeatureIso" );
+ }
+}
