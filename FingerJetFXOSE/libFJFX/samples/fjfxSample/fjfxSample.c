@@ -30,7 +30,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <fjfx.h>
+#include <FJFX.h>
 
 int main(int argc, char ** argv) {
   FILE *fp = 0;

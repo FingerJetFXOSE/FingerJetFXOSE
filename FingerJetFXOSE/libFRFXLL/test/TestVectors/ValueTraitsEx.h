@@ -36,21 +36,6 @@
 
 #include "../../include/FRFXLL_Results.h"
 
-inline const char* GetSymbolicName(FRFXLL_RESULT hr) {
-  #define char const char
-  static
-  #include "dpResults.dbg"
-  #undef char
-  FRFXLL_RESULT hr_;
-  for (int i = 0; (hr_ = dpResultsSymbolicNames[i].MessageId) != -1; i++) {
-    if (hr_ == hr) {
-      return dpResultsSymbolicNames[i].SymbolicName;
-    }
-  }
-
-  return "Unknown";
-}
-
 #undef CXXTEST_COMPARISONS
 #define CXXTEST_COMPARISONS(CXXTEST_X, CXXTEST_Y, CXXTEST_T) \
     CXXTEST_TEMPLATE_INSTANTIATION inline bool equals( CXXTEST_X x, CXXTEST_Y y ) { return (((CXXTEST_T)x) == ((CXXTEST_T)y)); } \
@@ -65,67 +50,6 @@ inline const char* GetSymbolicName(FRFXLL_RESULT hr) {
 enum x_t {};
 enum hr_t {};
 
-namespace CxxTest {
-  typedef unsigned int uint32;
-
-  enum x_t {};
-  CXXTEST_TEMPLATE_INSTANTIATION
-  class ValueTraits<const x_t> {
-    char _asString[12];
-  public:
-      ValueTraits(const x_t & t) {
-        numberToString<uint32>(uint32(size_t(t)), copyString( _asString, "0x" ), 16);
-      }
-      const char *asString( void ) const { return _asString; }
-  };
-  CXXTEST_COPY_CONST_TRAITS(x_t);
-
-
-  CXXTEST_TEMPLATE_INSTANTIATION
-  class ValueTraits<const hr_t> {
-    char _asString[50];
-  public:
-      ValueTraits(const hr_t & t) {
-        copyString(copyString(copyString(numberToString<uint32>(t, copyString(_asString, "0x" ), 16), " ("), GetSymbolicName(t)), ")");
-      }
-      const char *asString( void ) const { return _asString; }
-  };
-  CXXTEST_COPY_CONST_TRAITS(hr_t);
-
-    template<class Y>
-    void doAssertEquals(const char *file, unsigned line, const char *xExpr, void * const & x, const char *yExpr, const Y & y, const char *message) {
-      doAssertEquals(file, line, xExpr, x_t(size_t(x)), yExpr, x_t(size_t(y)), message);
-    }
-    template<class Y>
-    void doAssertEquals(const char *file, unsigned line, const char *xExpr, const FRFXLL_RESULT & x, const char *yExpr, const Y & y, const char *message) {
-      doAssertEquals(file, line, xExpr, hr_t(x), yExpr, hr_t(y), message);
-    }
-    template<class X>
-    void doAssertEquals(const char *file, unsigned line, const char *xExpr, const X & x, const char *yExpr, const ::x_t & y, const char *message) {
-      doAssertEquals(file, line, xExpr, x_t(size_t(x)), yExpr, x_t(y), message);
-    }
-    //inline
-    //void doAssertEquals(const char *file, unsigned line, const char *xExpr, void * const & x, const char *yExpr, const ::x_t & y, const char *message) {
-    //  doAssertEquals(file, line, xExpr, x_t(size_t(x)), yExpr, x_t(y), message);
-    //}
-    template<class Y>
-    void doAssertDiffers(const char *file, unsigned line, const char *xExpr, void * const & x, const char *yExpr, const Y & y, const char *message) {
-      doAssertDiffers(file, line, xExpr, x_t(size_t(x)), yExpr, x_t(size_t(y)), message);
-    }
-    template<class Y>
-    void doAssertDiffers(const char *file, unsigned line, const char *xExpr, const FRFXLL_RESULT & x, const char *yExpr, const Y & y, const char *message) {
-      doAssertDiffers(file, line, xExpr, hr_t(x), yExpr, hr_t(y), message);
-    }
-    template<class X>
-    void doAssertDiffers(const char *file, unsigned line, const char *xExpr, const X & x, const char *yExpr, const ::x_t & y, const char *message) {
-      doAssertDiffers(file, line, xExpr, x_t(size_t(x)), yExpr, x_t(y), message);
-    }
-    //template<>
-    //inline
-    //void doAssertDiffers(const char *file, unsigned line, const char *xExpr, void * const & x, const char *yExpr, const ::x_t & y, const char *message) {
-    //  doAssertDiffers(file, line, xExpr, x_t(size_t(x)), yExpr, x_t(y), message);
-    //}
-}
 // TS_ASSERT_EQUALS_X
 #   define ___ETS_ASSERT_EQUALS_X(f,l,x,y,m)    CxxTest::doAssertEquals( (f), (l), #x, x_t(size_t(x)), #y, x_t(size_t(y)), (m) )
 #   define ___TS_ASSERT_EQUALS_X(f,l,x,y,m)     { _TS_TRY { ___ETS_ASSERT_EQUALS_X(f,l,x,y,m); } __TS_CATCH(f,l) }
