@@ -37,16 +37,14 @@ if [ "${target}" == "" ]; then
   echo "Missing target (x64, x32, android-arm32, android-arm64, ios-arm32, ios-arm64)"
   exit
 fi
+build_folder="./build/${machine}/${target}"
 
 echo "Detected ${machine}, using cmake generator ${generator} for target ${target}"
-
-# temporary build directories
-mkdir -p "./build/${machine}/${target}"
-cd "./build/${machine}/${target}"
 
 #linux sanitizer
 if [ ${machine:0:5} == "Linux" ]; then
 	if [ "$2" == "sanitizer" ]; then
+    build_folder="${build_folder}_sanitizer"
     xtraflags="-DUSE_SANITIZER=ON"
   fi
 fi
@@ -70,6 +68,10 @@ if [ ${target:0:3} == "ios" ]; then
 	cfg="-DCMAKE_TOOLCHAIN_FILE='./ios.toolchain.cmake'"
   xtraflags="-DENABLE_ARC=FALSE"
 fi
+
+# temporary build directories
+mkdir -p "${build_folder}"
+cd "${build_folder}"
 
 # run cmake
 if [ "${target}" == "x64" ]; then

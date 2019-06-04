@@ -1,7 +1,17 @@
 option(USE_SANITIZER "Using the GCC sanitizer" OFF)
 
-if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-  # used for Windows and Linux
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
+#####################################################
+  message( "${Gn}Detected AppleClang compiler (MacOS, iOS)${Na}" )
+  add_definitions( "-O3 -fvisibility=hidden -fPIC" )
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+####################################################
+  message( STATUS "${Gn}Detected Clang compiler (Android)${Na}" )
+  add_definitions( "-O3 -fvisibility=hidden -fPIC" )
+  set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-z,defs -Wl")
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+##################################################
+  message( STATUS "${Gn}Detected GNU compiler (Windows, Linux)${Na}" )
   if( USE_SANITIZER )
     message( STATUS "${Pk}Configure diagnostic build with GCC sanitizer${Na}")
     add_definitions( "-O0 -fvisibility=hidden -Wno-unused-variable -Wno-unused-but-set-variable  -fsanitize=address -fno-omit-frame-pointer -static-libasan" )
@@ -20,16 +30,19 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -static-libgcc -static-libstdc++ -Wl,-z,defs")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++")
   endif()
-elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-  # used for Android
-  add_definitions( "-O3 -fvisibility=hidden -fPIC" )
-  set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-z,defs -Wl")
-elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
-  # used for Mac OSX
-  add_definitions( "-O3 -fvisibility=hidden -fPIC" )
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
-  # used for Windows
+  message( STATUS "${Gn}Detected MSVC compiler (Windows)${Na}" )
   add_definitions( "/W3 /D_CRT_SECURE_NO_WARNINGS /nologo /MT" )
+else()
+  message( STATUS "${Rd}Detected compiler ${CMAKE_CXX_COMPILER_ID} which is currently not supported${Na}" )
+endif()
+
+if( 32BITS)
+  set( CMAKE_C_FLAGS "-m32")
+  set( CMAKE_CXX_FLAGS "-m32") 
+elseif( 64BITS)
+  set( CMAKE_C_FLAGS "-m64")
+  set( CMAKE_CXX_FLAGS "-m64") 
 endif()
 
 if(CMAKE_HOST_WIN32 AND MINGW)

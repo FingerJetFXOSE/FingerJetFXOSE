@@ -1,0 +1,8 @@
+string(ASCII 27 Esc)
+set(Na "${Esc}[m")
+set(Rd "${Esc}[31m")
+set(Gn "${Esc}[32m")
+set(Ye "${Esc}[33m")
+set(Bl "${Esc}[34m")
+set(Pk "${Esc}[35m")
+set(Gy "${Esc}[37m")
