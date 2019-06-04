@@ -57,7 +57,6 @@ FRFXLL_RESULT CreateContext(FRFXLL_HANDLE_PT phContext) {
   const size_t heap_overhead = 36;
   FRFXLL_RESULT rc = FRFXLL_OK;
   
-  size_t total_heap_size;
   FRFXLL_CONTEXT_INIT ctx_init = {
     sizeof(FRFXLL_CONTEXT_INIT), // length
     NULL,                  // heapContext

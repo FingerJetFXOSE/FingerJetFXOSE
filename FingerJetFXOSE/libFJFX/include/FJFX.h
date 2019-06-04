@@ -64,7 +64,7 @@ extern "C" {
 #if defined(__GNUC__) && (__GNUC__ >= 4)
 #define FJFX_EXPORT __attribute__((visibility("default")))
 #else
-#define FJFX_EXPORT
+#define FJFX_EXPORT __declspec(dllexport)
 #endif
 #endif // FJFX_EXPORT
 

@@ -103,7 +103,7 @@ int fjfx_create_fmd_from_raw(
   FRFXLL_OUTPUT_PARAM_ISO_ANSI param = {sizeof(FRFXLL_OUTPUT_PARAM_ISO_ANSI), CBEFF, finger_position, 0, dpcm, dpcm, width, height, 0, finger_quality, impression_type};
   unsigned char * tmpl = reinterpret_cast<unsigned char *>(fmd);
   CheckFx( FRFXLLExport(hFtrSet, dt, &param, tmpl, &size) );
-  if (size_of_fmd_ptr) *size_of_fmd_ptr = size;
+  if (size_of_fmd_ptr) *size_of_fmd_ptr = (unsigned int)size;
   return FJFX_SUCCESS;
 }
 

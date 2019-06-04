@@ -21,7 +21,7 @@ function removeDebugConfig()
   $lines = Get-Content "FingerJetFXOSE.sln"
   Set-Content "FingerJetFXOSE.sln" -value ""
   foreach ($line in $lines) {
-    if (-not($line -match "Debug")) {
+    if (-not($line -match "Debug") -and -not($line -match "MinSizeRel") -and -not($line -match "RelWithDebInfo") ) {
       Add-Content "FingerJetFXOSE.sln" -value $line
     }
   }
