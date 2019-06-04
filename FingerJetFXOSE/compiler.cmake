@@ -1,0 +1,32 @@
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+  # used for Windows and Linux
+  add_definitions( "-O3 -fvisibility=hidden -Wno-unused-variable -Wno-unused-but-set-variable" )
+  if("${TARGET_PLATFORM}" MATCHES "win*")
+    add_definitions("-DWIN32 -D_WIN32")
+  else()
+    add_definitions("-DLINUX -fPIC")
+  endif()
+  if("${TARGET_PLATFORM}" MATCHES "win*")
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -static-libgcc -static-libstdc++ -Wl,-add-stdcall-alias -Wl,-enable-stdcall-fixup")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++ -Wl,-enable-stdcall-fixup")
+  elseif("${TARGET_PLATFORM}" MATCHES "linux*")
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -static-libgcc -static-libstdc++ -Wl,-z,defs")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++")
+  endif()
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+  # used for Android
+  add_definitions( "-O3 -fvisibility=hidden -fPIC" )
+  set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-z,defs -Wl")
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
+  # used for Mac OSX
+  add_definitions( "-O3 -fvisibility=hidden -fPIC" )
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+  # used for Windows
+  add_definitions( "/W3 /D_CRT_SECURE_NO_WARNINGS /nologo /MT" )
+endif()
+
+if(CMAKE_HOST_WIN32 AND MINGW)
+  set(CMAKE_RC_COMPILER_INIT windres)
+  ENABLE_LANGUAGE(RC)
+  SET(CMAKE_RC_COMPILE_OBJECT "<CMAKE_RC_COMPILER> <DEFINES> -o <OBJECT> <SOURCE>")
+endif(CMAKE_HOST_WIN32 AND MINGW)
