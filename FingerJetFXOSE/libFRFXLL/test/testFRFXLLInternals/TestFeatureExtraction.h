@@ -127,7 +127,7 @@ namespace {
       MakeCheckBoard(const_cast<uint8*>(imgIn), width, height, 3, 255);
       size_t width_ = width / 6 * 4, height_ = height / 6 * 4;
       size_t size_ = width_ * height_;
-      std::unique_ptr<uint8> ExpectedImage(new uint8[size_]);
+      std::unique_ptr<uint8[]> ExpectedImage(new uint8[size_]);
       uint8* pExpImage = ExpectedImage.get();
       MakeCheckBoard(pExpImage, width_, height_, 2, 251);
       TS_ASSERT_OK(Resize_AnyTo333InPlaceOrBuffer(imgIn, buf, Size));
@@ -178,7 +178,7 @@ namespace {
       MakeCheckBoard(const_cast<uint8*>(imgIn), width, height, 4, 255);
       size_t width_ = width / 4 * 3 & ~3, height_ = height / 4 * 3 & ~3;
       size_t size_ = width_ * height_;
-      std::unique_ptr<uint8> ExpectedImage(new uint8[size_]);
+      std::unique_ptr<uint8[]> ExpectedImage(new uint8[size_]);
       uint8* pExpImage = ExpectedImage.get();
       MakeCheckBoard(pExpImage, width_, height_, 3, 255);
       TS_ASSERT_OK(Resize_AnyTo333InPlaceOrBuffer(imgIn, buf, Size));
@@ -193,7 +193,7 @@ namespace {
       MakeCheckBoard(const_cast<uint8*>(imgIn), width, height, 4, 255);
       size_t width_ = width / 4 * 3 & ~3, height_ = height / 4 * 3 & ~3;
       size_t size_ = width_ * height_;
-      std::unique_ptr<uint8> ExpectedImage(new uint8[size_]);
+      std::unique_ptr<uint8[]> ExpectedImage(new uint8[size_]);
       uint8* pExpImage = ExpectedImage.get();
       MakeCheckBoard(pExpImage, width_, height_, 3, 255);
       TS_ASSERT_OK(Resize_AnyTo333InPlaceOrBuffer(imgIn, buf, Size));
@@ -208,7 +208,7 @@ namespace {
       MakeCheckBoard(const_cast<uint8*>(imgIn), width, height, 4, 255);
       size_t width_ = width / 4 * 3 & ~3, height_ = height / 4 * 3 & ~3;
       size_t size_ = width_ * height_;
-      std::unique_ptr<uint8> ExpectedImage(new uint8[size_]);
+      std::unique_ptr<uint8[]> ExpectedImage(new uint8[size_]);
       uint8* pExpImage = ExpectedImage.get();
       MakeCheckBoard(pExpImage, width_, height_, 3, 255);
       TS_ASSERT_OK(Resize_AnyTo333InPlaceOrBuffer(imgIn, buf, Size));
@@ -232,7 +232,7 @@ namespace {
       MakeCheckBoard(const_cast<uint8*>(imgIn), width, height, 5, 255);
       size_t width_ = width / 5 * 3 & ~3, height_ = height / 5 * 3 & ~3;
       size_t size_ = width_ * height_;
-      std::unique_ptr<uint8> ExpectedImage(new uint8[size_]);
+      std::unique_ptr<uint8[]> ExpectedImage(new uint8[size_]);
       uint8* pExpImage = ExpectedImage.get();
       MakeCheckBoard(pExpImage, width_, height_, 3, 255);
       TS_ASSERT_OK(Resize_AnyTo333InPlaceOrBuffer(imgIn, buf, Size));
@@ -247,7 +247,7 @@ namespace {
       MakeCheckBoard(const_cast<uint8*>(imgIn), width, height, 5, 255);
       size_t width_ = width / 5 * 3 & ~3, height_ = height / 5 * 3 & ~3;
       size_t size_ = width_ * height_;
-      std::unique_ptr<uint8> ExpectedImage(new uint8[size_]);
+      std::unique_ptr<uint8[]> ExpectedImage(new uint8[size_]);
       uint8* pExpImage = ExpectedImage.get();
       MakeCheckBoard(pExpImage, width_, height_, 3, 255);
       TS_ASSERT_OK(Resize_AnyTo333InPlaceOrBuffer(imgIn, buf, Size));
@@ -262,7 +262,7 @@ namespace {
       MakeCheckBoard(const_cast<uint8*>(imgIn), width, height, 5, 255);
       size_t width_ = width / 5 * 3 & ~3, height_ = height / 5 * 3 & ~3;
       size_t size_ = width_ * height_;
-      std::unique_ptr<uint8> ExpectedImage(new uint8[size_]);
+      std::unique_ptr<uint8[]> ExpectedImage(new uint8[size_]);
       uint8* pExpImage = ExpectedImage.get();
       MakeCheckBoard(pExpImage, width_, height_, 3, 255);
       TS_ASSERT_OK(Resize_AnyTo333InPlaceOrBuffer(imgIn, buf, Size));
