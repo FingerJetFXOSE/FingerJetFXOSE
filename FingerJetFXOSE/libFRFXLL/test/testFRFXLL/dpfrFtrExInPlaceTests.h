@@ -247,15 +247,12 @@ public:
     TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
   }
 
-//  The following test will be removed due the input parameter cannot be verified
-//   Explanation: ImageBuffer(const unsigned char image[], size_t size, bool bSetSize = true)
-//                Unable to perform the comparision: length of image[] == size
-//  void testCreateFeatureTestImageValidity() {
-//    TS_ASSERT(TempImage(TestAnsiImageValidityWrongRecordLength, TestAnsiImageValiditySize + 50));
-//    TS_ASSERT_OK(FRFXLLCreateFeatureSetInPlace(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet));
-//    TS_ASSERT_DIFFERS(hFtrSet, nullptr);
-//    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
-//  }
+  void testCreateFeatureTestImageValidity() {
+    TS_ASSERT(TempImage(TestAnsiImageValidityWrongRecordLength, TestAnsiImageValiditySize - 50));
+    TS_ASSERT_OK(FRFXLLCreateFeatureSetInPlace(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet));
+    TS_ASSERT_DIFFERS(hFtrSet, nullptr);
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
+  }
   
 
   void testCreateFeatureTestImage200() {

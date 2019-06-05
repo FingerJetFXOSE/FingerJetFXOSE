@@ -204,14 +204,17 @@ public:
     TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempImage, TempImage), savedCRC);
   }
-  void testCreateFeatureAuthentecImage01WithOneByteLonger() {
-    ImageBufferWrapper TempImage(TestAuthentec01, sizeof(TestAuthentec01) + 1);
-    savedCRC = CalculateCRC(TempImage, TempImage);
-    TS_ASSERT_OK(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet));
-    TS_ASSERT_DIFFERS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
-    TS_ASSERT_EQUALS_X(CalculateCRC(TempImage, TempImage), savedCRC);
-  }
+//  The following test will be removed due the input parameter cannot be verified
+//   Explanation: ImageBuffer(const unsigned char image[], size_t size, bool bSetSize = true)
+//                Unable to perform the comparision: length of image[] == size
+//  void testCreateFeatureAuthentecImage01WithOneByteLonger() {
+//    ImageBufferWrapper TempImage(TestAuthentec01, sizeof(TestAuthentec01) + 1);
+//    savedCRC = CalculateCRC(TempImage, TempImage);
+//    TS_ASSERT_OK(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet));
+//    TS_ASSERT_DIFFERS(hFtrSet, nullptr);
+//    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
+//    TS_ASSERT_EQUALS_X(CalculateCRC(TempImage, TempImage), savedCRC);
+//  }
   void testCreateFeatureWithTruncatedImage() {
     ImageBufferWrapper TempImage(TestAuthentec01, TRUNCATEDIMAGESIZE);
     savedCRC = CalculateCRC(TempImage, TempImage);
