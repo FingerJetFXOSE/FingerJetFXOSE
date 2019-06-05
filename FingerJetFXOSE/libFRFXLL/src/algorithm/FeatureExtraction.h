@@ -72,15 +72,19 @@ namespace Embedded {
       md.offset.y += yoffs;
     }
     //size_t j = 0;
-    for (i = 0; i < md.size(); i++) {
-      int16 x = md.minutia[i].position.x -= xoffs;
-      int16 y = md.minutia[i].position.y -= yoffs;
-      if (x < 0 || x > xMax || y < 0 || y > yMax) {
-        memcpy(md.minutia + i, md.minutia + i + 1, ((md.size() - (i + 1)) * sizeof(*md.minutia)));
-        i--;
-        md.numMinutia--;
-      }
-    }
+     Minutia minutia[md.Capacity];
+     memset( minutia, 0, md.Capacity * sizeof(Minutia));
+     size_t j = 0;
+     for (i = 0; i < md.size(); i++) {
+       int16 x = md.minutia[i].position.x -= xoffs;
+       int16 y = md.minutia[i].position.y -= yoffs;
+       if (x >= 0 && x <= xMax && y >= 0 && y <= yMax) {
+         minutia[j] = minutia[i];
+         j++;
+       }
+     }
+     memcpy( md.minutia, minutia, j * sizeof(Minutia));
+     md.numMinutia = j;
   }
 
   struct FeatureExtractionBase {
