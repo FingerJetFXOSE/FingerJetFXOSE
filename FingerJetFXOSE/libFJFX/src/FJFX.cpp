@@ -37,7 +37,7 @@
 struct dpHandle {
   FRFXLL_HANDLE h;
 
-  dpHandle(FRFXLL_HANDLE _h = NULL) : h(_h) {}
+  explicit dpHandle(FRFXLL_HANDLE _h = NULL) : h(_h) {}
 
   ~dpHandle() {
     if (h)

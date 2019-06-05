@@ -138,7 +138,7 @@ void __ut_assert_same_data(const char * file, int line, const unsigned char * da
 void TestGetLibraryVersion() {
   FRFXLL_VERSION version = {0};
   UT_ASSERT_OK(FRFXLLGetLibraryVersion(&version));
-  _printf(("Version %d.%d.%d.%d\n", version.major, version.minor, version.revision, version.build));
+  _printf(("Version %d.%d.%d.%d\n", (int)version.major, (int)version.minor, (int)version.revision, (int)version.build));
 }
 
 void TestCreateContext() {

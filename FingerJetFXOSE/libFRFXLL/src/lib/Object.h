@@ -109,7 +109,7 @@ namespace FingerJetFxOSE {
       mutable volatile long refCount;
       const Context * ctx;
 
-      Object(const Context * ctx_);
+      explicit Object(const Context * ctx_);
       virtual ~Object();
       FRFXLL_RESULT AddRef() const;
       FRFXLL_RESULT Release() const;
@@ -139,7 +139,7 @@ namespace FingerJetFxOSE {
         return tmp;
       }
     public:
-      Context(FRFXLL_CONTEXT_INIT &ctxi_) : Object(nullptr), FRFXLL_CONTEXT_INIT(ctxi_) {
+      explicit Context(FRFXLL_CONTEXT_INIT &ctxi_) : Object(nullptr), FRFXLL_CONTEXT_INIT(ctxi_) {
         ctx = this;
         if (interlocked_decrement == nullptr) interlocked_decrement = &_decrement;
         if (interlocked_increment == nullptr) interlocked_increment = &_increment;
@@ -189,7 +189,7 @@ namespace FingerJetFxOSE {
     template <class T> struct Ptr : public ObjectBase {
       T * ptr;
       Ptr() : ptr(nullptr) {}
-      Ptr(FRFXLL_HANDLE h);
+      explicit Ptr(FRFXLL_HANDLE h);
 
       template <class T1> Ptr(T1 * p) : ptr(p) {
         if (ptr) ptr->AddRef();
@@ -198,7 +198,7 @@ namespace FingerJetFxOSE {
         if (ptr) ptr->AddRef();
       }
       // Important: template c-tor does not override implicit copy c-tor!!!
-      Ptr(const Ptr<T> & p) : ptr(p.ptr) {
+      explicit Ptr(const Ptr<T> & p) : ptr(p.ptr) {
         if (ptr) ptr->AddRef();
       }
       ~Ptr() {
@@ -222,13 +222,13 @@ namespace FingerJetFxOSE {
 
     struct Handle : public Signature<0x646e6168, 0x0000656c>, public ObjectBase {
       Ptr<Object> ptr;
-      Handle(Object * pObj)
+      explicit Handle(Object * pObj)
         : ptr(pObj)
       {}
     };
     struct ConstHandle : public Signature<0x646e6148, 0x0100656c>, public ObjectBase {
       Ptr<const Object> ptr;
-      ConstHandle(const Object * pObj)
+      explicit ConstHandle(const Object * pObj)
         : ptr(pObj)
       {}
     };

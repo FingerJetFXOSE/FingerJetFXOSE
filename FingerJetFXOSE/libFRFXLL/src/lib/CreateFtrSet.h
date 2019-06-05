@@ -41,7 +41,7 @@ namespace FingerJetFxOSE {
     struct FeatureExtractionObj  : public Signature<0x65787446, 0x00727478>, public Object, public HResult {
       FeatureExtraction fex;
 
-      FeatureExtractionObj(const Context * ctx_) 
+      explicit FeatureExtractionObj(const Context * ctx_) 
         : Object(ctx_)
         , fex(ctx_->settings.fex)
       {

@@ -67,6 +67,9 @@ int main(int argc, char ** argv) {
   image = malloc(size);
   if (image == 0) {
     printf("Cannot allocate image buffer: image size is %dx%d", width, height);
+    if(fp != 0) {
+      fclose(fp); fp = 0;
+    }
     return 12;
   }
   
@@ -94,7 +97,7 @@ int main(int argc, char ** argv) {
   n = fwrite(tmpl, 1, size, fp);
   fclose(fp);
   if (n != size) {
-    printf("Cannot write output file of size %d\n", size);
+    printf("Cannot write output file of size %d\n", (int)size);
     free(image);
     return 15;
   }
