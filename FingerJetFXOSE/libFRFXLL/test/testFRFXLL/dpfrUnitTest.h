@@ -131,7 +131,7 @@ struct Handle {
   Handle() : handle(NULL) {}
   ~Handle() {
     if (handle != NULL) {
-      TS_ASSERT_OK(FRFXLLCloseHandle(handle));
+      TS_ASSERT_OK(FRFXLLCloseHandle(&handle));
     }
   }
   operator FRFXLL_HANDLE() const {
@@ -207,7 +207,7 @@ protected:
     TS_ASSERT(hCtx != NULL);
   }
   void _tearDown() {
-    TS_ASSERT_OK(FRFXLLCloseHandle(hCtx));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hCtx));
   }
 };
 
@@ -306,8 +306,8 @@ protected:
 public:
   FixtureWithExtractedFeatureSet() : hCtx(NULL), hFtrSet(NULL) {}
   ~FixtureWithExtractedFeatureSet() {
-    FRFXLLCloseHandle(hFtrSet);
-    FRFXLLCloseHandle(hCtx);
+    FRFXLLCloseHandle(&hFtrSet);
+    FRFXLLCloseHandle(&hCtx);
   }
 };
 

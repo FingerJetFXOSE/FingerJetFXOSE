@@ -146,7 +146,7 @@ void TestCreateContext() {
   CREATE_CONTEXT(&hCtx);
   UT_ASSERT(hCtx != NULL);
 
-  UT_ASSERT_OK(FRFXLLCloseHandle(hCtx));
+  UT_ASSERT_OK(FRFXLLCloseHandle(&hCtx));
 }
 
 static const unsigned char expectedFeatureSet[] = {
@@ -192,10 +192,10 @@ void TestCreateFeatureSet() {
 
   memcpy(image, TestAnsiImage, TESTIMAGESIZE);
   UT_ASSERT_OK(FRFXLLCreateFeatureSet(hCtx, image, sizeof(image), FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFeatureSet));
-  UT_ASSERT_OK(FRFXLLCloseHandle(hCtx));
+  UT_ASSERT_OK(FRFXLLCloseHandle(&hCtx));
   UT_ASSERT(hFeatureSet != NULL);
   UT_ASSERT_OK(FRFXLLExport(hFeatureSet, FRFXLL_DT_ISO_FEATURE_SET, NULL, data, &size));
-  FRFXLLCloseHandle(hFeatureSet);
+  FRFXLLCloseHandle(&hFeatureSet);
   UT_ASSERT_SAME_DATA(data, size, expectedFeatureSet, sizeof(expectedFeatureSet));
   UT_ASSERT(memcmp(image, TestAnsiImage, TESTIMAGESIZE) == 0);
 }
@@ -210,10 +210,10 @@ void TestCreateFeatureSetInPlace() {
 
   memcpy(image, TestAnsiImage, TESTIMAGESIZE);
   UT_ASSERT_OK(FRFXLLCreateFeatureSetInPlace(hCtx, image, sizeof(image), FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFeatureSet));
-  UT_ASSERT_OK(FRFXLLCloseHandle(hCtx));
+  UT_ASSERT_OK(FRFXLLCloseHandle(&hCtx));
   UT_ASSERT(hFeatureSet != NULL);
   UT_ASSERT_OK(FRFXLLExport(hFeatureSet, FRFXLL_DT_ISO_FEATURE_SET, NULL, data, &size));
-  FRFXLLCloseHandle(hFeatureSet);
+  FRFXLLCloseHandle(&hFeatureSet);
   UT_ASSERT_SAME_DATA(data, size, expectedFeatureSet, sizeof(expectedFeatureSet));
 }
 
@@ -232,10 +232,10 @@ void TestCreateFeatureSetFromRaw() {
                                                     width(image), height(image), 508, 0, &hFeatureSet));
 #undef height
 #undef width
-  UT_ASSERT_OK(FRFXLLCloseHandle(hCtx));
+  UT_ASSERT_OK(FRFXLLCloseHandle(&hCtx));
   UT_ASSERT(hFeatureSet != NULL);
   UT_ASSERT_OK(FRFXLLExport(hFeatureSet, FRFXLL_DT_ISO_FEATURE_SET, NULL, data, &size));
-  FRFXLLCloseHandle(hFeatureSet);
+  FRFXLLCloseHandle(&hFeatureSet);
   UT_ASSERT_SAME_DATA(data, size, expectedFeatureSet, sizeof(expectedFeatureSet));
   UT_ASSERT(memcmp(image, TestAnsiImage, TESTIMAGESIZE) == 0);
 }
@@ -255,10 +255,10 @@ void TestCreateFeatureSetInPlaceFromRaw() {
                                                     width(image), height(image), 508, 0, &hFeatureSet));
 #undef height
 #undef width
-  UT_ASSERT_OK(FRFXLLCloseHandle(hCtx));
+  UT_ASSERT_OK(FRFXLLCloseHandle(&hCtx));
   UT_ASSERT(hFeatureSet != NULL);
   UT_ASSERT_OK(FRFXLLExport(hFeatureSet, FRFXLL_DT_ISO_FEATURE_SET, NULL, data, &size));
-  FRFXLLCloseHandle(hFeatureSet);
+  FRFXLLCloseHandle(&hFeatureSet);
   UT_ASSERT_SAME_DATA(data, size, expectedFeatureSet, sizeof(expectedFeatureSet));
 }
 

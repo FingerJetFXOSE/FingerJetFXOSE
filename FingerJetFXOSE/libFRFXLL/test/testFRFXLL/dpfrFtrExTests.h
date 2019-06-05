@@ -63,76 +63,76 @@ public:
   void testCreateFeatureSetWithNullContextHandle() {
     TS_ASSERT_RC(FRFXLLCreateFeatureSet(NULL, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet), FRFXLL_ERR_INVALID_HANDLE);
     TS_ASSERT_EQUALS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
   }
   void testCreateFeatureSetWithNullFeatureSetHandlePtr() {
     TS_ASSERT_RC(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, NULL), FRFXLL_ERR_INVALID_PARAM);
     TS_ASSERT_EQUALS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
   }
   void testCreateFeatureSetWithNullImageDataPtr() {
     TS_ASSERT_RC(FRFXLLCreateFeatureSet(hCtx, NULL, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet), FRFXLL_ERR_INVALID_PARAM);
     TS_ASSERT_EQUALS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet))
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet))
   }
   void testCreateFeatureSetWithShortImageDataSize() {
     TS_ASSERT_RC(FRFXLLCreateFeatureSet(hCtx, TempImage, 5, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet), FRFXLL_ERR_INVALID_IMAGE);
     TS_ASSERT_EQUALS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
   }
   void testCreateFeatureSetWithOneByteShorterImageDataSize() {
     TS_ASSERT_RC(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage.size() - 1, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet), FRFXLL_ERR_INVALID_IMAGE);
     TS_ASSERT_EQUALS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
   }
   void testCreateFeatureSetWithOneByteLongerImageDataSize() {
     TS_ASSERT_OK(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage.size() + 1, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet));
     TS_ASSERT_DIFFERS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
   }
   void testCreateFeatureSetWithLongImageDataSize() {
     TS_ASSERT_OK(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage.max_buffer_size, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet));
     TS_ASSERT_DIFFERS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
   }
   void testCreateFeatureSetOutOfMemory() {
     FailMemoryAllocation fma(0);
     TS_ASSERT_RC(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet), FRFXLL_ERR_NO_MEMORY);
     TS_ASSERT_EQUALS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
   }
   void testCreateFeatureSetOutOfMemoryForFeatureSetObject() {
     FailMemoryAllocation fma(1);
     TS_ASSERT_RC(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet), FRFXLL_ERR_NO_MEMORY);
     TS_ASSERT_EQUALS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
   }
   void testCreateFeatureSetOutOfMemoryForHandle() {
     FailMemoryAllocation fma(2);
     TS_ASSERT_RC(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet), FRFXLL_ERR_NO_MEMORY);
     TS_ASSERT_EQUALS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
   }
   void testCreateFeatureSetMakesOnlyThreeAllocations() {
     FailMemoryAllocation fma(3);
     TS_ASSERT_OK(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet));
     TS_ASSERT_DIFFERS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
   }
   void testCreateFeatureSetAsInvalidDataType() {
     TS_ASSERT_RC(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, invalidDataType, 0, &hFtrSet), FRFXLL_ERR_INVALID_PARAM);
     TS_ASSERT_EQUALS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
   }
   void testCreateFeatureSetAsFeatureSetDataType() {
     TS_ASSERT_RC(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_FEATURE_SET, 0, &hFtrSet), FRFXLL_ERR_INVALID_PARAM);
     TS_ASSERT_EQUALS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
   }
   void testCreateAsFeatureSetAnsiSampleDataType() {
     TS_ASSERT_OK(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet));
     TS_ASSERT_DIFFERS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
   }
 };
 
@@ -159,7 +159,7 @@ public:
     savedCRC = CalculateCRC(TempImage, TempImage);
     TS_ASSERT_RC(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet), FRFXLL_ERR_INVALID_IMAGE);
     TS_ASSERT_EQUALS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempImage, TempImage), savedCRC);
   }
   void testCreateFeatureBadImage_OneLine() {
@@ -167,7 +167,7 @@ public:
     savedCRC = CalculateCRC(TempImage, TempImage);
     TS_ASSERT_RC(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet), FRFXLL_ERR_INVALID_IMAGE);
     TS_ASSERT_EQUALS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempImage, TempImage), savedCRC);
   }
   // This test returns FRFXLL_ERR_FB_TOO_SMALL_AREA (0x80048004L), instead of FRFXLL_ERR_FB_IMAGE_TOO_NOISY (0x80048001); it appears that FRFXLL_ERR_FB_IMAGE_TOO_NOISY is not used
@@ -177,7 +177,7 @@ public:
     savedCRC = CalculateCRC(TempAnsiImage, TempAnsiImage);
     TS_ASSERT_RC(FRFXLLCreateFeatureSet(hCtx, TempAnsiImage, TempAnsiImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet), FRFXLL_ERR_FB_TOO_SMALL_AREA); // 0x80048004L
     TS_ASSERT_EQUALS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempAnsiImage, TempAnsiImage), savedCRC);
   }
   void testCreateFeatureBrcmImage00() {
@@ -185,7 +185,7 @@ public:
     savedCRC = CalculateCRC(TempImage, TempImage);
     TS_ASSERT_OK(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet));
     TS_ASSERT_DIFFERS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempImage, TempImage), savedCRC);
   }
   void testCreateFeatureAuthentecImage01() {
@@ -193,7 +193,7 @@ public:
     savedCRC = CalculateCRC(TempImage, TempImage);
     TS_ASSERT_OK(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet));
     TS_ASSERT_DIFFERS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempImage, TempImage), savedCRC);
   }
   void testCreateFeatureAuthentecImage01WithOneByteShorter() {
@@ -201,7 +201,7 @@ public:
     savedCRC = CalculateCRC(TempImage, TempImage);
     TS_ASSERT_RC(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet), FRFXLL_ERR_INVALID_IMAGE);
     TS_ASSERT_EQUALS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempImage, TempImage), savedCRC);
   }
   void testCreateFeatureAuthentecImage01WithOneByteLonger() {
@@ -209,7 +209,7 @@ public:
     savedCRC = CalculateCRC(TempImage, TempImage);
     TS_ASSERT_OK(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet));
     TS_ASSERT_DIFFERS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempImage, TempImage), savedCRC);
   }
   void testCreateFeatureWithTruncatedImage() {
@@ -217,7 +217,7 @@ public:
     savedCRC = CalculateCRC(TempImage, TempImage);
     TS_ASSERT_RC(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet), FRFXLL_ERR_INVALID_IMAGE);
     TS_ASSERT_EQUALS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempImage, TempImage), savedCRC);
   }
   void testCreateFeatureAuthentecImage02() {
@@ -225,7 +225,7 @@ public:
     savedCRC = CalculateCRC(TempImage, TempImage);
     TS_ASSERT_OK(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet));
     TS_ASSERT_DIFFERS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempImage, TempImage), savedCRC);
   }
   void testCreateFeatureAuthentecImage02WithOneRowLonger() {
@@ -234,7 +234,7 @@ public:
     savedCRC = CalculateCRC(TempAnsiImage, TempAnsiImage);
     TS_ASSERT_OK(FRFXLLCreateFeatureSet(hCtx, TempAnsiImage, TempAnsiImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet));
     TS_ASSERT_DIFFERS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempAnsiImage, TempAnsiImage), savedCRC);
   }
   void testCreateFeatureTestAnsiImageMartini() {
@@ -242,7 +242,7 @@ public:
     savedCRC = CalculateCRC(TempImage, TempImage);
     TS_ASSERT_OK(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet));
     TS_ASSERT_DIFFERS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempImage, TempImage), savedCRC);
   }
   void testCreateFeatureTestAnsiImageMartiniCE() {
@@ -250,7 +250,7 @@ public:
     savedCRC = CalculateCRC(TempImage, TempImage);
     TS_ASSERT_OK(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet));
     TS_ASSERT_DIFFERS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempImage, TempImage), savedCRC);
   }
   void testCreateFeatureTestAnsiImage200() {
@@ -258,7 +258,7 @@ public:
     savedCRC = CalculateCRC(TempImage, TempImage);
     TS_ASSERT_RC(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet), FRFXLL_ERR_INVALID_IMAGE);
     TS_ASSERT_EQUALS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempImage, TempImage), savedCRC);
   }
   void testCreateFeatureTestAnsiImage250() {
@@ -266,7 +266,7 @@ public:
     savedCRC = CalculateCRC(TempImage, TempImage);
     TS_ASSERT_RC(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet), FRFXLL_ERR_INVALID_IMAGE);
     TS_ASSERT_EQUALS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempImage, TempImage), savedCRC);
   }
   void testCreateFeatureTestAnsiImage299() {
@@ -275,7 +275,7 @@ public:
     savedCRC = CalculateCRC(TempAnsiImage, TempAnsiImage);
     TS_ASSERT_RC(FRFXLLCreateFeatureSet(hCtx, TempAnsiImage, TempAnsiImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet), FRFXLL_ERR_INVALID_IMAGE);
     TS_ASSERT_EQUALS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempAnsiImage, TempAnsiImage), savedCRC);
   }
   void testCreateFeatureTestAnsiImage300() {
@@ -283,7 +283,7 @@ public:
     savedCRC = CalculateCRC(TempImage, TempImage);
     TS_ASSERT_OK(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet));
     TS_ASSERT_DIFFERS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempImage, TempImage), savedCRC);
   }
   void testCreateFeatureTestAnsiImage1000() {
@@ -291,7 +291,7 @@ public:
     savedCRC = CalculateCRC(TempImage, TempImage);
     TS_ASSERT_OK(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet));
     TS_ASSERT_DIFFERS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempImage, TempImage), savedCRC);
   }
   void testCreateFeatureTestAnsiImage1001() {
@@ -300,7 +300,7 @@ public:
     savedCRC = CalculateCRC(TempAnsiImage, TempAnsiImage);
     TS_ASSERT_RC(FRFXLLCreateFeatureSet(hCtx, TempAnsiImage, TempAnsiImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet), FRFXLL_ERR_INVALID_IMAGE);
     TS_ASSERT_EQUALS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempAnsiImage, TempAnsiImage), savedCRC);
   }
   void testCreateFeatureTestAnsiImage_100_100() {
@@ -308,7 +308,7 @@ public:
     savedCRC = CalculateCRC(TempImage, TempImage);
     TS_ASSERT_RC(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet), FRFXLL_ERR_FB_TOO_SMALL_AREA);
     TS_ASSERT_EQUALS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempImage, TempImage), savedCRC);
   }
   void testCreateFeatureIso() {
@@ -316,7 +316,7 @@ public:
     savedCRC = CalculateCRC(TempImage, TempImage);
     TS_ASSERT_OK(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ISO_19794_4_SAMPLE, 0, &hFtrSet));
     TS_ASSERT_DIFFERS(hFtrSet, nullptr);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempImage, TempImage), savedCRC);
   }
 };
@@ -347,7 +347,7 @@ public:
   //  savedCRC = CalculateCRC(TempAnsiImage, TempAnsiImage);
   //  TS_ASSERT_OK(FRFXLLCreateFeatureSet(hCtx, TempAnsiImage, TempAnsiImage/*sizeof(TestAnsiImage)*/, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet));
   //  TS_ASSERT_DIFFERS(hFtrSet, nullptr);
-  //  TS_ASSERT_OK(FRFXLLCloseHandle(hFtrSet));
+  //  TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
   //  TS_ASSERT_EQUALS_X(CalculateCRC(TempAnsiImage, TempAnsiImage), savedCRC);
   //}
 };

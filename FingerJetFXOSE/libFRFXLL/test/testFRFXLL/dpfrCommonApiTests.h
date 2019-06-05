@@ -105,13 +105,13 @@ public:
     FailMemoryAllocation fma(2);
     TS_ASSERT_OK(FRFXLLCreateContext(&ctx_init, &hCtx));
     TS_ASSERT(hCtx != NULL);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hCtx));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hCtx));
   }
   void testCreateContextWithValidParameters() {
     TS_ASSERT_OK(FRFXLLCreateContext(&ctx_init, &hCtx));
     TS_ASSERT(hCtx != NULL);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hCtx));
-    TS_ASSERT_EQUALS(FRFXLLCloseHandle(hCtx), FRFXLL_ERR_INVALID_HANDLE); // intended test step.
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hCtx));
+    TS_ASSERT_EQUALS(FRFXLLCloseHandle(&hCtx), FRFXLL_ERR_INVALID_HANDLE); // intended test step.
   }
 };
 
@@ -156,18 +156,18 @@ public:
     FailMemoryAllocation fma(1);
     TS_ASSERT_OK(FRFXLLDuplicateHandle(hCtx, &hCtx2));
     TS_ASSERT(hCtx2 != NULL);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hCtx2));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hCtx2));
   }
   void testDuplicateContextHandleWithSameContextHandle() {
     hCtx2 = hCtx;
     TS_ASSERT_OK(FRFXLLDuplicateHandle(hCtx, &hCtx2));
     TS_ASSERT(hCtx2 != NULL);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hCtx2));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hCtx2));
   }
   void testDuplicateContextHandleWithValidParameters() {
     TS_ASSERT_OK(FRFXLLDuplicateHandle(hCtx, &hCtx2));
     TS_ASSERT(hCtx2 != NULL);
-    TS_ASSERT_OK(FRFXLLCloseHandle(hCtx2));
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hCtx2));
   }
 };
 

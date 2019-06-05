@@ -47,7 +47,7 @@ struct dpHandle {
   FRFXLL_RESULT Close() {
     FRFXLL_RESULT rc = FRFXLL_OK;
     if (h) {
-      rc = FRFXLLCloseHandle(h);
+      rc = FRFXLLCloseHandle(&h);
     }
     h = NULL;
     return rc;

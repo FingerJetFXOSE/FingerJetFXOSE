@@ -65,17 +65,19 @@ FRFXLL_RESULT FRFXLLCreateContext(
 }
 
 FRFXLL_RESULT FRFXLLCloseHandle(
-  FRFXLL_HANDLE handle            ///< [in] Handle to close. Object is freed when the reference count is zero
+  FRFXLL_HANDLE_PT handle            ///< [in] Handle to close. Object is freed when the reference count is zero
 ) {
-  if (handle == NULL) return FRFXLL_OK; // closing NULL handle is not an error (like in case of operator delete)
-  Handle * ph = reinterpret_cast<Handle *>(handle);
+  if (*handle == nullptr) return FRFXLL_OK; // closing NULL handle is not an error (like in case of operator delete)
+  Handle * ph = reinterpret_cast<Handle *>(*handle);
   if (ph->Check()) {
     delete ph;
+    *handle = nullptr;
     return FRFXLL_OK;
   }
-  ConstHandle * pch = reinterpret_cast<ConstHandle *>(handle);
+  ConstHandle * pch = reinterpret_cast<ConstHandle *>(*handle);
   if (pch->Check()) {
     delete pch;
+    *handle = nullptr;
     return FRFXLL_OK;
   }
   return CheckResult(FRFXLL_ERR_INVALID_HANDLE);

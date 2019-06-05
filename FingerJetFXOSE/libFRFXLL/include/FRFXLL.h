@@ -142,7 +142,7 @@ Close handle
 \retval FRFXLL_ERR_INVALID_HANDLE      Handle is invalid. Note, that it is not an error to close NULL handle.
 */
 FRFXLL_RESULT FRFXLL_EXPORT FRFXLLCloseHandle(
-  FRFXLL_HANDLE handle            ///< [in] Handle to close. Object is freed when the reference count is zero
+  FRFXLL_HANDLE_PT handle            ///< [in] Handle to close. Object is freed when the reference count is zero
 );
 /**
 Duplicate handle
