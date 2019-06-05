@@ -34,6 +34,7 @@
 #include <dpTypes.h>
 #include "intmath.h"
 
+
 namespace FingerJetFxOSE {
 namespace FpRecEngineImpl {
 namespace Embedded {
@@ -83,7 +84,7 @@ namespace FeatureExtractionImpl {
     imresize23<out_stride>(out_img, out_width, out_size, in_img, in_width);
   }
 
-  inline void imresize(uint8 * out_img, size_t o_w, size_t o_size, const uint8 * in_img, size_t i_w, size_t scale256) {
+  inline void imresize(uint8 * out_img, size_t o_w, size_t o_size, const uint8 * in_img, size_t i_w, size_t i_h, size_t scale256) {
     const uint8 * piv = in_img;
     size_t dy = 0;
     uint8 * end = out_img + o_size;
@@ -91,8 +92,13 @@ namespace FeatureExtractionImpl {
       const uint8 * pi = piv;
       size_t dx = 0;
       for (uint8 * endline = po + o_w; po < endline; po++) {
-        *po = uint8(((pi[  0] * (256 - dx) + pi[    1] * dx) * (256 - dy)
-                   + (pi[i_w] * (256 - dx) + pi[i_w+1] * dx) * dy        ) >> 16);
+        // ralph.lessmann@crossmatch.com
+        // added additional guard to prevent a global buffer overflow, required to change  the function parameters
+        // problematic code was "pi[i_w]" and " pi[i_w+1]" which is only valid before the last input image line
+        if( (pi + i_w) < (in_img + i_w * i_h)) {
+          *po = uint8(((pi[  0] * (256 - dx) + pi[    1] * dx) * (256 - dy)
+                     + (pi[i_w] * (256 - dx) + pi[i_w+1] * dx) * dy        ) >> 16); // this line causes a global buffer overflow!
+        }
         dx += scale256;
         pi += dx >> 8;
         dx &= 0xff;

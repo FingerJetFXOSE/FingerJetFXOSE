@@ -285,7 +285,7 @@ namespace Embedded {
         imageResolution = muldiv(imageResolution, 5, 3);
       } else {
         size_t scale256 = imageResolution * size_t(256) / int_resolution;
-        imresize(buffer, width, size, in_img, in_width, scale256);
+        imresize(buffer, width, size, in_img, in_width, in_height, scale256);
         imageResolution = 500;
       }
       return FRFXLL_OK;
