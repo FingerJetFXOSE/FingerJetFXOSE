@@ -1,6 +1,16 @@
 
+// build and distribution directory
 **/dist/
 **/build/
-**/.vs*/
 
+// world editors
+**/.vs*/
+**/.DS_Store/
+
+// cxxtests
 **/runner.cpp
+
+// 
+**/*.cppcheck
+**/code_analysis-cppcheck-build-dir/
+

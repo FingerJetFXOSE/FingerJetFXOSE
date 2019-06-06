@@ -65,6 +65,7 @@ void * m_malloc(size_t size, void * _)
   m_block_count++;
   alloc_count++;
   ptr[0] = size;
+  // see a problem here, how do we free this pointer
   return ptr + 1;
 }
 

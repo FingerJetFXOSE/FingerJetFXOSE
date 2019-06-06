@@ -41,7 +41,7 @@ namespace FingerJetFxOSE {
     struct FpFtrSetObj : public Signature<0x74465046, 0x74655372>, public Object {
       MatchData fpFtrSet;
 
-      FpFtrSetObj(const Context * ctx_)  : Object(ctx_) {}
+      explicit FpFtrSetObj(const Context * ctx_)  : Object(ctx_) {}
 
       FRFXLL_RESULT Import(
         const unsigned char data[],  ///< [in] (fingerprint) data to import
