@@ -182,10 +182,7 @@ static const unsigned char expectedFeatureSet[] = {
 
 unsigned char image[TESTIMAGESIZE];
 
-void TestCreateFeatureSet() {
-  unsigned char data[500];
-  size_t size = sizeof(data);
-
+void TestCreateFeatureSet(unsigned char* data, size_t *size) {
   FRFXLL_HANDLE hCtx = NULL, hFeatureSet = NULL;
   CREATE_CONTEXT(&hCtx);
   UT_ASSERT(hCtx != NULL);
@@ -194,16 +191,13 @@ void TestCreateFeatureSet() {
   UT_ASSERT_OK(FRFXLLCreateFeatureSet(hCtx, image, sizeof(image), FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFeatureSet));
   UT_ASSERT_OK(FRFXLLCloseHandle(&hCtx));
   UT_ASSERT(hFeatureSet != NULL);
-  UT_ASSERT_OK(FRFXLLExport(hFeatureSet, FRFXLL_DT_ISO_FEATURE_SET, NULL, data, &size));
+  UT_ASSERT_OK(FRFXLLExport(hFeatureSet, FRFXLL_DT_ISO_FEATURE_SET, NULL, data, size));
   FRFXLLCloseHandle(&hFeatureSet);
-  UT_ASSERT_SAME_DATA(data, size, expectedFeatureSet, sizeof(expectedFeatureSet));
+  UT_ASSERT_SAME_DATA(data, *size, expectedFeatureSet, sizeof(expectedFeatureSet));
   UT_ASSERT(memcmp(image, TestAnsiImage, TESTIMAGESIZE) == 0);
 }
 
-void TestCreateFeatureSetInPlace() {
-  unsigned char data[500];
-  size_t size = sizeof(data);
-
+void TestCreateFeatureSetInPlace(unsigned char* data, size_t *size) {
   FRFXLL_HANDLE hCtx = NULL, hFeatureSet = NULL;
   CREATE_CONTEXT(&hCtx);
   UT_ASSERT(hCtx != NULL);
@@ -212,15 +206,12 @@ void TestCreateFeatureSetInPlace() {
   UT_ASSERT_OK(FRFXLLCreateFeatureSetInPlace(hCtx, image, sizeof(image), FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFeatureSet));
   UT_ASSERT_OK(FRFXLLCloseHandle(&hCtx));
   UT_ASSERT(hFeatureSet != NULL);
-  UT_ASSERT_OK(FRFXLLExport(hFeatureSet, FRFXLL_DT_ISO_FEATURE_SET, NULL, data, &size));
+  UT_ASSERT_OK(FRFXLLExport(hFeatureSet, FRFXLL_DT_ISO_FEATURE_SET, NULL, data, size));
   FRFXLLCloseHandle(&hFeatureSet);
-  UT_ASSERT_SAME_DATA(data, size, expectedFeatureSet, sizeof(expectedFeatureSet));
+  UT_ASSERT_SAME_DATA(data, *size, expectedFeatureSet, sizeof(expectedFeatureSet));
 }
 
-void TestCreateFeatureSetFromRaw() {
-  unsigned char data[500];
-  size_t size = sizeof(data);
-
+void TestCreateFeatureSetFromRaw(unsigned char* data, size_t *size) {
   FRFXLL_HANDLE hCtx = NULL, hFeatureSet = NULL;
   CREATE_CONTEXT(&hCtx);
   UT_ASSERT(hCtx != NULL);
@@ -234,16 +225,13 @@ void TestCreateFeatureSetFromRaw() {
 #undef width
   UT_ASSERT_OK(FRFXLLCloseHandle(&hCtx));
   UT_ASSERT(hFeatureSet != NULL);
-  UT_ASSERT_OK(FRFXLLExport(hFeatureSet, FRFXLL_DT_ISO_FEATURE_SET, NULL, data, &size));
+  UT_ASSERT_OK(FRFXLLExport(hFeatureSet, FRFXLL_DT_ISO_FEATURE_SET, NULL, data, size));
   FRFXLLCloseHandle(&hFeatureSet);
-  UT_ASSERT_SAME_DATA(data, size, expectedFeatureSet, sizeof(expectedFeatureSet));
+  UT_ASSERT_SAME_DATA(data, *size, expectedFeatureSet, sizeof(expectedFeatureSet));
   UT_ASSERT(memcmp(image, TestAnsiImage, TESTIMAGESIZE) == 0);
 }
 
-void TestCreateFeatureSetInPlaceFromRaw() {
-  unsigned char data[500];
-  size_t size = sizeof(data);
-
+void TestCreateFeatureSetInPlaceFromRaw(unsigned char* data, size_t *size) {
   FRFXLL_HANDLE hCtx = NULL, hFeatureSet = NULL;
   CREATE_CONTEXT(&hCtx);
   UT_ASSERT(hCtx != NULL);
@@ -257,24 +245,59 @@ void TestCreateFeatureSetInPlaceFromRaw() {
 #undef width
   UT_ASSERT_OK(FRFXLLCloseHandle(&hCtx));
   UT_ASSERT(hFeatureSet != NULL);
-  UT_ASSERT_OK(FRFXLLExport(hFeatureSet, FRFXLL_DT_ISO_FEATURE_SET, NULL, data, &size));
+  UT_ASSERT_OK(FRFXLLExport(hFeatureSet, FRFXLL_DT_ISO_FEATURE_SET, NULL, data, size));
   FRFXLLCloseHandle(&hFeatureSet);
-  UT_ASSERT_SAME_DATA(data, size, expectedFeatureSet, sizeof(expectedFeatureSet));
+  UT_ASSERT_SAME_DATA(data, *size, expectedFeatureSet, sizeof(expectedFeatureSet));
+}
+
+void SaveResultDetails(unsigned char* data, size_t size) {
+  FILE *fp = fopen("expected.fmd","wb");
+  fwrite(expectedFeatureSet,sizeof(expectedFeatureSet),1,fp);     
+  fclose(fp);
+  fp = fopen("detected.fmd","wb");
+  fwrite(data,size,1,fp);     
+  fclose(fp);
+#define width(image) (image[36 + 14 - 5] << 8) | (image[36 + 14 - 4])
+#define height(image) (image[36 + 14 - 3] << 8) | (image[36 + 14 - 2])
+  char name[100]; name[0]='\0';
+  sprintf( name, "image_%d_%d.raw", width(image), height(image) );
+  fp = fopen(name,"wb");
+  fwrite(TestAnsiImage + 36 + 14, sizeof(TestAnsiImage) - 36 - 14,1,fp);     
+  fclose(fp);
+#undef height
+#undef width
 }
 
 int RunTests() {
+  unsigned char data[5000];
+  size_t size = sizeof(data);
+ 
   _printf(("Starting tests.\n"));
-  TestGetLibraryVersion();
+  size = sizeof(data);  
+  memset( data, 0, size);
+  TestGetLibraryVersion(data, &size);
   _printf(("."));
-  TestCreateContext();
+  size = sizeof(data);  
+  memset( data, 0, size);
+  TestCreateContext(data, &size);
   _printf(("."));
-  TestCreateFeatureSet();
+  size = sizeof(data);  
+  memset( data, 0, size);
+  TestCreateFeatureSet(data, &size);
   _printf(("."));
-  TestCreateFeatureSetInPlace();
+  size = sizeof(data);  
+  memset( data, 0, size);
+  TestCreateFeatureSetInPlace(data, &size);
   _printf(("."));
-  TestCreateFeatureSetFromRaw();
+  size = sizeof(data);  
+  memset( data, 0, size);
+  TestCreateFeatureSetFromRaw(data, &size);
   _printf(("."));
-  TestCreateFeatureSetInPlaceFromRaw();
+  size = sizeof(data);  
+  memset( data, 0, size);
+  TestCreateFeatureSetInPlaceFromRaw(data, &size);
+  _printf(("."));
+  SaveResultDetails( data, size);
   _printf(("."));
 
   CheckMem();
