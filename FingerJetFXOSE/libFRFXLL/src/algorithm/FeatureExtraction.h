@@ -79,7 +79,7 @@ namespace Embedded {
        int16 x = md.minutia[i].position.x -= xoffs;
        int16 y = md.minutia[i].position.y -= yoffs;
        if (x >= 0 && x <= xMax && y >= 0 && y <= yMax) {
-         minutia[j] = minutia[i];
+         minutia[j] = md.minutia[i];
          j++;
        }
      }
