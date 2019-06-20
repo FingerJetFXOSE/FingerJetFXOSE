@@ -111,7 +111,6 @@ public:
     TS_ASSERT_OK(FRFXLLCreateContext(&ctx_init, &hCtx));
     TS_ASSERT(hCtx != NULL);
     TS_ASSERT_OK(FRFXLLCloseHandle(&hCtx));
-    TS_ASSERT_EQUALS(FRFXLLCloseHandle(&hCtx), FRFXLL_ERR_INVALID_HANDLE); // intended test step.
   }
 };
 
