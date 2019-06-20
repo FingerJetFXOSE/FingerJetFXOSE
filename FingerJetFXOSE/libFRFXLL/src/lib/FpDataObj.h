@@ -125,7 +125,7 @@ namespace FingerJetFxOSE {
       if (!ptr) return CheckResult(FRFXLL_ERR_INVALID_HANDLE);
       size_t size = *pcbData;
       FRFXLL_RESULT rc = ((*ptr).*export_f)(dataType, parameters, pbData, pcbData); // AI: don't user ->* because of bug in ARM compiler
-      if (rc < FRFXLL_OK && pbData != NULL) {
+      if (rc < FRFXLL_OK && rc != FRFXLL_ERR_MORE_DATA && pbData != NULL) {
         memset(pbData, 0, size);
       }
       return rc;
