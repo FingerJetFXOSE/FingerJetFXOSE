@@ -234,8 +234,8 @@ namespace FingerJetFxOSE {
                                                                             // Impression Type
           wr << fingerQuality;                                              // Finger Quality
           size_t avail = wr.size - wr.cur;                                  // calculate available space
-          uint8 num = (uint8) ( ( avail - 3 ) / 6 );                        // maximum minutae to write (already sorted by confidence)
-          num = num < md.numMinutia ? num : md.numMinutia;
+          size_t num = ( ( avail - 3 ) / 6 );                               // maximum minutae to write (already sorted by confidence)
+          num = num < md.numMinutia ? num : md.numMinutia;                  // not more than the number of minutiae found, max 255 see MatchData
           wr << uint8(num);                                                 // Number of Minutiae
           WriteMinutiae(wr, md, num);                                       // 6 bytes per minutae
           WriteViewEDBHeaders(wr);                                          // 2 bytes
