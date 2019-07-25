@@ -1,7 +1,7 @@
 /*
     FingerJetFX OSE -- Fingerprint Feature Extractor, Open Source Edition
 
-    Copyright (c) 2011 by DigitalPersona, Inc. All rights reserved.
+    Copyright (c) 2019 by HID Global, Inc. All rights reserved.
 
     DigitalPersona, FingerJet, and FingerJetFX are registered trademarks 
     or trademarks of DigitalPersona, Inc. in the United States and other
@@ -16,17 +16,6 @@
  
     For more information, please visit digitalpersona.com/fingerjetfx.
 */ 
-/*
-      LIBRARY: FRFXLL - Fingerprint Feature Extractor - Low Level API
-
-      ALGORITHM:      Alexander Ivanisov
-                      Yi Chen
-                      Salil Prabhakar
-      IMPLEMENTATION: Alexander Ivanisov
-                      Jacob Kaminsky
-                      Lixin Wei
-      DATE:           11/08/2011
-*/
 
 #include <stdlib.h>
 #include <time.h>
@@ -125,7 +114,10 @@ FRFXLL_RESULT FRFXLLCreateLibraryContext(
   ci.interlocked_decrement = m_interlocked_decrement;
   ci.interlocked_exchange  = m_interlocked_exchange;
   ci.interlocked_compare_exchange = m_interlocked_compare_exchange;
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
   return FRFXLLCreateContext(&ci, phContext);
+#pragma GCC diagnostic pop
 }
 
 

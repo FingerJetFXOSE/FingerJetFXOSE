@@ -1,7 +1,7 @@
 /*
     FingerJetFX OSE -- Fingerprint Feature Extractor, Open Source Edition
 
-    Copyright (c) 2011 by DigitalPersona, Inc. All rights reserved.
+    Copyright (c) 2019 by HID Global, Inc. All rights reserved.
 
     DigitalPersona, FingerJet, and FingerJetFX are registered trademarks 
     or trademarks of DigitalPersona, Inc. in the United States and other
@@ -16,17 +16,6 @@
  
     For more information, please visit digitalpersona.com/fingerjetfx.
 */ 
-/*
-      LIBRARY: FRFXLL - Fingerprint Feature Extractor - Low Level API
-
-      ALGORITHM:      Alexander Ivanisov
-                      Yi Chen
-                      Salil Prabhakar
-      IMPLEMENTATION: Alexander Ivanisov
-                      Jacob Kaminsky
-                      Lixin Wei
-      DATE:           11/08/2011
-*/
 
 #ifndef __SERIALIZEFPDATA_H
 #define __SERIALIZEFPDATA_H
@@ -192,18 +181,14 @@ namespace FingerJetFxOSE {
           uint8 minQ = 0xff;
           uint16 sizeX = 0;
           uint16 sizeY = 0;
-          
+                    
           size_t i;
           for ( i = 0; i < num; i++ ) {
-            Point pos = md.minutia[i].position + md.offset;
-            if ( resolutionX != Resolution ) {
-              pos.x = muldiv(pos.x, resolutionX, Resolution);
-            }
+            Point pos = md.minutia[i].position;
+
             if ( pos.x > sizeX ) sizeX = pos.x;
-            if ( resolutionY != Resolution ) {
-              pos.y = muldiv(pos.y, resolutionY, Resolution);
-            }
             if ( pos.y > sizeY ) sizeY = pos.y;
+
             wr << uint16((pos.x & 0x3FFF) | (md.minutia[i].type << 14));    // X
             wr << uint16(pos.y & 0x3FFF);                                   // Y
             WriteTheta(wr, md.minutia[i].theta);                            // Theta
@@ -345,7 +330,7 @@ namespace FingerJetFxOSE {
           wr << sizeY;
         }
         virtual void WriteTheta(Writer & wr, uint8 theta) {
-          wr << uint8(-theta + 64);
+          wr << uint8(theta);
         }
       };
 
@@ -370,7 +355,6 @@ namespace FingerJetFxOSE {
           wr << sizeY;
         }
         virtual void WriteTheta(Writer & wr, uint8 theta) {
-          theta = -theta + 64;
           theta = muldiv(theta, 180, 256);
           wr << uint8(theta);
         }

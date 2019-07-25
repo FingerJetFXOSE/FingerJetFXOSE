@@ -1,10 +1,10 @@
 /*
     FingerJetFX OSE -- Fingerprint Feature Extractor, Open Source Edition
 
-    Copyright (c) 2011 by DigitalPersona, Inc. All rights reserved.
+    Copyright (c) 2019 by HID Global, Inc. All rights reserved.
 
-    DigitalPersona, FingerJet, and FingerJetFX are registered trademarks 
-    or trademarks of DigitalPersona, Inc. in the United States and other
+    HID Global, FingerJet, and FingerJetFX are registered trademarks 
+    or trademarks of HID Global, Inc. in the United States and other
     countries.
 
     FingerJetFX OSE is open source software that you may modify and/or
@@ -25,7 +25,9 @@
       IMPLEMENTATION: Alexander Ivanisov
                       Jacob Kaminsky
                       Lixin Wei
-      DATE:           11/08/2011
+                      Greg Cannon
+                      Ralph Lessmann
+      DATE:           07/23/2019
 */
 
 #include <stdlib.h>
@@ -36,6 +38,45 @@
 
 #include "testFeatures.h"
 #include "TestAnsiImage.h"
+#include "TestRawImage.h"
+
+#include <inttypes.h>
+ 
+uint32_t
+rc_crc32(uint32_t crc, const char *buf, size_t len)
+{
+	static uint32_t table[256];
+	static int have_table = 0;
+	uint32_t rem;
+	uint8_t octet;
+	int i, j;
+	const char *p, *q;
+ 
+	/* This check is not thread safe; there is no mutex. */
+	if (have_table == 0) {
+		/* Calculate CRC table. */
+		for (i = 0; i < 256; i++) {
+			rem = i;  /* remainder from polynomial division */
+			for (j = 0; j < 8; j++) {
+				if (rem & 1) {
+					rem >>= 1;
+					rem ^= 0xedb88320;
+				} else
+					rem >>= 1;
+			}
+			table[i] = rem;
+		}
+		have_table = 1;
+	}
+ 
+	crc = ~crc;
+	q = buf + len;
+	for (p = buf; p < q; p++) {
+		octet = *p;  /* Cast to unsigned octet. */
+		crc = (crc >> 8) ^ table[(crc & 0xff) ^ octet];
+	}
+	return ~crc;
+}
 
 #define _printf(x) printf x; fflush(stdout)
 
@@ -180,6 +221,11 @@ static const unsigned char expectedFeatureSet[] = {
   0x00, 0xfb, 0x5e, 0x39, 0x00, 0x00,  
 };
 
+static const unsigned char expectedEmptyFeatureSet[] = {
+  0x46, 0x4d, 0x52, 0x00, 0x20, 0x32, 0x30, 0x00, 0x00, 0x20, 0x00, 0x33, 0x00, 0x00, 0x00, 0x00,
+  0x00, 0x08, 0x00, 0x08, 0x00, 0xc5, 0x00, 0xc5, 0x01, 0x00, 0x00, 0x00, 0xff, 0x00, 0x00, 0x00,
+};
+
 unsigned char image[TESTIMAGESIZE];
 
 void TestCreateFeatureSet(unsigned char* data, size_t *size) {
@@ -234,8 +280,8 @@ void TestCreateFeatureSetFromRaw(unsigned char* data, size_t *size) {
   memcpy(image, TestAnsiImage, TESTIMAGESIZE);
 #define width(image) (image[36 + 14 - 5] << 8) | (image[36 + 14 - 4])
 #define height(image) (image[36 + 14 - 3] << 8) | (image[36 + 14 - 2])
-  UT_ASSERT_OK(FRFXLLCreateFeatureSetFromRaw(hCtx, image + 36 + 14, sizeof(image) - 36 - 14, 
-                                                    width(image), height(image), 508, 0, &hFeatureSet));
+  UT_ASSERT_OK(FRFXLLCreateFeatureSetFromRaw(hCtx, image + 36 + 14, sizeof(image) - 36 - 14, width(image), height(image), 508, 0, &hFeatureSet));
+
 #undef height
 #undef width
   UT_ASSERT_OK(FRFXLLCloseHandle(&hCtx));
@@ -254,8 +300,9 @@ void TestCreateFeatureSetInPlaceFromRaw(unsigned char* data, size_t *size) {
   memcpy(image, TestAnsiImage, TESTIMAGESIZE);
 #define width(image) (image[36 + 14 - 5] << 8) | (image[36 + 14 - 4])
 #define height(image) (image[36 + 14 - 3] << 8) | (image[36 + 14 - 2])
-  UT_ASSERT_OK(FRFXLLCreateFeatureSetInPlaceFromRaw(hCtx, image + 36 + 14, sizeof(image) - 36 - 14, 
-                                                    width(image), height(image), 508, 0, &hFeatureSet));
+  UT_ASSERT_OK(FRFXLLCreateFeatureSetInPlaceFromRaw(hCtx, image + 36 + 14, sizeof(image) - 36 - 14, width(image), height(image), 508, 0, &hFeatureSet));
+  
+                                                    
 #undef height
 #undef width
   UT_ASSERT_OK(FRFXLLCloseHandle(&hCtx));
@@ -263,6 +310,65 @@ void TestCreateFeatureSetInPlaceFromRaw(unsigned char* data, size_t *size) {
   UT_ASSERT_EQUALS(FRFXLLExport(hFeatureSet, FRFXLL_DT_ISO_FEATURE_SET, NULL, data, size), FRFXLL_ERR_MORE_DATA);
   FRFXLLCloseHandle(&hFeatureSet);
   UT_ASSERT_SAME_DATA(data, *size, expectedFeatureSet, sizeof(expectedFeatureSet));
+}
+
+void TestGetMinutiae(unsigned char* data, size_t *size) {
+  FRFXLL_HANDLE hCtx = NULL, hFeatureSet = NULL;
+  CREATE_CONTEXT(&hCtx);
+  UT_ASSERT(hCtx != NULL);
+  
+  UT_ASSERT_OK(FRFXLLCreateFeatureSetFromRaw(hCtx, test_raw_image_333.pixels, test_raw_image_333.width*test_raw_image_333.height, test_raw_image_333.width, test_raw_image_333.height, test_raw_image_333.resolution, 2, &hFeatureSet));
+  UT_ASSERT(hFeatureSet != NULL);
+
+  unsigned int num_minutia = 0;
+  UT_ASSERT_OK(FRFXLLGetNumberMinutia(hFeatureSet,&num_minutia));
+//  printf("num minutia %u\n",num_minutia);
+  UT_ASSERT(num_minutia == 89);	// that seems totally crazy to Greg (way too many minutia)...
+  
+  struct FRFXLL_Basic_19794_2_Minutia* minutiae = calloc(num_minutia,sizeof(struct FRFXLL_Basic_19794_2_Minutia));
+  UT_ASSERT(minutiae != NULL);
+
+  UT_ASSERT_OK(FRFXLLGetMinutiae(hFeatureSet, BASIC_19794_2_MINUTIA_STRUCT, &num_minutia, minutiae));
+//  printf("rc_crc32 %d\n",rc_crc32(0,(const char*) minutiae,num_minutia*sizeof(struct FRFXLL_Basic_19794_2_Minutia)));
+  UT_ASSERT(rc_crc32(0,(const char*) minutiae,num_minutia*sizeof(struct FRFXLL_Basic_19794_2_Minutia)) == 1709855542);
+
+  free(minutiae);
+  UT_ASSERT_OK(FRFXLLCloseHandle(&hFeatureSet));
+  
+  // and now at 500
+
+  UT_ASSERT_OK(FRFXLLCreateFeatureSetFromRaw(hCtx, test_raw_image_500.pixels, test_raw_image_500.width*test_raw_image_500.height, test_raw_image_500.width, test_raw_image_500.height, test_raw_image_500.resolution, 2, &hFeatureSet));
+  UT_ASSERT(hFeatureSet != NULL);
+
+  num_minutia = 0;
+  UT_ASSERT_OK(FRFXLLGetNumberMinutia(hFeatureSet,&num_minutia));
+//  printf("num minutia %u\n",num_minutia);
+  UT_ASSERT(num_minutia == 89);	// that seems totally crazy to Greg (way too many minutia)...
+  
+  minutiae = calloc(num_minutia,sizeof(struct FRFXLL_Basic_19794_2_Minutia));
+  UT_ASSERT(minutiae != NULL);
+
+  UT_ASSERT_OK(FRFXLLGetMinutiae(hFeatureSet, BASIC_19794_2_MINUTIA_STRUCT, &num_minutia, minutiae));
+//  printf("rc_crc32 %d\n",rc_crc32(0,(const char*) minutiae,num_minutia*sizeof(struct FRFXLL_Basic_19794_2_Minutia)));
+  UT_ASSERT(rc_crc32(0,(const char*) minutiae,num_minutia*sizeof(struct FRFXLL_Basic_19794_2_Minutia)) == 1919678182);
+  
+  free(minutiae);
+  UT_ASSERT_OK(FRFXLLCloseHandle(&hFeatureSet));
+
+  UT_ASSERT_OK(FRFXLLCloseHandle(&hCtx));
+}
+
+void TestCreateEmptyFeatureSet(unsigned char* data, size_t *size) {
+  FRFXLL_HANDLE hCtx = NULL, hFeatureSet = NULL;
+  CREATE_CONTEXT(&hCtx);
+  UT_ASSERT(hCtx != NULL);
+
+  UT_ASSERT_OK(FRFXLLCreateEmptyFeatureSet(hCtx, &hFeatureSet));
+  UT_ASSERT_OK(FRFXLLCloseHandle(&hCtx));
+  UT_ASSERT(hFeatureSet != NULL);
+  UT_ASSERT_OK(FRFXLLExport(hFeatureSet, FRFXLL_DT_ANSI_FEATURE_SET, NULL, data, size));
+  FRFXLLCloseHandle(&hFeatureSet);
+  UT_ASSERT_SAME_DATA(data, *size, expectedEmptyFeatureSet, sizeof(expectedEmptyFeatureSet));
 }
 
 void SaveResultDetails(unsigned char* data, size_t size) {
@@ -312,6 +418,14 @@ int RunTests() {
   size = sizeof(data);  
   memset( data, 0, size);
   TestCreateFeatureSetInPlaceFromRaw(data, &size);
+  _printf(("."));
+  size = sizeof(data);  
+  memset( data, 0, size);
+  TestGetMinutiae(data, &size);
+  _printf(("."));
+  size = sizeof(data);  
+  memset( data, 0, size);
+  TestCreateEmptyFeatureSet(data, &size);
   _printf(("."));
   SaveResultDetails( data, size);
   _printf(("."));

@@ -1,10 +1,10 @@
 /*
     FingerJetFX OSE -- Fingerprint Feature Extractor, Open Source Edition
 
-    Copyright (c) 2011 by DigitalPersona, Inc. All rights reserved.
+    Copyright (c) 2019 by HID Global, Inc. All rights reserved.
 
-    DigitalPersona, FingerJet, and FingerJetFX are registered trademarks 
-    or trademarks of DigitalPersona, Inc. in the United States and other
+    HID Global, FingerJet, and FingerJetFX are registered trademarks 
+    or trademarks of HID Global, Inc. in the United States and other
     countries.
 
     FingerJetFX OSE is open source software that you may modify and/or
@@ -16,17 +16,6 @@
  
     For more information, please visit digitalpersona.com/fingerjetfx.
 */ 
-/*
-      LIBRARY: FRFXLL - Fingerprint Feature Extractor - Low Level API
-
-      ALGORITHM:      Alexander Ivanisov
-                      Yi Chen
-                      Salil Prabhakar
-      IMPLEMENTATION: Alexander Ivanisov
-                      Jacob Kaminsky
-                      Lixin Wei
-      DATE:           11/08/2011
-*/
 
 #ifndef __FEATUREEXTRACTION_H
 #define __FEATUREEXTRACTION_H
@@ -40,52 +29,18 @@
 #include "top_n.h"
 #include "fft_enhance.h"
 
+#define FRFXLL_EXTRACT_MIN_500WIDTH 196
+#define FRFXLL_EXTRACT_MAX_500WIDTH 800
+#define FRFXLL_EXTRACT_MIN_500HEIGHT 196
+#define FRFXLL_EXTRACT_MAX_500HEIGHT 1000
+#define FRFXLL_EXTRACT_MIN_DPI 300
+#define FRFXLL_EXTRACT_MAX_DPI 1008
+
 namespace FingerJetFxOSE {
 namespace FpRecEngineImpl {
 namespace Embedded {
 
   using namespace FeatureExtractionImpl;
-
-  inline void UpdateOffset(MatchData & md){
-    static const int16 xMax = 255, yMax = 399;
-    int16 x0 = std::numeric_limits<int16>::max();
-    int16 x1 = std::numeric_limits<int16>::min();
-    int16 y0 = std::numeric_limits<int16>::max();
-    int16 y1 = std::numeric_limits<int16>::min();
-    size_t i;
-    for (i = 0; i < md.size(); i++) {
-      int16 x = md.minutia[i].position.x;
-      int16 y = md.minutia[i].position.y;
-      x0 = std::min(x0, x);
-      x1 = std::max(x1, x);
-      y0 = std::min(y0, y);
-      y1 = std::max(y1, y);
-    }
-    int16 xoffs = 0;
-    if (x1 > xMax) {
-      xoffs = (x0 + x1 - xMax) >> 1;
-      md.offset.x += xoffs;
-    }
-    int16 yoffs = 0;
-    if (y1 > yMax) {
-      yoffs = std::min(y0, int16(y1 - yMax));
-      md.offset.y += yoffs;
-    }
-    //size_t j = 0;
-     Minutia minutia[md.Capacity];
-     memset( minutia, 0, md.Capacity * sizeof(Minutia));
-     size_t j = 0;
-     for (i = 0; i < md.size(); i++) {
-       int16 x = md.minutia[i].position.x -= xoffs;
-       int16 y = md.minutia[i].position.y -= yoffs;
-       if (x >= 0 && x <= xMax && y >= 0 && y <= yMax) {
-         minutia[j] = md.minutia[i];
-         j++;
-       }
-     }
-     memcpy( md.minutia, minutia, j * sizeof(Minutia));
-     md.numMinutia = j;
-  }
 
   struct FeatureExtractionBase {
     static const size_t maxwidth = 256;
@@ -142,22 +97,18 @@ namespace Embedded {
       ori_size = ori_height * ori_width;
     }
 
-    void WriteFootprint(Footprint & fp, const Point & offset) {
+    void WriteFootprint(Footprint & fp) {
       uint32 area = 0;
       for (int32 y = 0; y < fp.height; y++) {
         for (int32 x = 0; x < fp.width; x++) {
-          size_t xi = reduce(((x * 8 + offset.x) * imageResolution + imageResolution / 2) / imageScale, 2);
-          size_t yi = reduce(((y * 8 + offset.y) * imageResolution + imageResolution / 2) / imageScale, 2) * ori_width;
+          size_t xi = reduce(((x * 8) * imageResolution + imageResolution / 2) / imageScale, 2);
+          size_t yi = reduce(((y * 8) * imageResolution + imageResolution / 2) / imageScale, 2) * ori_width;
           bool b = (xi < ori_width) && (yi < ori_size) && (footprint[xi + yi]);
           if (b) area++;
           fp.Pixel(x,y) = b;
         }
       }
       fp.area = area * 8 * 8;
-    }
-    void WriteHeader(MatchData & md) {
-      md.offset.x = int16(xOffs * imageScale / imageResolution);
-      md.offset.y = int16(yOffs * imageScale / imageResolution);
     }
 
     void RescaleMinutia(MatchData & md) {
@@ -193,10 +144,29 @@ namespace Embedded {
       extract_minutia<maxwidth, ori_scale>(img, width, size, footprint, top_minutia, param);
       md.numMinutia = top_minutia.size();
       top_minutia.sort();
+
+      // this code fixes the angles to be ISO compliant (was in the serializer) 
+      std::for_each(&md.minutia[0],&md.minutia[md.numMinutia], [](Minutia &m) {int theta = (int) m.theta; theta = -theta + 64; m.theta = (uint) theta;});
+
       RescaleMinutia(md);
-      WriteHeader(md);                // order is important : this fills offset
-      UpdateOffset(md);
-      WriteFootprint(md.footprint, md.offset);  // this uses offset
+
+
+      // this code corrects for padding impact due to from the freeman phasemap (but its broken)
+      std::for_each(&md.minutia[0],&md.minutia[md.numMinutia], [this](Minutia &m) {
+		  m.position.x += int16(xOffs * imageScale / imageResolution);
+		  m.position.y += int16(yOffs * imageScale / imageResolution);
+      });
+      
+      WriteFootprint(md.footprint);  // this uses offset
+
+      // this code is moved from the serializer (it is broken, but works the same as in previous version)
+      // we cannot rescale after shifting.. -- all rescaling has to be done before the uncrop... 
+      // fixing this will break every expected feature in unit test... but we need to do it...
+      std::for_each(&md.minutia[0],&md.minutia[md.numMinutia], [md](Minutia &m) {
+		  m.position.x = muldiv(m.position.x, 197, StdFmdDeserializer::Resolution);
+		  m.position.y = muldiv(m.position.y, 197, StdFmdDeserializer::Resolution);
+      });
+
       if (   md.size() < param.user_feedback.minimum_number_of_minutia
           || md.footprint.area < param.user_feedback.minimum_footprint_area) {
         return FRFXLL_ERR_FB_TOO_SMALL_AREA;
@@ -224,6 +194,22 @@ namespace Embedded {
       uint32 imageResolution_         ///< [in] pixel resolution [DPI]
     ) {
       AssertR(size_ >= width_ * height_, FRFXLL_ERR_INVALID_IMAGE);
+
+		// lets assure that input is ok...
+      AssertR(imageResolution_ >= FRFXLL_EXTRACT_MIN_DPI, FRFXLL_ERR_INVALID_IMAGE);
+      AssertR(imageResolution_ <= FRFXLL_EXTRACT_MAX_DPI, FRFXLL_ERR_INVALID_IMAGE);
+      
+      // lets see what scaled image dimensions would be...
+      size_t width_at_500 = width_*500/imageResolution_;
+      size_t height_at_500 = width_*500/imageResolution_;
+
+      AssertR(width_at_500 >= FRFXLL_EXTRACT_MIN_500WIDTH, FRFXLL_ERR_INVALID_IMAGE);
+      AssertR(height_at_500 >= FRFXLL_EXTRACT_MIN_500HEIGHT, FRFXLL_ERR_INVALID_IMAGE);
+
+      AssertR(width_at_500 <= FRFXLL_EXTRACT_MAX_500WIDTH, FRFXLL_ERR_INVALID_IMAGE);
+      AssertR(height_at_500 <= FRFXLL_EXTRACT_MAX_500HEIGHT, FRFXLL_ERR_INVALID_IMAGE);
+
+
       imgIn = data;
       width = width_;
       height = height_;

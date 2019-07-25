@@ -1,7 +1,7 @@
 /*
     FingerJetFX OSE -- Fingerprint Feature Extractor, Open Source Edition
 
-    Copyright (c) 2011 by DigitalPersona, Inc. All rights reserved.
+    Copyright (c) 2019 by HID Global, Inc. All rights reserved.
 
     DigitalPersona, FingerJet, and FingerJetFX are registered trademarks 
     or trademarks of DigitalPersona, Inc. in the United States and other
@@ -16,17 +16,6 @@
  
     For more information, please visit digitalpersona.com/fingerjetfx.
 */ 
-/*
-      LIBRARY: FRFXLL - Fingerprint Feature Extractor - Low Level API
-
-      ALGORITHM:      Alexander Ivanisov
-                      Yi Chen
-                      Salil Prabhakar
-      IMPLEMENTATION: Alexander Ivanisov
-                      Jacob Kaminsky
-                      Lixin Wei
-      DATE:           11/08/2011
-*/
 
 #ifndef __DESERIALIZEFPDATA_H
 #define __DESERIALIZEFPDATA_H
@@ -294,22 +283,11 @@ namespace FingerJetFxOSE {
           return FRFXLL_OK;
         }
         void ConstructFootprint(MatchData & md) {
-          md.offset.x = 0; md.offset.y = 0;
-          if ( md.numMinutia > 0 ) {
-            md.offset = md.minutia[0].position;
-            for ( uint16 i = 1; i < md.numMinutia; i++ ) {
-              Point & pos = md.minutia[i].position;
-              if ( pos.x < md.offset.x ) md.offset.x = pos.x;
-              if ( pos.y < md.offset.y ) md.offset.y = pos.y;
-            }
-          }
           uint16 xmax = 0x0000;
           uint16 ymax = 0x0000;
           uint16 j = 0;
           for (uint16 i = 0; i < md.numMinutia; i++) {
             Point & pos = md.minutia[i].position;
-            pos.x -= md.offset.x;
-            pos.y -= md.offset.y;
             if ( pos.x > 256 || pos.y > 400 ) { // rare case of out-of-bound minutia.
               continue;
             }
@@ -433,14 +411,15 @@ namespace FingerJetFxOSE {
         : StdFmdDeserializer(dataIn_, dataInSize_) {}
         
         virtual void ReadTotalLength(Reader & r) { // in ANSI can be 2 bytes (0x001A - 0xFFFF) or 6 bytes (0x000000010000 - 0x0000FFFFFFFF)
-          uint32 length;
-          r >> (uint16&)length;
-          if ((uint16&)length != 0) {
-            length = (uint16&)length;
+          uint32 l_32;
+          uint16 l_16;
+          r >> l_16;
+          if (l_16 != 0) {
+            l_32 = l_16;
           } else {
-            r >> length;
+            r >> l_32;
           }
-          totalLength = length;
+          totalLength = l_32;
         }
         virtual void ReadDeviceInfo(Reader & r) {
           r >> CBEFF;                                       // CBEFF product ID.
