@@ -40,6 +40,8 @@
 
 #include "TestRawImage.h"
 
+#include <random>
+
 class CreatingFeatureSetAnsi : public CxxTest::TestSuite, private FixtureWithContext {
   typedef CreatingFeatureSetAnsi suite_t;
 private:
@@ -338,13 +340,36 @@ public:
     TS_ASSERT_DIFFERS(minutiae, nullptr);
 
     TS_ASSERT_OK(FRFXLLGetMinutiae(hFtrSet, BASIC_19794_2_MINUTIA_STRUCT, &num_minutia, minutiae));
-//    printf("rc_crc32 %u\n",CalculateCRC((const unsigned char*) minutiae,num_minutia*sizeof(struct FRFXLL_Basic_19794_2_Minutia)));
+//    printf("CalculateCRC %u\n",CalculateCRC((const unsigned char*) minutiae,num_minutia*sizeof(struct FRFXLL_Basic_19794_2_Minutia)));
     TS_ASSERT_EQUALS_X(CalculateCRC((const unsigned char*) minutiae,num_minutia*sizeof(struct FRFXLL_Basic_19794_2_Minutia)),179998);
     free(minutiae);
 
     TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(test_raw_image_500.pixels, test_raw_image_500.width*test_raw_image_500.height), savedCRC);
   }
+  // wanted to put this in Internals, but no easy way to incorporate a CRC there...
+  void testCPPRandomConsistency() {
+
+	const size_t N = 1000;
+	unsigned char data[N];
+
+	const int seeds[] = {4,17,31,217,63,972,47};
+	std::seed_seq sdsq(seeds,seeds+7); 
+
+	std::mt19937 engine;
+	engine.seed(sdsq);
+
+	std::uniform_int_distribution<unsigned char> ucd(0,255);
+
+	// now we are going to generate 1000 numbers into data
+	for (unsigned int i = 0; i < N; i++) {
+		data[i]=ucd(engine);
+	}
+
+//    printf("CalculateCRC %u\n",CalculateCRC( data,N));
+    TS_ASSERT_EQUALS_X(CalculateCRC(data,N), 128941);
+  }
+  
 };
 
 class CreatingFeatureSetAnsiUnalligned : public CxxTest::TestSuite, private FixtureWithContext {
