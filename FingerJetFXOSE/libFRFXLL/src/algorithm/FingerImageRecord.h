@@ -35,7 +35,13 @@
 #include "static_assert.h"
 #include "dpTypes.h"
 #include "dpError.h"
-#include "deserializeFpData.h"
+
+#include <algorithm> // sort
+#include "member_comp.h"
+#include "dpfr.h"
+#include "dpError.h"
+#include "matchData.h"
+#include "intmath.h"
 
 namespace FingerJetFxOSE {
   namespace FpRecEngineImpl {

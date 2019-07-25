@@ -20,7 +20,12 @@
 #ifndef __SERIALIZEFPDATA_H
 #define __SERIALIZEFPDATA_H
 
-#include "deserializeFpData.h"
+#include <algorithm> // sort
+#include "member_comp.h"
+#include "dpfr.h"
+#include "dpError.h"
+#include "matchData.h"
+#include "intmath.h"
 
 namespace FingerJetFxOSE {
   namespace FpRecEngineImpl {

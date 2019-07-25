@@ -29,7 +29,6 @@
 */
 
 #include <ValueTraitsEx.h>
-#include "deserializeFpData.h"
 #include "serializeFpData.h"
 #include "FeatureExtraction.h"
 #include "TestAnsiImage.h"
