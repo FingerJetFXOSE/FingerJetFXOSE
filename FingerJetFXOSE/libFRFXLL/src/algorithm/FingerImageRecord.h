@@ -48,6 +48,95 @@ namespace FingerJetFxOSE {
         operator uint64 () const { return lsb | (uint64(msb) << 32) ; }
       };
 
+      struct Reader {
+        const unsigned char * start;
+        const unsigned char * end;
+        const unsigned char * cur;
+        bool  dataInBigEndian;
+        FRFXLL_RESULT rc;
+
+        Reader(const unsigned char data[], size_t size, bool dataInBigEndian_ = false) 
+          : start(data)
+          , end(data + size)
+          , cur(data)
+          , dataInBigEndian(dataInBigEndian_)
+          , rc(FRFXLL_OK) 
+        {
+        };
+        virtual int getch() { 
+          if (eof()) {
+            SetError(FRFXLL_ERR_MORE_DATA);
+            return -1;
+          } else {
+            return *(cur++); 
+          }
+        }
+        virtual bool eof() const { return cur >= end; }
+        bool bad() const { return rc < FRFXLL_OK; }
+        void skip(size_t offs) {
+          for (;offs && !eof(); --offs) {
+            getch();
+          }
+        }
+        Reader & SetError(FRFXLL_RESULT rc_) {
+          if (!bad()) {
+            rc = rc_;
+          }
+          return *this;
+        }
+        Reader & operator >> (uint8 & x) { x = (uint8)getch(); return *this; }
+        Reader & operator >> (int8 & x) { 
+          uint8 t; 
+          *this >> t; 
+          x = (int8)(t); 
+          return *this; 
+        }
+        Reader & operator >> (uint16 & x) { 
+          uint8 msb, lsb;
+          if (dataInBigEndian) {
+            *this >> msb >> lsb;
+          } else {
+            *this >> lsb >> msb;
+          }
+          x = lsb | (uint16(msb) << 8);
+          return *this; 
+        }
+        Reader & operator >> (int16 & x) { 
+          uint16 v;
+          *this >> v;
+          x = (int16)(v);
+          return *this;
+        }
+        Reader & operator >> (uint32 & x) { 
+          uint16 msb, lsb;
+          if (dataInBigEndian) {
+            *this >> msb >> lsb;
+          } else {
+            *this >> lsb >> msb;
+          }
+          x = lsb | (uint32(msb) << 16);
+          return *this; 
+        }
+        Reader & operator >> (int32 & x) { 
+          uint32 v;
+          *this >> v;
+          x = (int32)(v);
+          return *this;
+        }
+
+        Reader & operator >> (uint64 & x) { 
+          uint32 msb, lsb;
+          if (dataInBigEndian) {
+            *this >> msb >> lsb;
+          } else {
+            *this >> lsb >> msb;
+          }
+          x = lsb | (uint64(msb) << 32);
+          return *this; 
+        }
+
+      };
+      
       inline Reader & operator >> (Reader & rd, uint48 & x) {
         if (rd.dataInBigEndian) {
           rd >> x.msb >> x.lsb;

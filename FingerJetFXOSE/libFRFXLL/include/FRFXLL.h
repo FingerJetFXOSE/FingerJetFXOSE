@@ -92,10 +92,10 @@ typedef struct tag_FRFXLL_RAW_CONST_SAMPLE {
 #define FRFXLL_FEX_ENABLE_ENHANCEMENT   (0x00000002U)       // Slower and more accurate: currently same as default
 
 typedef struct tag_FRFXLL_VERSION_INFO {
-  unsigned  major;
-  unsigned  minor;
-  unsigned  revision;
-  unsigned  build;
+  unsigned int major;
+  unsigned int minor;
+  unsigned int revision;
+  unsigned int build;
 } FRFXLL_VERSION;
 
 /**
@@ -300,6 +300,19 @@ FRFXLL_RESULT FRFXLL_EXPORT FRFXLLCreateEmptyFeatureSet(
 #define FRFXLL_RESOLUTION_NOT_SPECIFIED        0xFFFF
 #define FRFXLL_IMAGE_SIZE_NOT_SPECIFIED        0xFFFF
 
+
+/*
+ * This is broken by design...
+ * the old match data did not have the resolution information... 
+ * therefore, the scaling done at export was only accurate by assumption
+ * the new matchdata now maintains the resolution in ppcm of the minutial points
+ * there is no existing mechanism for supporting non isometric images (res_x == res_y)
+ * There is no need to support an output scaling to nonisometric images
+ * 
+ * Therefore, the values of resolutionX and resolutionY will be ignored
+ * 
+ * There is also no need to support minutia rotation - it should be ignored...
+*/
 typedef struct tag_FRFXLL_OUTPUT_PARAM_ISO_ANSI {
   size_t length;                     ///< size of this structure, for extensibility
   unsigned int    CBEFF;
@@ -355,15 +368,16 @@ Getter function for number of minutia function
 \retval FRFXLL_OK                        The operation completed successfully.
 \retval FRFXLL_ERR_INVALID_PARAM         Invalid parameter, for example incorrect data type.
 */
-FRFXLL_RESULT FRFXLL_EXPORT FRFXLLGetNumberMinutia(
-  const FRFXLL_HANDLE hFeatureSet, ///< [in] pointer to where to put an open handle to the minutia set
-  unsigned int *num_minutia        ///< [out] pointer to set number of extracted minutia
+FRFXLL_RESULT FRFXLL_EXPORT FRFXLLGetMinutiaInfo(
+  const FRFXLL_HANDLE hFeatureSet,  ///< [in] pointer to where to put an open handle to the minutia set
+  unsigned int *num_minutia,         ///< [out] pointer to set number of extracted minutia
+  unsigned int *resolution_ppi      ///< [out] pointer to set number of extracted minutia (can be NULL)
 );
 
 enum FRXLL_MINUTIA_TYPE {
+	OTHER = 0,
 	RIDGE_END = 1,
-	RIDGE_BIFURCATION = 1,
-	OTHER = 1,
+	RIDGE_BIFURCATION = 2,
 };
 
 struct FRFXLL_Basic_19794_2_Minutia {

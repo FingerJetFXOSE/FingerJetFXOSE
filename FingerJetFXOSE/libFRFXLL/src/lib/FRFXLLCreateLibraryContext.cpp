@@ -114,6 +114,8 @@ FRFXLL_RESULT FRFXLLCreateLibraryContext(
   ci.interlocked_decrement = m_interlocked_decrement;
   ci.interlocked_exchange  = m_interlocked_exchange;
   ci.interlocked_compare_exchange = m_interlocked_compare_exchange;
+  
+// not sure this is cross compiler correct... (might need to remove)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
   return FRFXLLCreateContext(&ci, phContext);

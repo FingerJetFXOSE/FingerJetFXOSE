@@ -38,11 +38,6 @@ FRFXLL_RESULT FRFXLLCreateFeatureSetFromRaw(
   Ptr<FexObj> fex(new(ctx) FexObj(ctx));
   if (!fex) return CheckResult(FRFXLL_ERR_NO_MEMORY);
 
-  // checks for width and height coupled to resolution - required for proper operation of algorithm
-  if (imageResolution < FRFXLL_EXTRACT_MIN_DPI || imageResolution > FRFXLL_EXTRACT_MAX_DPI) return FRFXLL_ERR_INVALID_IMAGE;
-  if (width * 500 < FRFXLL_EXTRACT_MIN_500WIDTH * imageResolution  || width * 500 > FRFXLL_EXTRACT_MAX_500WIDTH * imageResolution) return FRFXLL_ERR_INVALID_IMAGE; // in range 0.3..1.62 in
-  if (height * 500 < FRFXLL_EXTRACT_MIN_500HEIGHT * imageResolution || height * 500 > FRFXLL_EXTRACT_MAX_500HEIGHT * imageResolution) return FRFXLL_ERR_INVALID_IMAGE; // in range 0.3..2.0 in
-
   FRFXLL_RESULT rv = fex->CreateFeatureSet(fpData, size, width, height, imageResolution, flags, phFeatureSet);
   
   return rv;

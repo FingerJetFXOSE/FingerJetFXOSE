@@ -41,41 +41,23 @@
 #include "TestRawImage.h"
 
 #include <inttypes.h>
- 
-uint32_t
-rc_crc32(uint32_t crc, const char *buf, size_t len)
+
+unsigned int CalculateCRC(const unsigned char data[], size_t size)
 {
-	static uint32_t table[256];
-	static int have_table = 0;
-	uint32_t rem;
-	uint8_t octet;
-	int i, j;
-	const char *p, *q;
- 
-	/* This check is not thread safe; there is no mutex. */
-	if (have_table == 0) {
-		/* Calculate CRC table. */
-		for (i = 0; i < 256; i++) {
-			rem = i;  /* remainder from polynomial division */
-			for (j = 0; j < 8; j++) {
-				if (rem & 1) {
-					rem >>= 1;
-					rem ^= 0xedb88320;
-				} else
-					rem >>= 1;
-			}
-			table[i] = rem;
-		}
-		have_table = 1;
-	}
- 
-	crc = ~crc;
-	q = buf + len;
-	for (p = buf; p < q; p++) {
-		octet = *p;  /* Cast to unsigned octet. */
-		crc = (crc >> 8) ^ table[(crc & 0xff) ^ octet];
-	}
-	return ~crc;
+  unsigned short r = 55665;
+  unsigned short c1 = 52845;
+  unsigned short c2 = 22719;
+
+  unsigned int sum = 0;
+  unsigned char cipher;
+  for ( size_t i = 0; i < size; i++ )
+  {
+    cipher = ( data[i] ^ (r>>8) );
+    r = (cipher + r) * c1 + c2;
+    sum += cipher;
+  }
+
+  return sum;
 }
 
 #define _printf(x) printf x; fflush(stdout)
@@ -317,40 +299,45 @@ void TestGetMinutiae(unsigned char* data, size_t *size) {
   CREATE_CONTEXT(&hCtx);
   UT_ASSERT(hCtx != NULL);
   
-  UT_ASSERT_OK(FRFXLLCreateFeatureSetFromRaw(hCtx, test_raw_image_333.pixels, test_raw_image_333.width*test_raw_image_333.height, test_raw_image_333.width, test_raw_image_333.height, test_raw_image_333.resolution, 2, &hFeatureSet));
+  UT_ASSERT_OK(FRFXLLCreateFeatureSetFromRaw(hCtx, test_raw_image_333.pixels, test_raw_image_333.width*test_raw_image_333.height, test_raw_image_333.width, test_raw_image_333.height, test_raw_image_333.resolution, FRFXLL_FEX_ENABLE_ENHANCEMENT, &hFeatureSet));
   UT_ASSERT(hFeatureSet != NULL);
 
   unsigned int num_minutia = 0;
-  UT_ASSERT_OK(FRFXLLGetNumberMinutia(hFeatureSet,&num_minutia));
+  unsigned int minutia_ppi = 0;
+  UT_ASSERT_OK(FRFXLLGetMinutiaInfo(hFeatureSet,&num_minutia,&minutia_ppi));
 //  printf("num minutia %u\n",num_minutia);
-  UT_ASSERT(num_minutia == 89);	// that seems totally crazy to Greg (way too many minutia)...
+  UT_ASSERT(num_minutia == 89);
+//  UT_ASSERT(minutia_ppi == test_raw_image_333.resolution);	// this should be how it works, but it is not! all minutia scaled to 500
+  UT_ASSERT(minutia_ppi == 500);
   
   struct FRFXLL_Basic_19794_2_Minutia* minutiae = calloc(num_minutia,sizeof(struct FRFXLL_Basic_19794_2_Minutia));
   UT_ASSERT(minutiae != NULL);
 
   UT_ASSERT_OK(FRFXLLGetMinutiae(hFeatureSet, BASIC_19794_2_MINUTIA_STRUCT, &num_minutia, minutiae));
-//  printf("rc_crc32 %d\n",rc_crc32(0,(const char*) minutiae,num_minutia*sizeof(struct FRFXLL_Basic_19794_2_Minutia)));
-  UT_ASSERT(rc_crc32(0,(const char*) minutiae,num_minutia*sizeof(struct FRFXLL_Basic_19794_2_Minutia)) == 1709855542);
+//  printf("CRC %u\n",CalculateCRC((const unsigned char*) minutiae,num_minutia*sizeof(struct FRFXLL_Basic_19794_2_Minutia)));
+  UT_ASSERT(CalculateCRC((const unsigned char*) minutiae,num_minutia*sizeof(struct FRFXLL_Basic_19794_2_Minutia)) == 184959);
 
   free(minutiae);
   UT_ASSERT_OK(FRFXLLCloseHandle(&hFeatureSet));
   
   // and now at 500
 
-  UT_ASSERT_OK(FRFXLLCreateFeatureSetFromRaw(hCtx, test_raw_image_500.pixels, test_raw_image_500.width*test_raw_image_500.height, test_raw_image_500.width, test_raw_image_500.height, test_raw_image_500.resolution, 2, &hFeatureSet));
+  UT_ASSERT_OK(FRFXLLCreateFeatureSetFromRaw(hCtx, test_raw_image_500.pixels, test_raw_image_500.width*test_raw_image_500.height, test_raw_image_500.width, test_raw_image_500.height, test_raw_image_500.resolution, FRFXLL_FEX_ENABLE_ENHANCEMENT, &hFeatureSet));
   UT_ASSERT(hFeatureSet != NULL);
 
   num_minutia = 0;
-  UT_ASSERT_OK(FRFXLLGetNumberMinutia(hFeatureSet,&num_minutia));
+  minutia_ppi = 0;
+  UT_ASSERT_OK(FRFXLLGetMinutiaInfo(hFeatureSet,&num_minutia,&minutia_ppi));
 //  printf("num minutia %u\n",num_minutia);
-  UT_ASSERT(num_minutia == 89);	// that seems totally crazy to Greg (way too many minutia)...
+  UT_ASSERT(num_minutia == 89);
+  UT_ASSERT(minutia_ppi == test_raw_image_500.resolution);
   
   minutiae = calloc(num_minutia,sizeof(struct FRFXLL_Basic_19794_2_Minutia));
   UT_ASSERT(minutiae != NULL);
 
   UT_ASSERT_OK(FRFXLLGetMinutiae(hFeatureSet, BASIC_19794_2_MINUTIA_STRUCT, &num_minutia, minutiae));
-//  printf("rc_crc32 %d\n",rc_crc32(0,(const char*) minutiae,num_minutia*sizeof(struct FRFXLL_Basic_19794_2_Minutia)));
-  UT_ASSERT(rc_crc32(0,(const char*) minutiae,num_minutia*sizeof(struct FRFXLL_Basic_19794_2_Minutia)) == 1919678182);
+//  printf("CRC %d\n",CalculateCRC((const unsigned char*) minutiae,num_minutia*sizeof(struct FRFXLL_Basic_19794_2_Minutia)));
+  UT_ASSERT(CalculateCRC((const unsigned char*) minutiae,num_minutia*sizeof(struct FRFXLL_Basic_19794_2_Minutia)) == 179998);
   
   free(minutiae);
   UT_ASSERT_OK(FRFXLLCloseHandle(&hFeatureSet));

@@ -327,18 +327,19 @@ public:
   void testGetMinutiaFromFeature() {
     ImageBufferWrapper TempImage(TestIsoImage, sizeof(TestIsoImage));
     savedCRC = CalculateCRC(test_raw_image_500.pixels, test_raw_image_500.width*test_raw_image_500.height);
-    TS_ASSERT_OK(FRFXLLCreateFeatureSetFromRaw(hCtx, test_raw_image_500.pixels, test_raw_image_500.width*test_raw_image_500.height, test_raw_image_500.width, test_raw_image_500.height, test_raw_image_500.resolution, 2, &hFtrSet));
+    TS_ASSERT_OK(FRFXLLCreateFeatureSetFromRaw(hCtx, test_raw_image_500.pixels, test_raw_image_500.width*test_raw_image_500.height, test_raw_image_500.width, test_raw_image_500.height, test_raw_image_500.resolution, FRFXLL_FEX_ENABLE_ENHANCEMENT, &hFtrSet));
     TS_ASSERT_DIFFERS(hFtrSet, nullptr);
     
     unsigned int num_minutia = 0;
-    TS_ASSERT_OK(FRFXLLGetNumberMinutia(hFtrSet,&num_minutia));
+    unsigned int minutia_ppi = 0;
+    TS_ASSERT_OK(FRFXLLGetMinutiaInfo(hFtrSet,&num_minutia,&minutia_ppi));
 
     struct FRFXLL_Basic_19794_2_Minutia* minutiae = (struct FRFXLL_Basic_19794_2_Minutia*) calloc(num_minutia,sizeof(struct FRFXLL_Basic_19794_2_Minutia));
     TS_ASSERT_DIFFERS(minutiae, nullptr);
 
     TS_ASSERT_OK(FRFXLLGetMinutiae(hFtrSet, BASIC_19794_2_MINUTIA_STRUCT, &num_minutia, minutiae));
 //    printf("rc_crc32 %u\n",CalculateCRC((const unsigned char*) minutiae,num_minutia*sizeof(struct FRFXLL_Basic_19794_2_Minutia)));
-    TS_ASSERT_EQUALS_X(CalculateCRC((const unsigned char*) minutiae,num_minutia*sizeof(struct FRFXLL_Basic_19794_2_Minutia)),181070);
+    TS_ASSERT_EQUALS_X(CalculateCRC((const unsigned char*) minutiae,num_minutia*sizeof(struct FRFXLL_Basic_19794_2_Minutia)),179998);
     free(minutiae);
 
     TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));

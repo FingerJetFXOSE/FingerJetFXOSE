@@ -266,6 +266,7 @@ namespace Embedded {
 
   struct MatchData : public MinutiaPoints<255> {
     Footprint footprint;
+    unsigned int minutia_resolution_ppi = 500;	// sad default
 
     void Init() {
       footprint.Init();

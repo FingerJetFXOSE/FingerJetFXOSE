@@ -150,7 +150,6 @@ namespace Embedded {
 
       RescaleMinutia(md);
 
-
       // this code corrects for padding impact due to from the freeman phasemap (but its broken)
       std::for_each(&md.minutia[0],&md.minutia[md.numMinutia], [this](Minutia &m) {
 		  m.position.x += int16(xOffs * imageScale / imageResolution);
@@ -158,14 +157,22 @@ namespace Embedded {
       });
       
       WriteFootprint(md.footprint);  // this uses offset
-
-      // this code is moved from the serializer (it is broken, but works the same as in previous version)
+      
+      // this code has been moved from the serializer (it is broken, but works the same as in previous version)
       // we cannot rescale after shifting.. -- all rescaling has to be done before the uncrop... 
       // fixing this will break every expected feature in unit test... but we need to do it...
+      // this code always scales back to 500 ppi - just as it did for every tested use case...
+      // and it should really scale to image resolution...
+      #define StdFmdDeserializer_Resolution 167	// this was a constant in deserializeFpData... (it needs to be fixed)
       std::for_each(&md.minutia[0],&md.minutia[md.numMinutia], [md](Minutia &m) {
-		  m.position.x = muldiv(m.position.x, 197, StdFmdDeserializer::Resolution);
-		  m.position.y = muldiv(m.position.y, 197, StdFmdDeserializer::Resolution);
+//		  m.position.x = muldiv(m.position.x, 197, StdFmdDeserializer::Resolution);
+//		  m.position.y = muldiv(m.position.y, 197, StdFmdDeserializer::Resolution);
+		  m.position.x = muldiv(m.position.x, 197, StdFmdDeserializer_Resolution);
+		  m.position.y = muldiv(m.position.y, 197, StdFmdDeserializer_Resolution);
       });
+
+//      md.minutia_resolution_ppi = imageResolution;		// this is what it should be..
+      md.minutia_resolution_ppi = 500;	// its currently broken!
 
       if (   md.size() < param.user_feedback.minimum_number_of_minutia
           || md.footprint.area < param.user_feedback.minimum_footprint_area) {

@@ -56,6 +56,17 @@ of the data will be smaller.
 #ifndef __fjfx_h
 #define __fjfx_h
 
+#if __cplusplus >= 201402L
+#define DEPRECATED [[deprecated]]
+#else
+#ifdef __GNUC__
+#define DEPRECATED __attribute__((deprecated))
+#else
+#define DEPRECATED
+#endif
+#endif
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif // __cplusplus
@@ -85,6 +96,8 @@ extern "C" {
 #define FJFX_FMD_BUFFER_SIZE          (34 + 256 * 6) // Output data buffer must be at least this size, in bytes (34 bytes for header + 6 bytes per minutiae point, for up to 256 minutiae points)
 
 // Minutiae Extraction interface
+// we are deprecating this entire library - no need for it
+DEPRECATED
 int FJFX_EXPORT fjfx_create_fmd_from_raw(
   const void            *raw_image,             // Input: image to convert.  The image must be grayscale (8 bits/pixel), no padding, bright field (dark fingerprint on white background), scan sequence consistent with ISO/IEC 19794-4:2005.
   const unsigned short  pixel_resolution_dpi,   // Must be between 300 and 1024 dpi; the resolution must be the same for horizontal and vertical size (square pixels)
@@ -96,6 +109,8 @@ int FJFX_EXPORT fjfx_create_fmd_from_raw(
 );
 
 // Misc functions
+// we are deprecating this entire library - no need for it
+DEPRECATED
 int FJFX_EXPORT fjfx_get_pid(unsigned int *feature_extractor); // Returns 2-byte vendor ID + 2-byte product ID.
                                                    // Standard biometric component identifier per CBEFF registry
                                                    // http://www.ibia.org/cbeff/iso/

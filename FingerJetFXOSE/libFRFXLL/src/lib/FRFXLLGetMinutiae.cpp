@@ -20,9 +20,6 @@
 #include "CreateFtrSet.h"
 #include "FpDataObj.h"
 
-#include "intmath.h"
-
-
 typedef FeatureExtractionObj<Engine::FeatureExtraction> FexObj;
 
 FRFXLL_RESULT FRFXLLCreateEmptyFeatureSet(
@@ -40,9 +37,10 @@ FRFXLL_RESULT FRFXLLCreateEmptyFeatureSet(
 }
 
 
-FRFXLL_RESULT FRFXLLGetNumberMinutia(
+FRFXLL_RESULT FRFXLLGetMinutiaInfo(
   const FRFXLL_HANDLE hFeatureSet, ///< [in] pointer to where to put an open handle to the minutia set
-  unsigned int *num_minutia        ///< [out] pointer to set number of extracted minutia
+  unsigned int *num_minutia,        ///< [out] pointer to set number of extracted minutia
+  unsigned int *resolution_ppi        ///< [out] pointer to set number of extracted minutia
 ) {
   if (hFeatureSet == NULL) return CheckResult(FRFXLL_ERR_INVALID_PARAM);
   if (num_minutia == NULL)  return CheckResult(FRFXLL_ERR_INVALID_PARAM);
@@ -52,6 +50,8 @@ FRFXLL_RESULT FRFXLLGetNumberMinutia(
   Ptr<const FpFtrSetObj> ptr(hFeatureSet);
   const MatchData& md = ptr->fpFtrSet;	// just a reference to an existing object...
   *num_minutia = (unsigned int) md.numMinutia;  
+
+  if (resolution_ppi != NULL)  *resolution_ppi = (unsigned int) md.minutia_resolution_ppi;  
 
   return FRFXLL_OK;
 }
@@ -73,7 +73,7 @@ FRFXLL_RESULT FRFXLLGetMinutiae(
   // casting the FRFXLL_HANDLE into a FpFtrSetObj...
   Ptr<const FpFtrSetObj> ptr(hFeatureSet);
   const MatchData& md = ptr->fpFtrSet;	// just a reference to an existing object...
-
+  
   // limiting the number of minutia returned to the number minutia known by the hFeatureSet
   if (*num_minutia>md.numMinutia) *num_minutia = (unsigned int) md.numMinutia;
 

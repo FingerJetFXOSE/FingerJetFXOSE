@@ -37,6 +37,8 @@ add_subdirectory("${ROOT_PATH}/libFRFXLL/test/TestVectors/" "${BUILD_PATH}/libFR
 add_subdirectory("${ROOT_PATH}/libFRFXLL/test/testFRFXLL/" "${BUILD_PATH}/libFRFXLL/test/testFRFXLL/")
 add_subdirectory("${ROOT_PATH}/libFRFXLL/test/testFRFXLLInternals/" "${BUILD_PATH}/libFRFXLL/test/testFRFXLLInternals/")
 
+add_subdirectory("${ROOT_PATH}/libMINEX/src/" "${BUILD_PATH}/libMINEX/src")
+
 add_subdirectory("${ROOT_PATH}/libFJFX/src/" "${BUILD_PATH}/libFJFX/src")
 add_subdirectory("${ROOT_PATH}/libFJFX/samples/fjfxSample/" "${BUILD_PATH}/libFJFX/samples/fjfxSample/")
 
