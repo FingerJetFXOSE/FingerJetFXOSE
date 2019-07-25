@@ -43,6 +43,8 @@ namespace Embedded {
   using namespace FeatureExtractionImpl;
 
   struct FeatureExtractionBase {
+    static const size_t min_minutia = 6;
+
     static const size_t maxwidth = 256;
     static const size_t maxheight = 400;
 
@@ -144,7 +146,7 @@ namespace Embedded {
       extract_minutia<maxwidth, ori_scale>(img, width, size, footprint, top_minutia, param);
       md.numMinutia = top_minutia.size();
       top_minutia.sort();
-
+      
       // this code fixes the angles to be ISO compliant (was in the serializer) 
       std::for_each(&md.minutia[0],&md.minutia[md.numMinutia], [](Minutia &m) {int theta = (int) m.theta; theta = -theta + 64; m.theta = (uint) theta;});
 
@@ -173,7 +175,12 @@ namespace Embedded {
 
 //      md.minutia_resolution_ppi = imageResolution;		// this is what it should be..
       md.minutia_resolution_ppi = 500;	// its currently broken!
+      
+      // ideally, this would return an error code of INSUFFICIENT_MINUTIA... (no new error codes for now)
+      // the threshold should also be adjustable???
+      if (md.numMinutia<min_minutia) return FRFXLL_ERR_FB_TOO_SMALL_AREA;
 
+		// this is a measure of what the masking information found...
       if (   md.size() < param.user_feedback.minimum_number_of_minutia
           || md.footprint.area < param.user_feedback.minimum_footprint_area) {
         return FRFXLL_ERR_FB_TOO_SMALL_AREA;

@@ -174,6 +174,7 @@ public:
     TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempImage, TempImage), savedCRC);
   }
+  // this test provides a very dark uniform image to the extractor.  No minutia are expected.
   // This test returns FRFXLL_ERR_FB_TOO_SMALL_AREA (0x80048004L), instead of FRFXLL_ERR_FB_IMAGE_TOO_NOISY (0x80048001); it appears that FRFXLL_ERR_FB_IMAGE_TOO_NOISY is not used
   void testCreateFeatureBadImage_CONSTANT_IMAGE() {
     ImageBuffer TempAnsiImage(0x10, sizeof(TestAnsiImage));
@@ -310,10 +311,12 @@ public:
     TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempAnsiImage, TempAnsiImage), savedCRC);
   }
+  // the code has now change - we check the input image dimension, and if too small, we report FRFXLL_ERR_INVALID_IMAGE
+  // the FRFXLL_ERR_FB_TOO_SMALL_AREA is for insufficient fingerprint content on an otherwise large enough image
   void testCreateFeatureTestAnsiImage_100_100() {
     ImageBufferWrapper TempImage(TestAnsiImage_100_100, sizeof(TestAnsiImage_100_100));
     savedCRC = CalculateCRC(TempImage, TempImage);
-    TS_ASSERT_RC(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet), FRFXLL_ERR_FB_TOO_SMALL_AREA);
+    TS_ASSERT_RC(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet), FRFXLL_ERR_INVALID_IMAGE);
     TS_ASSERT_EQUALS(hFtrSet, nullptr);
     TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempImage, TempImage), savedCRC);
