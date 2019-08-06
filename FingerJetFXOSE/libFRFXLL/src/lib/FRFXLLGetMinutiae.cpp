@@ -17,25 +17,7 @@
     For more information, please visit digitalpersona.com/fingerjetfx.
 */ 
 
-#include "CreateFtrSet.h"
 #include "FpDataObj.h"
-
-typedef FeatureExtractionObj<Engine::FeatureExtraction> FexObj;
-
-FRFXLL_RESULT FRFXLLCreateEmptyFeatureSet(
-  FRFXLL_HANDLE hContext,          ///< [in] Handle to a fingerprint recognition context
-  FRFXLL_HANDLE_PT phFeatureSet    ///< [out] pointer to where to put an open handle to the feature set
-) {
-  Ptr<const Context> ctx(hContext);
-  if (!ctx) return CheckResult(FRFXLL_ERR_INVALID_HANDLE);
-  if (phFeatureSet == NULL) return CheckResult(FRFXLL_ERR_INVALID_PARAM);
-
-  Ptr<FexObj> fex(new(ctx) FexObj(ctx));
-  FRFXLL_RESULT rv = fex->CreateEmptyFeatureSet(phFeatureSet);
-  return rv;
-
-}
-
 
 FRFXLL_RESULT FRFXLLGetMinutiaInfo(
   const FRFXLL_HANDLE hFeatureSet, ///< [in] pointer to where to put an open handle to the minutia set
