@@ -148,7 +148,7 @@ namespace Embedded {
       top_minutia.sort();
       
       // this code fixes the angles to be ISO compliant (was in the serializer) 
-      std::for_each(&md.minutia[0],&md.minutia[md.numMinutia], [](Minutia &m) {int theta = (int) m.theta; theta = -theta + 64; m.theta = (uint) theta;});
+      std::for_each(&md.minutia[0],&md.minutia[md.numMinutia], [](Minutia &m) {int theta = (int) m.theta; theta = -theta + 64; m.theta = (uint8) theta;});
 
       RescaleMinutia(md);
 
