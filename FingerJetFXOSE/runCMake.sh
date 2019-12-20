@@ -72,20 +72,22 @@ fi
 # temporary build directories
 mkdir -p "${build_folder}"
 cd "${build_folder}"
+dist_folder="$(sed 's/build/dist/' <<< ${build_folder})"
+dist_flag="-DCMAKE_INSTALL_PREFIX=../../../${dist_folder}"
 
 # run cmake
 if [ "${target}" == "x64" ]; then
-  cmake -G "${generator}" -D32BITS=OFF -D64BITS=ON "$xtraflags" ../../../
+  cmake -G "${generator}" -D32BITS=OFF -D64BITS=ON "$xtraflags" "${dist_flag}" ../../../
 elif [ "${target}" == "x32" ]; then
-  cmake -G "${generator}" -D32BITS=ON -D64BITS=OFF "$xtraflags" ../../../
+  cmake -G "${generator}" -D32BITS=ON -D64BITS=OFF "$xtraflags" "${dist_flag}" ../../../
 elif [ "${target}" == "android-arm32" ]; then
-  cmake -G "$generator" "$ndk" "$platform" -DANDROID_ABI=armeabi-v7a "$cfg" "$xtraflags" "../../../"
+  cmake -G "$generator" "$ndk" "$platform" -DANDROID_ABI=armeabi-v7a "$cfg" "$xtraflags" "${dist_flag}" "../../../"
 elif [ "${target}" == "android-arm64" ]; then
-  cmake -G "$generator" "$ndk" "$platform" -DANDROID_ABI=arm64-v8a "$cfg" "$xtraflags" "../../../"
+  cmake -G "$generator" "$ndk" "$platform" -DANDROID_ABI=arm64-v8a "$cfg" "$xtraflags" "${dist_flag}" "../../../"
 elif [ "${target}" == "ios-arm32" ]; then
-  cmake -G "$generator" -DPLATFORM=OS "$cfg" "$xtraflags" "../../../"
+  cmake -G "$generator" -DPLATFORM=OS "$cfg" "$xtraflags" "${dist_flag}" "../../../"
 elif [ "${target}" == "ios-arm64" ]; then
-  cmake -G "$generator" -DPLATFORM=OS64 "$cfg" "$xtraflags" "../../../"
+  cmake -G "$generator" -DPLATFORM=OS64 "$cfg" "$xtraflags" "${dist_flag}" "../../../"
 else
   echo "Missing target (x64, x32, android-arm, android-arm64)"
   exit

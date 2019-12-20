@@ -19,3 +19,12 @@ if( USE_SANITIZER )
 else()
   target_link_libraries( ${PROJECT_NAME} "FRFXLL_static" ) 
 endif()
+
+set_target_properties( ${PROJECT_NAME} ${PROJECT_NAME}_static PROPERTIES
+    PUBLIC_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/../include/FJFX.h"
+)
+install( TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_static
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    PUBLIC_HEADER DESTINATION include
+)

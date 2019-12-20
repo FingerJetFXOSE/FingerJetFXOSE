@@ -18,6 +18,9 @@ if(EXISTS "${CXXTEST_OUTPUT}")
     runner.cpp 
     dpfrUnitTest.cpp
   )
+  install( TARGETS ${PROJECT_NAME}
+    RUNTIME DESTINATION bin
+  )
   
   if( USE_SANITIZER )
     target_link_libraries( ${PROJECT_NAME} "FRFXLL_static" "TestVectors" "asan" ) 

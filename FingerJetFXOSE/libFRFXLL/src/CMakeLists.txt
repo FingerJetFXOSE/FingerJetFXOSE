@@ -19,3 +19,16 @@ add_library( ${PROJECT_NAME} SHARED
 if( USE_SANITIZER )
   target_link_libraries( ${PROJECT_NAME} "asan" ) 
 endif()
+
+set(PUBLIC_HEADERS
+    "${CMAKE_CURRENT_SOURCE_DIR}/../include/FRFXLL.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../include/FRFXLL_Results.h"
+)
+set_target_properties( ${PROJECT_NAME} ${PROJECT_NAME}_static PROPERTIES
+    PUBLIC_HEADER "${PUBLIC_HEADERS}"
+)
+install( TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_static
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    PUBLIC_HEADER DESTINATION include
+)

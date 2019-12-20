@@ -16,3 +16,11 @@ if( USE_SANITIZER )
 else()
   target_link_libraries( ${PROJECT_NAME} "FRFXLL_static" ) 
 endif()
+
+set_target_properties( ${PROJECT_NAME} PROPERTIES
+    PUBLIC_HEADER "${FJFX_MINEX_PATH}/include/minex.h"
+)
+install( TARGETS ${PROJECT_NAME}
+    LIBRARY DESTINATION lib
+    PUBLIC_HEADER DESTINATION include
+)
