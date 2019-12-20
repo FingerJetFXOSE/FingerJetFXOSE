@@ -38,7 +38,7 @@
 
 #include "testFeatures.h"
 #include "TestAnsiImage.h"
-#include "TestRawImage.h"
+#include "testRawImage.h"
 
 #include <inttypes.h>
 
