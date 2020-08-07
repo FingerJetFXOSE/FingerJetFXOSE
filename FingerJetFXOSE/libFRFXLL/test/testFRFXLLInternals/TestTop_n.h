@@ -79,7 +79,7 @@ public:
     TS_ASSERT_EQUALS(tp.size(), 0);
     TS_ASSERT_EQUALS(tp.capacity(), 10);
 
-    for (int i = 0; i < countof(val_size1); i++) {
+    for (unsigned int i = 0; i < countof(val_size1); i++) {
       tp.add(val_size1[i].i1);
       TS_ASSERT_EQUALS(tp.size(), val_size1[i].i2);
       TS_ASSERT_EQUALS(isHeap(tp.begin(), tp.end()), true);

@@ -12,7 +12,7 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 ##################################################
   message( STATUS "${Gn}Detected GNU compiler (Windows, Linux)${Na}" )
-#  add_definitions( "-Wall -Werror" )
+  add_definitions( "-Wall -Werror" )
   add_definitions( "-Wno-deprecated-declarations -Wno-deprecated" )
   if( USE_SANITIZER )
     message( STATUS "${Pk}Configure diagnostic build with GCC sanitizer${Na}")

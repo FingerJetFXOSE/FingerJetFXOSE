@@ -66,13 +66,13 @@ public:
   }
   template <class T>
   void _testDivideU() {
-    TS_ASSERT_EQUALS(2, divide<T>(3, 2));
-    TS_ASSERT_EQUALS(1, divide<T>(2, 2));
-    TS_ASSERT_EQUALS(1, divide<T>(1, 2));
-    TS_ASSERT_EQUALS(0, divide<T>(0, 2));
-    TS_ASSERT_EQUALS(0, divide<T>(0, 2));
-    TS_ASSERT_EQUALS(1, divide<T>(4, 3));
-    TS_ASSERT_EQUALS(2, divide<T>(5, 3));
+    TS_ASSERT_EQUALS((T)2, divide<T>(3, 2));
+    TS_ASSERT_EQUALS((T)1, divide<T>(2, 2));
+    TS_ASSERT_EQUALS((T)1, divide<T>(1, 2));
+    TS_ASSERT_EQUALS((T)0, divide<T>(0, 2));
+    TS_ASSERT_EQUALS((T)0, divide<T>(0, 2));
+    TS_ASSERT_EQUALS((T)1, divide<T>(4, 3));
+    TS_ASSERT_EQUALS((T)2, divide<T>(5, 3));
   }
   void testDivide() {
     _testDivideS<signed>();
