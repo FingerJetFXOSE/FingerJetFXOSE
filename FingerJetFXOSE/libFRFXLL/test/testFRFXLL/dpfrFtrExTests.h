@@ -38,6 +38,10 @@
 
 #include "dpfrUnitTest.h"
 
+#include "TestRawImage.h"
+
+#include <random>
+
 class CreatingFeatureSetAnsi : public CxxTest::TestSuite, private FixtureWithContext {
   typedef CreatingFeatureSetAnsi suite_t;
 private:
@@ -170,6 +174,7 @@ public:
     TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempImage, TempImage), savedCRC);
   }
+  // this test provides a very dark uniform image to the extractor.  No minutia are expected.
   // This test returns FRFXLL_ERR_FB_TOO_SMALL_AREA (0x80048004L), instead of FRFXLL_ERR_FB_IMAGE_TOO_NOISY (0x80048001); it appears that FRFXLL_ERR_FB_IMAGE_TOO_NOISY is not used
   void testCreateFeatureBadImage_CONSTANT_IMAGE() {
     ImageBuffer TempAnsiImage(0x10, sizeof(TestAnsiImage));
@@ -306,10 +311,12 @@ public:
     TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempAnsiImage, TempAnsiImage), savedCRC);
   }
+  // the code has now change - we check the input image dimension, and if too small, we report FRFXLL_ERR_INVALID_IMAGE
+  // the FRFXLL_ERR_FB_TOO_SMALL_AREA is for insufficient fingerprint content on an otherwise large enough image
   void testCreateFeatureTestAnsiImage_100_100() {
     ImageBufferWrapper TempImage(TestAnsiImage_100_100, sizeof(TestAnsiImage_100_100));
     savedCRC = CalculateCRC(TempImage, TempImage);
-    TS_ASSERT_RC(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet), FRFXLL_ERR_FB_TOO_SMALL_AREA);
+    TS_ASSERT_RC(FRFXLLCreateFeatureSet(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet), FRFXLL_ERR_INVALID_IMAGE);
     TS_ASSERT_EQUALS(hFtrSet, nullptr);
     TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempImage, TempImage), savedCRC);
@@ -322,6 +329,50 @@ public:
     TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
     TS_ASSERT_EQUALS_X(CalculateCRC(TempImage, TempImage), savedCRC);
   }
+  void testGetMinutiaFromFeature() {
+    ImageBufferWrapper TempImage(TestIsoImage, sizeof(TestIsoImage));
+    savedCRC = CalculateCRC(test_raw_image_500.pixels, test_raw_image_500.width*test_raw_image_500.height);
+    TS_ASSERT_OK(FRFXLLCreateFeatureSetFromRaw(hCtx, test_raw_image_500.pixels, test_raw_image_500.width*test_raw_image_500.height, test_raw_image_500.width, test_raw_image_500.height, test_raw_image_500.resolution, FRFXLL_FEX_ENABLE_ENHANCEMENT, &hFtrSet));
+    TS_ASSERT_DIFFERS(hFtrSet, nullptr);
+    
+    unsigned int num_minutia = 0;
+    unsigned int minutia_ppi = 0;
+    TS_ASSERT_OK(FRFXLLGetMinutiaInfo(hFtrSet,&num_minutia,&minutia_ppi));
+
+    struct FRFXLL_Basic_19794_2_Minutia* minutiae = (struct FRFXLL_Basic_19794_2_Minutia*) calloc(num_minutia,sizeof(struct FRFXLL_Basic_19794_2_Minutia));
+    TS_ASSERT_DIFFERS(minutiae, nullptr);
+
+    TS_ASSERT_OK(FRFXLLGetMinutiae(hFtrSet, BASIC_19794_2_MINUTIA_STRUCT, &num_minutia, minutiae));
+//    printf("CalculateCRC %u\n",CalculateCRC((const unsigned char*) minutiae,num_minutia*sizeof(struct FRFXLL_Basic_19794_2_Minutia)));
+    TS_ASSERT_EQUALS_X(CalculateCRC((const unsigned char*) minutiae,num_minutia*sizeof(struct FRFXLL_Basic_19794_2_Minutia)),179998);
+    free(minutiae);
+
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
+    TS_ASSERT_EQUALS_X(CalculateCRC(test_raw_image_500.pixels, test_raw_image_500.width*test_raw_image_500.height), savedCRC);
+  }
+  // wanted to put this in Internals, but no easy way to incorporate a CRC there...
+  void testCPPRandomConsistency() {
+
+	const size_t N = 1000;
+	unsigned char data[N];
+
+	const int seeds[] = {4,17,31,217,63,972,47};
+	std::seed_seq sdsq(seeds,seeds+7); 
+
+	std::mt19937 engine;
+	engine.seed(sdsq);
+
+	std::uniform_int_distribution<unsigned char> ucd(0,255);
+
+	// now we are going to generate 1000 numbers into data
+	for (unsigned int i = 0; i < N; i++) {
+		data[i]=ucd(engine);
+	}
+
+//    printf("CalculateCRC %u\n",CalculateCRC( data,N));
+    TS_ASSERT_EQUALS_X(CalculateCRC(data,N), 128941);
+  }
+  
 };
 
 class CreatingFeatureSetAnsiUnalligned : public CxxTest::TestSuite, private FixtureWithContext {

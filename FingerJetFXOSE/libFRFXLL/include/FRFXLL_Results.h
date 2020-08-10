@@ -1,10 +1,10 @@
 /*
     FingerJetFX OSE -- Fingerprint Feature Extractor, Open Source Edition
 
-    Copyright (c) 2011 by DigitalPersona, Inc. All rights reserved.
+    Copyright (c) 2019 by HID Global, Inc. All rights reserved.
 
-    DigitalPersona, FingerJet, and FingerJetFX are registered trademarks 
-    or trademarks of DigitalPersona, Inc. in the United States and other
+    HID Global, FingerJet, and FingerJetFX are registered trademarks 
+    or trademarks of HID Global, Inc. in the United States and other
     countries.
 
     FingerJetFX OSE is open source software that you may modify and/or
@@ -15,17 +15,6 @@
     software are met.
  
     For more information, please visit digitalpersona.com/fingerjetfx.
-*/ 
-/*
-      LIBRARY: FRFXLL.a - Fingerprint Feature Extractor - Low Level API
-
-      ALGORITHM:      Alexander Ivanisov
-                      Yi Chen
-                      Salil Prabhakar
-      IMPLEMENTATION: Alexander Ivanisov
-                      Jacob Kaminsky
-                      Lixin Wei
-      DATE:           11/08/2011
 */
 
 #ifndef FRFXLL_RC_DEFINED

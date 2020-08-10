@@ -53,8 +53,6 @@ namespace {
     MatchData mdIn;
   public:
     void setUp() {
-      memset(&mdIn, 0xaa, sizeof(mdIn));
-      TS_ASSERT_EQUALS(FRFXLL_OK, ReadIsoFeatures(iso_fmd, iso_fmd_len, mdIn, NULL));
     }
     void testWriteIsoFeatures() {
       uint8 data[600] = {0};

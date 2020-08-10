@@ -1,7 +1,7 @@
 /*
     FingerJetFX OSE -- Fingerprint Feature Extractor, Open Source Edition
 
-    Copyright (c) 2011 by DigitalPersona, Inc. All rights reserved.
+    Copyright (c) 2019 by HID Global, Inc. All rights reserved.
 
     DigitalPersona, FingerJet, and FingerJetFX are registered trademarks 
     or trademarks of DigitalPersona, Inc. in the United States and other
@@ -16,17 +16,6 @@
  
     For more information, please visit digitalpersona.com/fingerjetfx.
 */ 
-/*
-      LIBRARY: FRFXLL - Fingerprint Feature Extractor - Low Level API
-
-      ALGORITHM:      Alexander Ivanisov
-                      Yi Chen
-                      Salil Prabhakar
-      IMPLEMENTATION: Alexander Ivanisov
-                      Jacob Kaminsky
-                      Lixin Wei
-      DATE:           11/08/2011
-*/
 
 #ifndef __MATCHDATA_H
 #define __MATCHDATA_H
@@ -277,7 +266,7 @@ namespace Embedded {
 
   struct MatchData : public MinutiaPoints<255> {
     Footprint footprint;
-    Point offset;
+    unsigned int minutia_resolution_ppi = 500;	// sad default
 
     void Init() {
       footprint.Init();

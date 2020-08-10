@@ -1,10 +1,10 @@
 /*
     FingerJetFX OSE -- Fingerprint Feature Extractor, Open Source Edition
 
-    Copyright (c) 2011 by DigitalPersona, Inc. All rights reserved.
+    Copyright (c) 2019 by HID Global, Inc. All rights reserved.
 
-    DigitalPersona, FingerJet, and FingerJetFX are registered trademarks 
-    or trademarks of DigitalPersona, Inc. in the United States and other
+    HID Global, FingerJet, and FingerJetFX are registered trademarks 
+    or trademarks of HID Global, Inc. in the United States and other
     countries.
 
     FingerJetFX OSE is open source software that you may modify and/or
@@ -17,19 +17,33 @@
     For more information, please visit digitalpersona.com/fingerjetfx.
 */ 
 /*
-      LIBRARY: FRFXLL.a - Fingerprint Feature Extractor - Low Level API
+      LIBRARY: FRFXLL - Fingerprint Feature Extractor - Low Level API
 
       ALGORITHM:      Alexander Ivanisov
                       Yi Chen
                       Salil Prabhakar
+                      Greg Cannon
       IMPLEMENTATION: Alexander Ivanisov
                       Jacob Kaminsky
                       Lixin Wei
-      DATE:           11/08/2011
+                      Greg Cannon
+                      Ralph Lessmann
+      DATE:           07/23/2019
 */
 
 #ifndef __FRFXLL_h
 #define __FRFXLL_h
+
+#if __cplusplus >= 201402L
+#define DEPRECATED [[deprecated]]
+#else
+#ifdef __GNUC__
+#define DEPRECATED __attribute__((deprecated))
+#else
+#define DEPRECATED
+#endif
+#endif
+
 
 #ifndef __FRFXLL_VER__
 #define __FRFXLL_VER__ ((0x5<<8) | 0x2)
@@ -78,10 +92,10 @@ typedef struct tag_FRFXLL_RAW_CONST_SAMPLE {
 #define FRFXLL_FEX_ENABLE_ENHANCEMENT   (0x00000002U)       // Slower and more accurate: currently same as default
 
 typedef struct tag_FRFXLL_VERSION_INFO {
-  unsigned  major;
-  unsigned  minor;
-  unsigned  revision;
-  unsigned  build;
+  unsigned int major;
+  unsigned int minor;
+  unsigned int revision;
+  unsigned int build;
 } FRFXLL_VERSION;
 
 /**
@@ -107,6 +121,8 @@ Note: for the function that accept multiple handles, all handles must reference 
 \retval FRFXLL_ERR_INVALID_PARAM       Invalid parameter
 \retval FRFXLL_ERR_NO_MEMORY           No enough memory to complete the operation
 */
+// the ability to pass in system facilities will be removed in the future
+DEPRECATED
 FRFXLL_RESULT FRFXLL_EXPORT FRFXLLCreateContext(
   FRFXLL_CONTEXT_INIT * contextInit,  ///< [in] pointer to filled context initialization structure
   FRFXLL_HANDLE_PT phContext          ///< [out] pointer to where to put an open handle to created context
@@ -152,6 +168,7 @@ Duplicate handle
 \retval FRFXLL_ERR_INVALID_HANDLE  Invalid handle.
 \retval FRFXLL_ERR_NO_MEMORY       No enough memory to complete the operation
 */
+DEPRECATED
 FRFXLL_RESULT FRFXLL_EXPORT FRFXLLDuplicateHandle(
   FRFXLL_HANDLE handle,          ///< [in] Handle to copy
   FRFXLL_HANDLE_PT pHandle       ///< [out] Pointer where to put a new handle
@@ -168,6 +185,11 @@ Feature extraction function
 \retval FRFXLL_ERR_FB_TOO_SMALL_AREA     Fingerprint area is too small
 \retval FRFXLL_ERR_INVALID_IMAGE         Invalid image data
 */
+// this only works for ansi 381:2005 or ISO 19794-4:2005 uncompressed 8 bit raw images
+// it does not work for 381:2011, nor 19794-4:2011, nor is it expected to support all options for 39794-4
+// it will fail for fingerprint images compressed with WSQ, JPG, ..
+// it will fail if the raw images use a number different than 8
+DEPRECATED
 FRFXLL_RESULT FRFXLL_EXPORT FRFXLLCreateFeatureSet(
   FRFXLL_HANDLE hContext,          ///< [in] Handle to a fingerprint recognition context
   const unsigned char fpData[],    ///< [in] sample
@@ -189,6 +211,12 @@ as the result function uses very small amount of memory, but the content of imag
 \retval FRFXLL_ERR_FB_TOO_SMALL_AREA     Fingerprint area is too small
 \retval FRFXLL_ERR_INVALID_IMAGE         Invalid image data
 */
+// this only works for ansi 381:2005 or ISO 19794-4:2005 uncompressed 8 bit raw images
+// it does not work for 381:2011, nor 19794-4:2011, nor is it expected to support all options for 39794-4
+// it will fail for fingerprint images compressed with WSQ, JPG, ..
+// it will fail if the raw images use a number different than 8
+// it fails by design for compressed or reduced grayscale images - as the necessary buffer space is not available
+DEPRECATED
 FRFXLL_RESULT FRFXLL_EXPORT FRFXLLCreateFeatureSetInPlace(
   FRFXLL_HANDLE hContext,          ///< [in] Handle to a fingerprint recognition context
   unsigned char fpData[],          ///< [in] fingerprint sample, buffer is overridden during feature extraction to save memory
@@ -232,6 +260,10 @@ as the result function uses very small amount of memory, but the content of pixe
 \retval FRFXLL_ERR_FB_TOO_SMALL_AREA     Fingerprint area is too small
 \retval FRFXLL_ERR_INVALID_IMAGE         Invalid image data
 */
+// this places signficant constraints on the ability to process the image before extraction
+// in particular, it is quite likely that the library would have to allocate space for processing in the future
+// given this, the value of this method is very low
+DEPRECATED
 FRFXLL_RESULT FRFXLL_EXPORT FRFXLLCreateFeatureSetInPlaceFromRaw(
   FRFXLL_HANDLE hContext,          ///< [in] Handle to a fingerprint recognition context
   unsigned char pixels[],          ///< [in] sample as 8bpp pixel array (no line padding for alignment)
@@ -241,6 +273,19 @@ FRFXLL_RESULT FRFXLL_EXPORT FRFXLLCreateFeatureSetInPlaceFromRaw(
   unsigned int imageResolution,    ///< [in] image resolution [DPI]
   unsigned int flags,              ///< [in] Set to 0 for default or bitwise or of any of the FRFXLL_FEX_xxx flags
   FRFXLL_HANDLE_PT phFeatureSet    ///< [out] pointer to where to put an open handle to the feature set
+);
+
+/**
+creates an empty template, often used as a signal for failure to extract
+
+\retval FRFXLL_OK                        The operation completed successfully.
+\retval FRFXLL_ERR_INVALID_PARAM         Invalid parameter, for example incorrect data type.
+\retval FRFXLL_ERR_INVALID_HANDLE        Invalid context handle.
+\retval FRFXLL_ERR_NO_MEMORY             No enough memory to complete the operation
+*/
+FRFXLL_RESULT FRFXLL_EXPORT FRFXLLCreateEmptyFeatureSet(
+  FRFXLL_HANDLE hContext,          ///< [in] Handle to a fingerprint recognition context
+  FRFXLL_HANDLE_PT rmobj    ///< [out] pointer to where to put an open handle to the feature set
 );
 
 /* Data types for export */
@@ -255,6 +300,19 @@ FRFXLL_RESULT FRFXLL_EXPORT FRFXLLCreateFeatureSetInPlaceFromRaw(
 #define FRFXLL_RESOLUTION_NOT_SPECIFIED        0xFFFF
 #define FRFXLL_IMAGE_SIZE_NOT_SPECIFIED        0xFFFF
 
+
+/*
+ * This is broken by design...
+ * the old match data did not have the resolution information... 
+ * therefore, the scaling done at export was only accurate by assumption
+ * the new matchdata now maintains the resolution in ppcm of the minutial points
+ * there is no existing mechanism for supporting non isometric images (res_x == res_y)
+ * There is no need to support an output scaling to nonisometric images
+ * 
+ * Therefore, the values of resolutionX and resolutionY will be ignored
+ * 
+ * There is also no need to support minutia rotation - it should be ignored...
+*/
 typedef struct tag_FRFXLL_OUTPUT_PARAM_ISO_ANSI {
   size_t length;                     ///< size of this structure, for extensibility
   unsigned int    CBEFF;
@@ -291,6 +349,11 @@ size when processing the data.
 \retval FRFXLL_ERR_MORE_DATA           More data is available, when this code is returned the content 
                                    of the buffer pointed by pbData is undefined
 */
+// the library currently supports old formats (378:2005 and 19794-2:2005)
+// there is no expectation to support the more recent 378:2011 or 19794-2:2011
+// similarly, there is no expectation to support the 39794-2 standard (ASN or xml)
+// a subset of this code will be moved to the minex libray for certification purposes
+DEPRECATED
 FRFXLL_RESULT FRFXLL_EXPORT FRFXLLExport(
   FRFXLL_HANDLE handle,          ///< [in] Handle to data object to export
   FRFXLL_DATA_TYPE dataType,     ///< [in] Type and format of data to export
@@ -298,6 +361,58 @@ FRFXLL_RESULT FRFXLL_EXPORT FRFXLLExport(
   unsigned char pbData[],        ///< [out] Buffer where to export the data, optional
   size_t * pcbData               ///< [in/out] Pointer where to store the length of exported data, optional
 );
+
+/**
+Getter function for number of minutia function
+
+\retval FRFXLL_OK                        The operation completed successfully.
+\retval FRFXLL_ERR_INVALID_PARAM         Invalid parameter, for example incorrect data type.
+*/
+FRFXLL_RESULT FRFXLL_EXPORT FRFXLLGetMinutiaInfo(
+  const FRFXLL_HANDLE hFeatureSet,  ///< [in] pointer to where to put an open handle to the minutia set
+  unsigned int *num_minutia,         ///< [out] pointer to set number of extracted minutia
+  unsigned int *resolution_ppi      ///< [out] pointer to set number of extracted minutia (can be NULL)
+);
+
+enum FRXLL_MINUTIA_TYPE {
+	OTHER = 0,
+	RIDGE_END = 1,
+	RIDGE_BIFURCATION = 2,
+};
+
+struct FRFXLL_Basic_19794_2_Minutia {
+	unsigned short x;
+	unsigned short y;
+	unsigned char a;              // 0-255
+	enum FRXLL_MINUTIA_TYPE t;
+	unsigned char q;               // 0-100
+};
+
+enum FRXLL_MINUTIAE_LAYOUT {
+	BASIC_19794_2_MINUTIA_STRUCT = 1,	/// standardized - just x, y, angle, type, and quality (top down, left right, counterclockwise from postive x axis
+};
+
+/**
+Minutia getter function using phFeatureSet as an input
+Caller allocates an array of minutia and passes it to library to populate
+The API is future extensible, as future revisions may add new extended structures to populate
+The caller specifies the layout with the enum value
+Currently, the only value allowed for the layout parameter is BASIC_19794_2_MINUTIA_STRUCT==1
+The Library will cast the void* into the appropriate type
+\retval FRFXLL_OK                        The operation completed successfully.
+\retval FRFXLL_ERR_INVALID_PARAM         Invalid parameter, for example incorrect data type.
+\retval FRFXLL_ERR_INVALID_HANDLE        Invalid context handle.
+\retval FRFXLL_ERR_NO_MEMORY             No enough memory to complete the operation
+\retval FRFXLL_ERR_FB_TOO_SMALL_AREA     Fingerprint area is too small
+\retval FRFXLL_ERR_INVALID_IMAGE         Invalid image data
+*/
+FRFXLL_RESULT FRFXLL_EXPORT FRFXLLGetMinutiae(
+  const FRFXLL_HANDLE mobj,			///< [in] pointer to where to put an open handle to the minutia set
+  enum FRXLL_MINUTIAE_LAYOUT layout, ///< [in] library casts the void * into the correct type based on layout (struct FRFXLL_Minutia*?)
+  unsigned int *num_minutia,		///< [in/out] pointer to set/get number of extracted minutia
+  void *mdata					///< [in/out] caller allocated... calloc of number minutira * sizeof minutia struct type
+);
+
 
 #ifdef __cplusplus
 }

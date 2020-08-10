@@ -1,7 +1,7 @@
 /*
     FingerJetFX OSE -- Fingerprint Feature Extractor, Open Source Edition
 
-    Copyright (c) 2011 by DigitalPersona, Inc. All rights reserved.
+    Copyright (c) 2019 by HID Global, Inc. All rights reserved.
 
     DigitalPersona, FingerJet, and FingerJetFX are registered trademarks 
     or trademarks of DigitalPersona, Inc. in the United States and other
@@ -16,17 +16,6 @@
  
     For more information, please visit digitalpersona.com/fingerjetfx.
 */ 
-/*
-      LIBRARY: FRFXLL - Fingerprint Feature Extractor - Low Level API
-
-      ALGORITHM:      Alexander Ivanisov
-                      Yi Chen
-                      Salil Prabhakar
-      IMPLEMENTATION: Alexander Ivanisov
-                      Jacob Kaminsky
-                      Lixin Wei
-      DATE:           11/08/2011
-*/
 
 #include "CreateFtrSet.h"
 
@@ -48,5 +37,8 @@ FRFXLL_RESULT FRFXLLCreateFeatureSetFromRaw(
   if (!ctx) return CheckResult(FRFXLL_ERR_INVALID_HANDLE);
   Ptr<FexObj> fex(new(ctx) FexObj(ctx));
   if (!fex) return CheckResult(FRFXLL_ERR_NO_MEMORY);
-  return fex->CreateFeatureSet(fpData, size, width, height, imageResolution, flags, phFeatureSet);
+
+  FRFXLL_RESULT rv = fex->CreateFeatureSet(fpData, size, width, height, imageResolution, flags, phFeatureSet);
+  
+  return rv;
 }

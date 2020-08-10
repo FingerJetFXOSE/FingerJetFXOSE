@@ -1,7 +1,7 @@
 /*
     FingerJetFX OSE -- Fingerprint Feature Extractor, Open Source Edition
 
-    Copyright (c) 2011 by DigitalPersona, Inc. All rights reserved.
+    Copyright (c) 2019 by HID Global, Inc. All rights reserved.
 
     DigitalPersona, FingerJet, and FingerJetFX are registered trademarks 
     or trademarks of DigitalPersona, Inc. in the United States and other
@@ -16,26 +16,62 @@
  
     For more information, please visit digitalpersona.com/fingerjetfx.
 */ 
-/*
-      LIBRARY: FRFXLL - Fingerprint Feature Extractor - Low Level API
-
-      ALGORITHM:      Alexander Ivanisov
-                      Yi Chen
-                      Salil Prabhakar
-      IMPLEMENTATION: Alexander Ivanisov
-                      Jacob Kaminsky
-                      Lixin Wei
-      DATE:           11/08/2011
-*/
 
 #ifndef __SERIALIZEFPDATA_H
 #define __SERIALIZEFPDATA_H
 
-#include "deserializeFpData.h"
+#include <algorithm> // sort
+#include "member_comp.h"
+#include "dpfr.h"
+#include "dpError.h"
+#include "matchData.h"
+#include "intmath.h"
 
 namespace FingerJetFxOSE {
   namespace FpRecEngineImpl {
     namespace Embedded {
+
+      struct FtrCode {
+        static const uint16 DPFP_CODE_BITS_USED_MASK    = 0x8000;
+        static const uint16 DPFP_ENCRYPTED_MASK         = 0x4000;
+        static const uint16 DPFP_LITTLE_ENDIAN_MASK     = 0x2000;
+        // DPFP_MORE_FEATURES_FOLLOW indicates that after the current template,
+        // there are more.  The address of the next template should be calculated by
+        // adding the address of compressedData and compressedDataLen + 1 (for the end marker).
+        static const uint16 DPFP_MORE_FEATURES_FOLLOW   = 0x1000;
+        static const uint16 DPFP_EXTENDED_FEATURES      = 0x0800;
+        static const uint16 DPFP_ALLOW_LEARNING         = 0x0400;
+        static const uint16 DPFP_XTEA_MASK              = 0x0200;
+        static const uint16 DPFP_PLAIN = 47;      //These remain for backward compatibility.  See FP_ENCRYPTED_MASK and
+        static const uint16 DPFP_ENCRYPTED = 74;  //FP_IS_ENCRYPTED below for current usage.
+        uint16 value;
+
+        bool BytesSwapped() const { // should work for any byte order
+          if (value == DPFP_PLAIN || value == DPFP_ENCRYPTED) return false;
+          if (value == (DPFP_PLAIN << 8) || value == (DPFP_ENCRYPTED << 8)) return true; 
+          if (value & DPFP_CODE_BITS_USED_MASK) return false;
+          if (value & (DPFP_CODE_BITS_USED_MASK >> 8)) return true;
+          return false;
+        }
+
+        bool IsValid() const {
+          if (value == DPFP_PLAIN || value == DPFP_ENCRYPTED) return true;
+          return (value & DPFP_CODE_BITS_USED_MASK) != 0;
+        }
+        bool IsEncrypted() const { return (value & DPFP_CODE_BITS_USED_MASK) ? (value & DPFP_ENCRYPTED_MASK) != 0 : value != DPFP_PLAIN; }
+        bool IsTeaEncrypted() const { return IsEncrypted() && !(value & DPFP_XTEA_MASK); }
+        bool MoreViewsFollow() const { return (value & DPFP_MORE_FEATURES_FOLLOW) != 0; }
+        bool HasEFBs() const { return (value & DPFP_EXTENDED_FEATURES) != 0; }
+        FtrCode(uint16 code) : value(code) {}
+        FtrCode() 
+          : value(DPFP_CODE_BITS_USED_MASK | DPFP_ENCRYPTED_MASK | DPFP_LITTLE_ENDIAN_MASK | DPFP_EXTENDED_FEATURES) 
+        {}
+      };
+
+      inline bool ValidFingerPosition(uint16 fingerPosition) { return fingerPosition <= 10; };
+      inline bool ValidResolution(uint16 resolution) { return resolution >= 99 && resolution <= 1000; };
+      inline bool ValidImageSize(uint16 imageSize) { return imageSize >= 16 && imageSize < (1<<14); };
+
       struct Writer : public HResult {
         unsigned char * data;
         size_t size;
@@ -122,7 +158,6 @@ namespace FingerJetFxOSE {
       struct StdFmdSerializer {
         static const uint16 ImageSizeX = 250;
         static const uint16 ImageSizeY = 400;
-        static const uint16 Resolution = StdFmdDeserializer::Resolution;
         static const uint16 DefaultResolution = 197; // 500DPI / 2.54
 
         unsigned char * const dataOut;
@@ -188,22 +223,26 @@ namespace FingerJetFxOSE {
           wr << quality;
           wr.cur = saved;
         }
-        void WriteMinutiae(Writer & wr, const MatchData & md, int num) {
+        void WriteMinutiae(Writer & wr, const MatchData & md, unsigned int num) {
           uint8 minQ = 0xff;
           uint16 sizeX = 0;
           uint16 sizeY = 0;
-          
-          size_t i;
-          for ( i = 0; i < num; i++ ) {
-            Point pos = md.minutia[i].position + md.offset;
-            if ( resolutionX != Resolution ) {
-              pos.x = muldiv(pos.x, resolutionX, Resolution);
-            }
+
+          unsigned int mr_ppcm = muldiv(md.minutia_resolution_ppi,197,500);
+                    
+          for ( size_t i = 0; i < num; i++ ) {
+            Point pos = md.minutia[i].position;
+            
+            if (resolutionX != mr_ppcm) {
+				pos.x = muldiv(pos.x,resolutionX,mr_ppcm);
+			}
+            if (resolutionY != mr_ppcm) {
+				pos.y = muldiv(pos.y,resolutionY,mr_ppcm);
+			}
+
             if ( pos.x > sizeX ) sizeX = pos.x;
-            if ( resolutionY != Resolution ) {
-              pos.y = muldiv(pos.y, resolutionY, Resolution);
-            }
             if ( pos.y > sizeY ) sizeY = pos.y;
+
             wr << uint16((pos.x & 0x3FFF) | (md.minutia[i].type << 14));    // X
             wr << uint16(pos.y & 0x3FFF);                                   // Y
             WriteTheta(wr, md.minutia[i].theta);                            // Theta
@@ -345,7 +384,7 @@ namespace FingerJetFxOSE {
           wr << sizeY;
         }
         virtual void WriteTheta(Writer & wr, uint8 theta) {
-          wr << uint8(-theta + 64);
+          wr << uint8(theta);
         }
       };
 
@@ -370,7 +409,6 @@ namespace FingerJetFxOSE {
           wr << sizeY;
         }
         virtual void WriteTheta(Writer & wr, uint8 theta) {
-          theta = -theta + 64;
           theta = muldiv(theta, 180, 256);
           wr << uint8(theta);
         }

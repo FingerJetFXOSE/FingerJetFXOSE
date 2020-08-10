@@ -43,22 +43,6 @@ namespace FingerJetFxOSE {
 
       explicit FpFtrSetObj(const Context * ctx_)  : Object(ctx_) {}
 
-      FRFXLL_RESULT Import(
-        const unsigned char data[],  ///< [in] (fingerprint) data to import
-        size_t size,                 ///< [in] size of the (fingerprint) data
-        FRFXLL_DATA_TYPE dataType,   ///< [in] type and format of the (fingerprint) data
-        const void * parameters      ///< [in] parameters structure, specific to the data type
-      ) {
-        switch (dataType) {
-          case FRFXLL_DT_ISO_FEATURE_SET:
-            return ReadIsoFeatures(data, size, fpFtrSet, parameters);
-          case FRFXLL_DT_ANSI_FEATURE_SET:
-            return ReadAnsiFeatures(data, size, fpFtrSet, parameters);
-          default:
-            return CheckResult(FRFXLL_ERR_INVALID_PARAM);
-        }
-      }
-
       FRFXLL_RESULT Export(
         FRFXLL_DATA_TYPE dataType,   ///< [in] type and format of the (fingerprint) data
         const void * parameters,     ///< [in] parameters structure, specific to the data type

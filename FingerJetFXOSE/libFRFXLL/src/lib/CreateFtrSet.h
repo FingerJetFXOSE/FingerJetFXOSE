@@ -1,7 +1,7 @@
 /*
     FingerJetFX OSE -- Fingerprint Feature Extractor, Open Source Edition
 
-    Copyright (c) 2011 by DigitalPersona, Inc. All rights reserved.
+    Copyright (c) 2019 by HID Global, Inc. All rights reserved.
 
     DigitalPersona, FingerJet, and FingerJetFX are registered trademarks 
     or trademarks of DigitalPersona, Inc. in the United States and other
@@ -16,17 +16,6 @@
  
     For more information, please visit digitalpersona.com/fingerjetfx.
 */ 
-/*
-      LIBRARY: FRFXLL - Fingerprint Feature Extractor - Low Level API
-
-      ALGORITHM:      Alexander Ivanisov
-                      Yi Chen
-                      Salil Prabhakar
-      IMPLEMENTATION: Alexander Ivanisov
-                      Jacob Kaminsky
-                      Lixin Wei
-      DATE:           11/08/2011
-*/
 
 #ifndef __CREATEFTRSET_H
 #define __CREATEFTRSET_H
@@ -73,6 +62,7 @@ namespace FingerJetFxOSE {
             rc = FRFXLL_ERR_INVALID_PARAM;
             break;
         }
+        if (rc!=FRFXLL_OK) return rc;
         return ftrSet->GetHandle(phFtrSet, GetResult());
       }
 
@@ -97,8 +87,23 @@ namespace FingerJetFxOSE {
           return rc;
         }
         rc = fex.FromRawSample(data, size, width, height, dpi, flags, ftrSet->fpFtrSet);
+        if (rc!=FRFXLL_OK) return rc;
         return ftrSet->GetHandle(phFtrSet, GetResult());
       }
+
+      FRFXLL_RESULT CreateEmptyFeatureSet(
+        FRFXLL_HANDLE * phFtrSet       ///< [out] handle to feature set
+      ) {
+        
+        Ptr<FpFtrSetObj> ftrSet(new(ctx) FpFtrSetObj(ctx));
+        ftrSet->fpFtrSet.numMinutia = 0;
+        if (!ftrSet) {
+          rc = CheckResult(FRFXLL_ERR_NO_MEMORY);
+          return rc;
+        }
+        return ftrSet->GetHandle(phFtrSet, GetResult());
+      }
+
     };
   }
 }

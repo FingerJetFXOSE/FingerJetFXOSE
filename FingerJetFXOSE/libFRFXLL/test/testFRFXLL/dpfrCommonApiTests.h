@@ -112,6 +112,11 @@ public:
     TS_ASSERT(hCtx != NULL);
     TS_ASSERT_OK(FRFXLLCloseHandle(&hCtx));
   }
+  void testCreateLibraryContextWithValidParameters() {
+    TS_ASSERT_OK(FRFXLLCreateLibraryContext(&hCtx));
+    TS_ASSERT(hCtx != NULL);
+    TS_ASSERT_OK(FRFXLLCloseHandle(&hCtx));
+  }
 };
 
 class OperationsWithCreatedContext : public CxxTest::TestSuite, private FixtureWithContext {

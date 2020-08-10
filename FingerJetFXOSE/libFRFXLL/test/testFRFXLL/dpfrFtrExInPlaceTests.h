@@ -247,10 +247,10 @@ public:
     TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
   }
 
+  // the decoder is correctly determining that this is an invalid image due to size mismatch and is returning FRFXLL_ERR_INVALID_IMAGE
   void testCreateFeatureTestImageValidity() {
     TS_ASSERT(TempImage(TestAnsiImageValidityWrongRecordLength, TestAnsiImageValiditySize - 50));
-    TS_ASSERT_OK(FRFXLLCreateFeatureSetInPlace(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet));
-    TS_ASSERT_DIFFERS(hFtrSet, nullptr);
+    TS_ASSERT_RC(FRFXLLCreateFeatureSetInPlace(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet), FRFXLL_ERR_INVALID_IMAGE);
     TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
   }
   
@@ -307,9 +307,11 @@ public:
     TS_ASSERT_EQUALS(hFtrSet, nullptr);
     TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
   }
+  // the code has now change - we check the input image dimension, and if too small, we report FRFXLL_ERR_INVALID_IMAGE
+  // the FRFXLL_ERR_FB_TOO_SMALL_AREA is for insufficient fingerprint content on an otherwise large enough image
   void testCreateFeatureTestImage_100_100() {
     TS_ASSERT(TempImage(TestAnsiImage_100_100, sizeof(TestAnsiImage_100_100)));
-    TS_ASSERT_RC(FRFXLLCreateFeatureSetInPlace(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet), FRFXLL_ERR_FB_TOO_SMALL_AREA);
+    TS_ASSERT_RC(FRFXLLCreateFeatureSetInPlace(hCtx, TempImage, TempImage, FRFXLL_DT_ANSI_381_SAMPLE, 0, &hFtrSet), FRFXLL_ERR_INVALID_IMAGE);
     TS_ASSERT_EQUALS(hFtrSet, nullptr);
     TS_ASSERT_OK(FRFXLLCloseHandle(&hFtrSet));
   }
