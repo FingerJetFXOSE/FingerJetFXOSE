@@ -41,9 +41,9 @@ _STLP_IMPORT_DECLSPEC long _STLP_STDCALL InterlockedCompareExchange(long volatil
 #endif
 
 #undef HAS_SYNC_FUNCTIONS
-//#if defined(__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4)
-//#define HAS_SYNC_FUNCTIONS
-//#endif
+#if defined(__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4)
+# define HAS_SYNC_FUNCTIONS
+#endif
 
 
 static void * m_malloc(size_t size, void * _) {
@@ -61,7 +61,8 @@ static long m_interlocked_increment(volatile long * pv) {
 #ifdef WIN32
   return InterlockedIncrement(pv);
 #elif defined(HAS_SYNC_FUNCTIONS)
-  return __sync_fetch_and_add(pv, 1L);
+  __sync_fetch_and_add(pv, 1L);
+  return *pv;
 #else
   return ++(*pv);
 #endif
@@ -71,7 +72,8 @@ static long m_interlocked_decrement(volatile long * pv) {
 #ifdef WIN32
   return InterlockedDecrement(pv);
 #elif defined(HAS_SYNC_FUNCTIONS)
-  return __sync_fetch_and_sub(pv, 1L);
+  __sync_fetch_and_sub(pv, 1L);
+  return *pv;
 #else
   return --(*pv);
 #endif
