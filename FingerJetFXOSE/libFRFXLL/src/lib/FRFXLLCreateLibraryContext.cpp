@@ -40,9 +40,10 @@ _STLP_IMPORT_DECLSPEC long _STLP_STDCALL InterlockedCompareExchange(long volatil
 #endif
 #endif
 
-#if defined(__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4)
-#define HAS_SYNC_FUNCTIONS
-#endif
+#undef HAS_SYNC_FUNCTIONS
+//#if defined(__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4)
+//#define HAS_SYNC_FUNCTIONS
+//#endif
 
 
 static void * m_malloc(size_t size, void * _) {
