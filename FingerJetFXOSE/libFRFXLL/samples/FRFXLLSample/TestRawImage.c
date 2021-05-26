@@ -17,7 +17,7 @@
     For more information, please visit digitalpersona.com/fingerjetfx.
 */ 
 
-#include "testRawImage.h"
+#include "TestRawImage.h"
 
 struct raw_image test_raw_image_333 = {
 	256,332,333,{

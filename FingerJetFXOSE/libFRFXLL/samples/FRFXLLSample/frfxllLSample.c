@@ -36,7 +36,7 @@
 
 #include "FRFXLL.h"
 
-#include "testFeatures.h"
+#include "TestFeatures.h"
 #include "TestAnsiImage.h"
 #include "TestRawImage.h"
 
