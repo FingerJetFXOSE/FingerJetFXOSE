@@ -18,6 +18,11 @@ if(EXISTS "${CXXTEST_OUTPUT}")
   add_executable( ${PROJECT_NAME}
     runner.cpp 
   )
+
+  include(GNUInstallDirs)
+  install( TARGETS ${PROJECT_NAME}
+    RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
+  )
   
   if( USE_SANITIZER )
     target_link_libraries( ${PROJECT_NAME} "FRFXLL_static" "TestVectors" "asan" ) 
