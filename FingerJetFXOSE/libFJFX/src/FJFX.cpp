@@ -104,6 +104,8 @@ int fjfx_create_fmd_from_raw(
   unsigned char * tmpl = reinterpret_cast<unsigned char *>(fmd);
   CheckFx( FRFXLLExport(hFtrSet, dt, &param, tmpl, &size) );
   if (size_of_fmd_ptr) *size_of_fmd_ptr = (unsigned int)size;
+  CheckFx( FRFXLLCloseHandle(&hFtrSet) );
+  CheckFx( FRFXLLCloseHandle(&hContext) );
   return FJFX_SUCCESS;
 }
 
