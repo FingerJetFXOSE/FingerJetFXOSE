@@ -38,7 +38,7 @@
 
 #include "dpfrUnitTest.h"
 
-#include "TestRawImage.h"
+#include "testRawImage.h"
 
 #include <random>
 
