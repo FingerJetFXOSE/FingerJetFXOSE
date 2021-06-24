@@ -18,8 +18,10 @@ if(EXISTS "${CXXTEST_OUTPUT}")
   add_executable( ${PROJECT_NAME}
     runner.cpp 
   )
+
+  include(GNUInstallDirs)
   install( TARGETS ${PROJECT_NAME}
-    RUNTIME DESTINATION bin
+    RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
   )
   
   if( USE_SANITIZER )

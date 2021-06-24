@@ -5,6 +5,7 @@ add_library( "TestVectors" STATIC
   ${TEST_VECTORS_SOURCE_FILES}
 )
 
+include(GNUInstallDirs)
 install( TARGETS ${PROJECT_NAME}
-    ARCHIVE DESTINATION lib
+    ARCHIVE DESTINATION "${INSTALL_STAGING_LIBDIR}"
 )
