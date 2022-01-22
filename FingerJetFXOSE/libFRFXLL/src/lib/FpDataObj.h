@@ -62,12 +62,13 @@ namespace FingerJetFxOSE {
       FRFXLL_RESULT Export(
         FRFXLL_DATA_TYPE dataType,   ///< [in] type and format of the (fingerprint) data
         const void * parameters,     ///< [in] parameters structure, specific to the data type
-        unsigned char pData[],       ///< [in] (fingerprint) data to import
+        unsigned char pData[],       ///< [in] (fingerprint) data to export
         size_t *pSize                ///< [in] size of the (fingerprint) data
       ) const {
         FRFXLL_RESULT rc = FRFXLL_OK;
         unsigned char * data = pData;
-        size_t size = data ? *pSize : size_t(-1);
+        size_t size = *pSize;
+        memset( data, 0, size);
         switch (dataType) {
           case FRFXLL_DT_ISO_FEATURE_SET:
             rc = WriteIsoFeatures(data, size, fpFtrSet, parameters, false);
@@ -124,7 +125,7 @@ namespace FingerJetFxOSE {
       if (!ptr) return CheckResult(FRFXLL_ERR_INVALID_HANDLE);
       size_t size = *pcbData;
       FRFXLL_RESULT rc = ((*ptr).*export_f)(dataType, parameters, pbData, pcbData); // AI: don't user ->* because of bug in ARM compiler
-      if (rc < FRFXLL_OK && pbData != NULL) {
+      if (rc < FRFXLL_OK && rc != FRFXLL_ERR_MORE_DATA && pbData != NULL) {
         memset(pbData, 0, size);
       }
       return rc;

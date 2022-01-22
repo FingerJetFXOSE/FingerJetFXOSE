@@ -162,7 +162,7 @@ namespace FingerJetFxOSE {
           imageSizeX  =     FRFXLL_IMAGE_SIZE_NOT_SPECIFIED;
           imageSizeY  =     FRFXLL_IMAGE_SIZE_NOT_SPECIFIED;
           rotation    =     0;
-          fingerQuality  =  86;
+          fingerQuality  =  0;
           impressionType =  0; // live scan
         }
         static uint8 QualityFromConfidence(uint8 confidence) {
@@ -172,12 +172,29 @@ namespace FingerJetFxOSE {
         virtual void WriteDeviceInfo(Writer & wr, const MatchData & md) {};
         virtual void WriteImageSize(Writer & wr, uint16 sizeX, uint16 sizeY) {};
         virtual void WriteTheta(Writer & wr, uint8 theta) {};
-        void WriteMinutiae(Writer & wr, const MatchData & md) {
+        void ReWriteTotalLength(Writer & wr, size_t len) {
+          size_t saved = wr.cur;
+          WriteTotalLength(wr, len);
+          wr.cur = saved;
+        }
+        void ReWriteImageSize(Writer & wr, uint16 sizeX, uint16 sizeY) {
+          size_t saved = wr.cur;
+          WriteImageSize(wr, sizeX, sizeY);
+          wr.cur = saved;
+        }
+        void ReWriteQuality(Writer & wr, uint8 quality) {
+          size_t saved = wr.cur;
+          wr.cur = viewDataOffset + 2;
+          wr << quality;
+          wr.cur = saved;
+        }
+        void WriteMinutiae(Writer & wr, const MatchData & md, int num) {
+          uint8 minQ = 0xff;
           uint16 sizeX = 0;
           uint16 sizeY = 0;
-
+          
           size_t i;
-          for ( i = 0; i < md.numMinutia; i++ ) {
+          for ( i = 0; i < num; i++ ) {
             Point pos = md.minutia[i].position + md.offset;
             if ( resolutionX != Resolution ) {
               pos.x = muldiv(pos.x, resolutionX, Resolution);
@@ -190,11 +207,12 @@ namespace FingerJetFxOSE {
             wr << uint16((pos.x & 0x3FFF) | (md.minutia[i].type << 14));    // X
             wr << uint16(pos.y & 0x3FFF);                                   // Y
             WriteTheta(wr, md.minutia[i].theta);                            // Theta
-            wr << QualityFromConfidence(md.minutia[i].conf);                // Quality
+            uint8 currQ = QualityFromConfidence(md.minutia[i].conf);
+            wr << currQ;                                                    // Quality
+            minQ = currQ < minQ ? currQ : minQ;
           }
-          size_t saved = wr.cur;
-          WriteImageSize(wr, imageSizeX != FRFXLL_IMAGE_SIZE_NOT_SPECIFIED ? imageSizeX : (sizeX + 8), imageSizeY != FRFXLL_IMAGE_SIZE_NOT_SPECIFIED ? imageSizeY : (sizeY + 8));
-          wr.cur = saved;
+          ReWriteImageSize(wr, imageSizeX != FRFXLL_IMAGE_SIZE_NOT_SPECIFIED ? imageSizeX : (sizeX + 8), imageSizeY != FRFXLL_IMAGE_SIZE_NOT_SPECIFIED ? imageSizeY : (sizeY + 8));
+          ReWriteQuality(wr, minQ);          
         }
         void WriteRecordHeaders(Writer & wr, const MatchData & md) {
           wr.cur = 0;
@@ -215,17 +233,21 @@ namespace FingerJetFxOSE {
           wr << uint8((viewNumber<<4) + (impressionType & 0x0F));           // View Number
                                                                             // Impression Type
           wr << fingerQuality;                                              // Finger Quality
-          wr << uint8(md.numMinutia);                                       // Number of Minutiae
-          WriteMinutiae(wr, md);
-          wr << uint16(0);                                                  // Extended Data Block Length
+          size_t avail = wr.size - wr.cur;                                  // calculate available space
+          size_t num = ( ( avail - 3 ) / 6 );                               // maximum minutae to write (already sorted by confidence)
+          num = num < md.numMinutia ? num : md.numMinutia;                  // not more than the number of minutiae found, max 255 see MatchData
+          wr << uint8(num);                                                 // Number of Minutiae
+          WriteMinutiae(wr, md, num);                                       // 6 bytes per minutae
+          WriteViewEDBHeaders(wr);                                          // 2 bytes
+          size_t saved = wr.cur;
           wr.cur = viewDataOffset - 2;
           wr << uint8(1);                                                   // Number of Finger Views
+          wr.cur = saved;
         }
         void WriteViewEDBHeaders(Writer & wr) {
-          wr.cur = viewEDBOffset - 2;
           wr << uint16(viewEDBLength);                                      // Extended Data Block Length
-          wr << uint8(0x01) << uint8(0x01);                                 // Extended Data Area Type Code
-          wr << uint16(0);                                                  // Extended Data Area Length
+          //wr << uint8(0x01) << uint8(0x01);                               // Extended Data Area Type Code
+          //wr << uint16(0);                                                // Extended Data Area Length
         }
         void ComputeLengthAndOffset(size_t & size, const MatchData & md) {
           viewDataOffset = recordHeaderLength;
@@ -295,13 +317,11 @@ namespace FingerJetFxOSE {
           Writer   wr(dataOut, dataOutSize, true);
           rc = FRFXLL_ERR_MORE_DATA;
           WriteRecordHeaders(wr, md);
-          totalLength = recordHeaderLength;
-          if ( dataOutSize >= viewDataOffset + viewDataLength ) {
-            WriteViewData(wr, md);
-            totalLength += viewDataLength;
-          }
-          WriteTotalLength(wr, totalLength); // in ISO 4 bytes; in ANSI can be 2 bytes (0x001A - 0xFFFF) or 6 bytes (0x000000010000 - 0x0000FFFFFFFF)
-          return FRFXLL_OK;
+          WriteViewData(wr, md);
+          rc = size > wr.cur ? FRFXLL_ERR_MORE_DATA : FRFXLL_OK;
+          size = wr.cur;
+          ReWriteTotalLength(wr, size); // in ISO 4 bytes; in ANSI can be 2 bytes (0x001A - 0xFFFF) or 6 bytes (0x000000010000 - 0x0000FFFFFFFF)
+          return rc;
         }
       };
 

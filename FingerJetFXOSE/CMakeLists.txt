@@ -22,6 +22,9 @@ include( "${ROOT_PATH}/cmake/compiler.cmake" )
 # create build and distribution path
 include( "${ROOT_PATH}/cmake/folders.cmake" )
 
+# set build version
+include( "${ROOT_PATH}/cmake/version.cmake" )
+
 # write summary
 message( STATUS "----- Configuring ${PROJECT_NAME} -----" ) 
 message( STATUS "-- Project root path: '${ROOT_PATH}'" )

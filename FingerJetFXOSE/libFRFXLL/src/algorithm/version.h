@@ -32,7 +32,7 @@
 // #pragma message("Definitions FRFXLL_MAJOR, FRFXLL_MINOR, FRFXLL_REVISION are missing. Reverting to defaults.")
 #define FRFXLL_MAJOR 5
 #define FRFXLL_MINOR 2
-#define FRFXLL_REVISION 0
+#define FRFXLL_REVISION 1
 #if !(defined(FRFXLL_BUILD))
 // #pragma message("Definition BUILD is missing. Reverting to default.")
 #define FRFXLL_BUILD 0

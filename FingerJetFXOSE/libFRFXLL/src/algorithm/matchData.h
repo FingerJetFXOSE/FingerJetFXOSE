@@ -275,7 +275,7 @@ namespace Embedded {
     return CompareMinutiaByConfidence(mp1, mp2);
   }
 
-  struct MatchData : public MinutiaPoints<76> {
+  struct MatchData : public MinutiaPoints<255> {
     Footprint footprint;
     Point offset;
 
