@@ -383,6 +383,7 @@ namespace FingerJetFxOSE {
 
       std::fill_n(S, m, false);   // init set S
       std::fill_n(T, n, false);   // init set T
+      std::fill_n(slackx, MAX_MN, INDEX_UNASSIGNED);
       S[root] = true;
 
       for (y = 0; y < n; y++) {   // initializing slack array
