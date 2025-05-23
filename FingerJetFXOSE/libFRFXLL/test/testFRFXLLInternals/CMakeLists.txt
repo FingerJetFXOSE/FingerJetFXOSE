@@ -1,6 +1,6 @@
 project( testFRFXLLInternals ) 
 
-add_definitions( "-std=c++11" )
+add_definitions( "-std=c++11 -Wno-array-bounds -Wno-stringop-overflow" )
 
 file( GLOB TEST_HEADER_FILES "${CMAKE_CURRENT_SOURCE_DIR}/*.h" ) 
 get_filename_component(CXXTEST_OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/runner.cpp" ABSOLUTE BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
