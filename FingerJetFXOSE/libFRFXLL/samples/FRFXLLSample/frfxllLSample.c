@@ -37,8 +37,8 @@
 #include "FRFXLL.h"
 
 #include "testFeatures.h"
-#include "TestAnsiImage.h"
-#include "TestRawImage.h"
+#include "testAnsiImage.h"
+#include "testRawImage.h"
 
 #include <inttypes.h>
 
