@@ -76,12 +76,12 @@ public:
     int * edb = tp.endbuf();
     size_t size = tp.size();
     size_t cap =  tp.capacity();
-    TS_ASSERT_EQUALS(tp.size(), 0);
-    TS_ASSERT_EQUALS(tp.capacity(), 10);
+    TS_ASSERT_EQUALS(tp.size(), (size_t)0);
+    TS_ASSERT_EQUALS(tp.capacity(), (size_t)10);
 
     for (unsigned int i = 0; i < countof(val_size1); i++) {
       tp.add(val_size1[i].i1);
-      TS_ASSERT_EQUALS(tp.size(), val_size1[i].i2);
+      TS_ASSERT_EQUALS(tp.size(), (size_t)val_size1[i].i2);
       TS_ASSERT_EQUALS(isHeap(tp.begin(), tp.end()), true);
       TS_ASSERT_EQUALS(isHeapTailNotTouched(tp.begin(), tp.end(), tp.endbuf()), true);
       TS_ASSERT_EQUALS(buffer[0], val_size1[i].i3);
@@ -100,7 +100,7 @@ public:
 
     for (int i = 1; i < 11; i++) {
       tp.add(i);
-      TS_ASSERT_EQUALS(tp.size(), i);
+      TS_ASSERT_EQUALS(tp.size(), (size_t)i);
       TS_ASSERT_EQUALS(isHeap(tp.begin(), tp.end()), true);
       TS_ASSERT_EQUALS(isHeapTailNotTouched(tp.begin(), tp.end(), tp.endbuf()), true);
       TS_ASSERT_EQUALS(buffer[0], 1);
@@ -108,7 +108,7 @@ public:
 
     for (int i = 11; i < 20; i++) {
       tp.add(i);
-      TS_ASSERT_EQUALS(tp.size(), 10);
+      TS_ASSERT_EQUALS(tp.size(), (size_t)10);
       TS_ASSERT_EQUALS(isHeap(tp.begin(), tp.end()), true);
       TS_ASSERT_EQUALS(isHeapTailNotTouched(tp.begin(), tp.end(), tp.endbuf()), true);
       TS_ASSERT_EQUALS(buffer[0], i-9);
@@ -126,7 +126,7 @@ public:
 
     for (int i = 20; i > 10; i--) {
       tp.add(i);
-      TS_ASSERT_EQUALS(tp.size(), 21 - i);
+      TS_ASSERT_EQUALS(tp.size(), (size_t)(21 - i));
       TS_ASSERT_EQUALS(isHeap(tp.begin(), tp.end()), true);
       TS_ASSERT_EQUALS(isHeapTailNotTouched(tp.begin(), tp.end(), tp.endbuf()), true);
       TS_ASSERT_EQUALS(buffer[0], i);
@@ -134,7 +134,7 @@ public:
 
     for (int i = 10; i > 0; i--) {
       tp.add(i);
-      TS_ASSERT_EQUALS(tp.size(), 10);
+      TS_ASSERT_EQUALS(tp.size(), (size_t)10);
       TS_ASSERT_EQUALS(isHeap(tp.begin(), tp.end()), true);
       TS_ASSERT_EQUALS(isHeapTailNotTouched(tp.begin(), tp.end(), tp.endbuf()), true);
       TS_ASSERT_EQUALS(buffer[0], 11);
@@ -172,7 +172,7 @@ public:
         }
       }
       tp.add(Rand2);
-      TS_ASSERT_EQUALS(tp.size(), min(iCountPositive, 10));
+      TS_ASSERT_EQUALS(tp.size(), (size_t)min(iCountPositive, 10));
       TS_ASSERT_EQUALS(isHeap(tp.begin(), tp.end()), true);
       TS_ASSERT_EQUALS(isHeapTailNotTouched(tp.begin(), tp.end(), tp.endbuf()), true);
       TS_ASSERT_EQUALS(buffer[0], SortedBuffer[0]);
