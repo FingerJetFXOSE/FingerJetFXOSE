@@ -31,9 +31,10 @@ function runCMake( $folder, $generator)
 {
   # temporary build directories
   new-item "./build/$folder" -ItemType directory -Force
+  new-item "./dist/$folder" -ItemType directory -Force
   cd "./build/$folder"
   # run cmake
-  & "$global:cmake" -DCMAKE_SYSTEM_VERSION=8.1 -G"${generator}" ../../
+  & "$global:cmake" -DCMAKE_SYSTEM_VERSION=8.1 -G"${generator}" -DCMAKE_INSTALL_PREFIX="../../dist/$folder" ../../
   # unable to generate only release with cmake, will modify the solution manually
   removeDebugConfig
   # cleanup

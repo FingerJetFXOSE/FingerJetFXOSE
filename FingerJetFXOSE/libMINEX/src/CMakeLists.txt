@@ -16,3 +16,13 @@ if( USE_SANITIZER )
 else()
   target_link_libraries( ${PROJECT_NAME} "FRFXLL_static" ) 
 endif()
+
+set_target_properties( ${PROJECT_NAME} PROPERTIES
+    PUBLIC_HEADER "${FJFX_MINEX_PATH}/include/minex.h"
+)
+include(GNUInstallDirs)
+install( TARGETS ${PROJECT_NAME}
+    LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+    RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
+    PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+)
